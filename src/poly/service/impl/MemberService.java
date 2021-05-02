@@ -35,5 +35,11 @@ public class MemberService implements IMemberService {
         return memberMapper.getLogin(pDTO);
     }
 
+    // 비밀번호 변경
+    @Override
+    public int update_pw(MemberDTO pDTO) throws Exception {
+        return memberMapper.update_pw(pDTO);
+    }
+
 
 }

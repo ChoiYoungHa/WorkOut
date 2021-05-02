@@ -12,4 +12,7 @@ public interface IMemberService {
     // 로그인하기
     MemberDTO getLogin(MemberDTO pDTO) throws Exception;
 
+    // 비밀번호 변경
+    int update_pw(MemberDTO pDTO) throws Exception;
+
 }

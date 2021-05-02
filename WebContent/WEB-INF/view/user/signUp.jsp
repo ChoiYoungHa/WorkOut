@@ -21,7 +21,6 @@
         <input type="text" name="member_nic" id="member_nic" placeholder="닉네임을 입력해주세요." required="required" />
         <br/>
 
-
 <input type="submit" value="회원가입">
 </form>
 </div>

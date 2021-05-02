@@ -41,4 +41,12 @@
             WHERE EMAIL = #{email}
             AND MEMBER_PW = #{member_pw}
     </select>
+
+    <update id="update_pw" parameterType="MemberDTO">
+        UPDATE work.member
+        SET
+            MEMBER_PW = #{member_pw}
+        WHERE
+            EMAIL = #{email}
+    </update>
 </mapper>
