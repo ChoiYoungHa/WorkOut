@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Around-Sell 로그인</title>
+    <title>로그인</title>
     <!-- jquery -->
     <script src="/resource/js/jquery-3.4.1.min.js"></script>
 </head>
