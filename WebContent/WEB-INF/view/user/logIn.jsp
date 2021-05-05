@@ -20,9 +20,8 @@
 </div>
 
 <!-- bootstrap, css 파일 -->
-<link rel="stylesheet" href="/resource/css/user.css"/>
-<script src="/resources/js/bootstrap.js"></script>
-<link rel="stylesheet" href="/resources/css/bootstrap.css"/>
+
+
 
 </body>
 </html>

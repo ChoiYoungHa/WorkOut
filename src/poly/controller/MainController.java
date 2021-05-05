@@ -16,5 +16,11 @@ public class MainController {
 		
 		return "/index";
 	}
+
+	@RequestMapping(value = "/menu")
+	public String menu(){
+
+		return "/menu/menuPage";
+	}
 			
 }

@@ -21,6 +21,7 @@
 <% } else { %> <!--세션이 설정된 경우에는, 이름 + 로그아웃 표시-->
     <%=SS_MEMBER_ID%>번 회원 <%=SS_MEMBER_NAME %>님 환영합니다~ <br>
     <a href="/logOut.do">로그아웃</a>
+    <a href="/menu.do.do">식단관리</a>
 <% } %>
 </body>
 </html>
