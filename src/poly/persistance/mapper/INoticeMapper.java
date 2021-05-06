@@ -1,5 +1,2 @@
-package poly.persistance.mapper;
-
-public class INoticeMapper {
-
+package poly.persistance.mapper;public interface INoticeMapper {
 }
