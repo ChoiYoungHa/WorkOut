@@ -414,6 +414,8 @@ public class MemberController {
         } catch (Exception e) {
             msg = "실패하였습니다. : " + e.toString();
             url = "/";
+
+
             log.info(e.toString());
             e.printStackTrace();
 
@@ -434,4 +436,6 @@ public class MemberController {
         log.info("find_pw_change_update End!");
         return "/redirect";
     }
+
+
 }
