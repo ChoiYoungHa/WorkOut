@@ -1,52 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- JAVA와 연결할 Mapper 파일 설정 -->
-<mapper namespace="poly.persistance.mapper.IMemberMapper">
+<mapper namespace="poly.persistance.mapper.INoticeMapper">
 
-    <!--회원 가입하기(회원정보 등록하기) -->
-    <insert id="insertMember" parameterType="MemberDTO">
-        INSERT INTO work.member
+    <!--게시글 등록(제목, 카테고리) 그외 디폴트 값 -->
+    <insert id="InsertNoticeInfo" parameterType="NoticeDTO">
+        INSERT INTO work.post
             (
-                EMAIL,
-                MEMBER_PW,
-                MEMBER_NAME,
-                MEMBER_NIC
+                POST_CATEGORY,
+                POST_TITLE
             )
             VALUES(
-                #{email},
-                #{member_pw},
-                #{member_name},
-                #{member_nic}
+                #{post_category},
+                #{post_title}
             )
     </insert>
 
-    <!--중복가입 방지를 위한 이메일 중복 확인 -->
-    <select id="emailCheck" parameterType="MemberDTO" resultType="MemberDTO">
-        SELECT
-            EMAIL
-        FROM
-            work.member
-        WHERE
-            EMAIL = #{email}
-    </select>
-
-    <!-- 로그인을 위해 이메일과 비밀번호가 일치하는지 확인 -->
-    <select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
-        SELECT MEMBER_ID,
-               EMAIL,
-               MEMBER_NAME,
-               MEMBER_PW,
-               MEMBER_NIC
-            FROM work.member
-            WHERE EMAIL = #{email}
-            AND MEMBER_PW = #{member_pw}
-    </select>
-
-    <update id="update_pw" parameterType="MemberDTO">
-        UPDATE work.member
-        SET
-            MEMBER_PW = #{member_pw}
-        WHERE
-            EMAIL = #{email}
-    </update>
+    <!--게시글 내용 등록 조회성능을 위해 테이블 분리 -->
+    <insert id="ContentNotice" parameterType="NoticeDTO">
+        INSERT INTO work.post_content
+        (
+         CONTENT
+        )
+        VALUES(
+                  #{content}
+              )
+    </insert>
 </mapper>

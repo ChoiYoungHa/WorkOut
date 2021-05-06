@@ -129,7 +129,7 @@ public class MemberController {
 
         // 세션 삭제(user_name, user_no) - invalidate() 또는 removeAttribute 함수 사용
         session.removeAttribute("SS_MEMBER_ID");
-        session.removeAttribute("SS_MEMBER_NO");
+        session.removeAttribute("SS_MEMBER_NAME");
 
         // 세션이 정상적으로 삭제되었는지 로그를 통해 확인
         log.info("session deleted ? : " + session.getAttribute("SS_MEMBER_ID"));
