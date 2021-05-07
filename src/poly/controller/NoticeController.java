@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class NoticeController {
@@ -20,6 +22,16 @@ public class NoticeController {
     private INoticeService noticeService;
 
     private Logger log = Logger.getLogger(this.getClass());
+
+    /**
+     *  게시글 작성 페이지 이동
+     */
+    @RequestMapping(value = "notice/insertPage")
+    public String insertPage(){
+        log.info(this.getClass().getName() + ".insertPage Start!");
+        log.info(this.getClass().getName() + ".insertPage END!");
+        return "/notice/NoticeReg";
+    }
 
 
     /**
@@ -37,7 +49,7 @@ public class NoticeController {
             /*
              * 게시판 글 등록되기 위해 사용되는 form객체의 하위 input 객체 등을 받아오기 위해 사용함
              * */
-            int member_id = (int) CmmUtil.nvl(session.getAttribute("SS_MEMBER_NAME")); // 회원번호
+            String member_id = CmmUtil.nvl((String)session.getAttribute("SS_MEMBER_ID")); // 회원번호
             String post_title = CmmUtil.nvl(request.getParameter("title")); //제목
             String post_category = CmmUtil.nvl(request.getParameter("category")); //카테고리
             String content = CmmUtil.nvl(request.getParameter("contents")); //내용
@@ -85,11 +97,41 @@ public class NoticeController {
         }finally{
 
             log.info(this.getClass().getName() + ".NoticeInsert end!");
-            //결과 메시지 전달하기
+            //결과 메시지 전달 하기
             model.addAttribute("msg", msg);
 
         }
         return "/notice/MsgToList";
+    }
+
+    /**
+     * 게시판 리스트 보여주기
+     * */
+    @RequestMapping(value="notice/NoticeList", method=RequestMethod.GET)
+    public String NoticeList(HttpServletRequest request, HttpServletResponse response,
+                             ModelMap model) throws Exception {
+
+        //로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
+        log.info(this.getClass().getName() + ".NoticeList start!");
+
+        //공지사항 리스트 가져오기
+        List<NoticeDTO> rList = noticeService.getNoticeList();
+
+        if (rList==null){
+            rList = new ArrayList<NoticeDTO>();
+        }
+
+        //조회된 리스트 결과값 넣어주기
+        model.addAttribute("rList", rList);
+
+        //변수 초기화(메모리 효율화 시키기 위해 사용함)
+        rList = null;
+
+        //로그 찍기(추후 찍은 로그를 통해 이 함수 호출이 끝났는지 파악하기 용이하다.)
+        log.info(this.getClass().getName() + ".NoticeList end!");
+
+        //함수 처리가 끝나고 보여줄 JSP 파일명(/WEB-INF/view/notice/NoticeList.jsp)
+        return "/notice/NoticeList";
     }
 
 

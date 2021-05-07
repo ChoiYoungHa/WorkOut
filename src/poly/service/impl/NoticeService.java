@@ -6,12 +6,18 @@ import poly.persistance.mapper.INoticeMapper;
 import poly.service.INoticeService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("NoticeService")
 public class NoticeService implements INoticeService {
 
     @Resource(name = "NoticeMapper")
     private INoticeMapper noticeMapper;
+    // 게시글 리스트 가져오기
+    @Override
+    public List<NoticeDTO> getNoticeList() throws Exception {
+        return noticeMapper.getNoticeList();
+    }
 
     // 게시글 등록
     @Override

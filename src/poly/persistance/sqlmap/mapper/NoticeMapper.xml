@@ -7,10 +7,12 @@
     <insert id="InsertNoticeInfo" parameterType="NoticeDTO">
         INSERT INTO work.post
             (
+                MEMBER_MEMBER_ID,
                 POST_CATEGORY,
                 POST_TITLE
             )
             VALUES(
+                #{member_id},
                 #{post_category},
                 #{post_title}
             )
@@ -19,11 +21,19 @@
     <!--게시글 내용 등록 조회성능을 위해 테이블 분리 -->
     <insert id="ContentNotice" parameterType="NoticeDTO">
         INSERT INTO work.post_content
-        (
-         CONTENT
-        )
+                (
+                CONTENT
+                )
         VALUES(
-                  #{content}
+                #{content}
               )
     </insert>
+
+    <!-- 게시판 리스트 쿼리 -->
+    <select id="getNoticeList" resultType="NoticeDTO">
+        SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
+        FROM work.POST P, work.MEMBER M
+        WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID
+    </select>
+
 </mapper>

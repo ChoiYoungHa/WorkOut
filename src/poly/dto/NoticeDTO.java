@@ -3,6 +3,7 @@ package poly.dto;
 public class NoticeDTO {
 
     // 게시판
+    private String post_id; // 게시글 번호
     private String post_category; // 게시글분류
     private String bookmark; // 북마크 여부
     private String post_title; // 글 제목
@@ -11,7 +12,8 @@ public class NoticeDTO {
     private String content; // 글 내용
 
     //회원
-    private int member_id; // 회원번호
+    private String member_id; // 회원번호
+    private String member_nic; // 회원 닉네임
 
     public String getPost_category() {
         return post_category;
@@ -61,11 +63,27 @@ public class NoticeDTO {
         this.content = content;
     }
 
-    public int getMember_id() {
+    public String getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(int member_id) {
+    public void setMember_id(String member_id) {
         this.member_id = member_id;
+    }
+
+    public String getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(String post_id) {
+        this.post_id = post_id;
+    }
+
+    public String getMember_nic() {
+        return member_nic;
+    }
+
+    public void setMember_nic(String member_nic) {
+        this.member_nic = member_nic;
     }
 }

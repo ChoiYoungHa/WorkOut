@@ -149,7 +149,7 @@ public class MemberController {
         return "/user/signUp";
     }
 
-    //회원가입 화면
+    //비밀번호 찾기 화면
     @RequestMapping(value = "find_pw")
     public String find_pw() {
         log.info(this.getClass().getName() + ".signup 시작!");
