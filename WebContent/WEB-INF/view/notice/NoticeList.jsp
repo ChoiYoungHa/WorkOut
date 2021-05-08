@@ -4,9 +4,9 @@
 <%@ page import="poly.dto.NoticeDTO" %>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="java.util.HashMap"%>
+
 <%
-    session.setAttribute("SS_MEMBER_ID", "USER01"); //세션 강제 적용, 로그인된 상태로 보여주기 위함
+    String SS_MEMBER_ID = ((String)session.getAttribute("SS_MEMBER_ID"));
     List<NoticeDTO> rList =	(List<NoticeDTO>)request.getAttribute("rList");
 
 //게시판 조회 결과 보여주기
@@ -52,10 +52,10 @@
             <a href="javascript:doDetail('<%=CmmUtil.nvl(rDTO.getPost_id())%>');">
                 <%=CmmUtil.nvl(rDTO.getPost_title()) %></a>
         </td>
-        <!-- Class Casting Exception 오류 해결하기 포장클래스로 감싸보자.-->
-        <td align="center"><%=CmmUtil.nvl(rDTO.getPost_view()) %></td>
-        <td align="center"><%=CmmUtil.nvl(rDTO.getPost_recom()) %></td>
-        <td align="center"><%=CmmUtil.nvl(rDTO.getMember_nic()) %></td>
+
+        <td align="center"><%=rDTO.getPost_view() %></td>
+        <td align="center"><%=rDTO.getPost_recom() %></td>
+        <td align="center"><%=rDTO.getMember_nic() %></td>
     </tr>
     <%
         }

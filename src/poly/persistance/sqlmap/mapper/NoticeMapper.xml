@@ -29,11 +29,30 @@
               )
     </insert>
 
-    <!-- 게시판 리스트 쿼리 -->
+    <!-- 게시판 리스트 쿼리 / 식단, 운동 게시판 분리-->
     <select id="getNoticeList" resultType="NoticeDTO">
         SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
         FROM work.POST P, work.MEMBER M
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID
     </select>
+
+    <!-- 게시판 상세보기 쿼리-->
+    <select id="getNoticeInfo" parameterType="NoticeDTO" resultType="NoticeDTO">
+        SELECT P.POST_ID, P.BOOKMARK, P.POST_TITLE, P.POST_VIEW, P.POST_RECOM,
+               P.POST_CATEGORY, C.CONTENT, P.MEMBER_MEMBER_ID
+        FROM work.POST P, work.POST_CONTENT C
+        WHERE P.POST_ID = C.POST_POST_ID AND P.POST_ID = ${post_id}
+    </select>
+
+    <!-- 게시판 조회수 카운트-->
+    <update id="updateNoticeReadCnt" parameterType="NoticeDTO">
+        UPDATE work.post SET
+            POST_VIEW = POST_VIEW + 1
+        WHERE
+            POST_ID = #{post_id}
+    </update>
+
+
+
 
 </mapper>

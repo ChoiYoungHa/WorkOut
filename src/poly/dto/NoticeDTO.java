@@ -14,6 +14,15 @@ public class NoticeDTO {
     //회원
     private String member_id; // 회원번호
     private String member_nic; // 회원 닉네임
+    private String member_member_id; // 작성자 회원번호
+
+    public String getMember_member_id() {
+        return member_member_id;
+    }
+
+    public void setMember_member_id(String member_member_id) {
+        this.member_member_id = member_member_id;
+    }
 
     public String getPost_category() {
         return post_category;

@@ -49,4 +49,10 @@
         WHERE
             EMAIL = #{email}
     </update>
+
+    <select id="member_find" parameterType="MemberDTO" resultType="MemberDTO">
+        SELECT MEMBER_NAME, MEMBER_NIC, MEMBER_GK
+        FROM work.member
+        WHERE MEMBER_ID = ${member_id}
+    </select>
 </mapper>

@@ -41,5 +41,11 @@ public class MemberService implements IMemberService {
         return memberMapper.update_pw(pDTO);
     }
 
+    // 회원정보 조회
+    @Override
+    public MemberDTO member_find(MemberDTO pDTO) throws Exception {
+        return memberMapper.member_find(pDTO);
+    }
+
 
 }

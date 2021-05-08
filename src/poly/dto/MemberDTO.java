@@ -12,6 +12,8 @@ public class MemberDTO {
     //회원번호 생성, 데이터 전달을 위해 String 사용
     private String member_id; //회원번호
 
+
+
     public String getEmail() {
         return email;
     }

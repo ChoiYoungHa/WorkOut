@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import poly.dto.MemberDTO;
 import poly.dto.NoticeDTO;
+import poly.service.IMemberService;
 import poly.service.INoticeService;
 import poly.util.CmmUtil;
 
@@ -20,6 +22,9 @@ import java.util.List;
 public class NoticeController {
     @Resource(name = "NoticeService")
     private INoticeService noticeService;
+
+    @Resource(name = "MemberService")
+    private IMemberService memberService;
 
     private Logger log = Logger.getLogger(this.getClass());
 
@@ -134,5 +139,63 @@ public class NoticeController {
         return "/notice/NoticeList";
     }
 
+    /**
+     * 게시판 상세보기
+     * */
+    @RequestMapping(value="notice/NoticeInfo", method=RequestMethod.GET)
+    public String NoticeInfo(HttpServletRequest request, HttpServletResponse response,
+                             ModelMap model) throws Exception {
+
+        log.info(this.getClass().getName() + ".NoticeInfo start!");
+
+
+        /*
+         * 게시판 글 등록되기 위해 사용되는 form객체의 하위 input 객체 등을 받아오기 위해 사용함
+         * */
+        String nSeq = CmmUtil.nvl(request.getParameter("nSeq"));
+
+        // 게시글번호
+        log.info("nSeq : "+ nSeq);
+
+        NoticeDTO pDTO = new NoticeDTO();
+        pDTO.setPost_id(nSeq);
+
+        // 게시글 조회수 증가
+        noticeService.updateNoticeReadCnt(pDTO);
+        log.info("read_cnt update success!!!");
+
+        // 게시글 상세정보 가져오기
+        NoticeDTO rDTO = noticeService.getNoticeInfo(pDTO);
+
+        // 회원정보 가져오지말고 세션 회원ID 사용하자.
+        String member_member_id = rDTO.getMember_member_id();
+        MemberDTO fDTO = new MemberDTO();
+        fDTO.setMember_id(member_member_id);
+
+        // 회원정보 가져오기
+        MemberDTO find_member = memberService.member_find(fDTO);
+
+        if (rDTO==null){
+            rDTO = new NoticeDTO();
+        }
+        log.info("getNoticeInfo success!!!");
+
+        //조회된 리스트 결과값 넣어주기
+        model.addAttribute("rDTO", rDTO);
+        model.addAttribute("find_member", find_member);
+
+        //변수 초기화(메모리 효율화 시키기 위해 사용함)
+        rDTO = null;
+        pDTO = null;
+        fDTO = null;
+
+        log.info(this.getClass().getName() + ".NoticeInfo end!");
+
+        //
+        return "/notice/NoticeInfo";
+    }
+
 
 }
+
+

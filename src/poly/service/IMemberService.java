@@ -15,4 +15,7 @@ public interface IMemberService {
     // 비밀번호 변경
     int update_pw(MemberDTO pDTO) throws Exception;
 
+    // 회원정보 조회
+    MemberDTO member_find(MemberDTO pDTO) throws Exception;
+
 }

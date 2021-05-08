@@ -31,8 +31,16 @@ public class NoticeService implements INoticeService {
         noticeMapper.ContentNotice(pDTO);
     }
 
+    // 게시글 상세보기
+    @Override
+    public NoticeDTO getNoticeInfo(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.getNoticeInfo(pDTO);
+    }
 
-
+    @Override
+    public void updateNoticeReadCnt(NoticeDTO pDTO) throws Exception {
+        noticeMapper.updateNoticeReadCnt(pDTO);
+    }
 
 
 }
