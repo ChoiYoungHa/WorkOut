@@ -21,6 +21,9 @@ public interface INoticeService {
     // 게시글 조회수 카운트
     void updateNoticeReadCnt(NoticeDTO pDTO) throws Exception;
 
+    // 게시글 수정
+    void updateNoticeInfo(NoticeDTO pDTO) throws Exception;
+
 
 
 

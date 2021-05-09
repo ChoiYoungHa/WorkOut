@@ -24,6 +24,9 @@ public interface INoticeMapper {
     //게시판 조회수 업데이트
     void updateNoticeReadCnt(NoticeDTO pDTO) throws Exception;
 
+    //게시글 수정
+    void updateNoticeInfo(NoticeDTO pDTO) throws Exception;
+
 
 
 

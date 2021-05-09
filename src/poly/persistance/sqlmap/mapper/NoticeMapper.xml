@@ -52,7 +52,11 @@
             POST_ID = #{post_id}
     </update>
 
-
-
-
+    <!-- 게시판 수정 쿼리 -->
+    <update id="updateNoticeInfo" parameterType="NoticeDTO">
+        UPDATE work.post P INNER JOIN work.post_content T
+        ON (P.POST_ID = T.POST_POST_ID)
+        SET P.POST_TITLE = #{post_title}, T.CONTENT = #{content}, P.POST_CATEGORY = #{post_category}
+        WHERE P.POST_ID = #{post_id}
+    </update>
 </mapper>

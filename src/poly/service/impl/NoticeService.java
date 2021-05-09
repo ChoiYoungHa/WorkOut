@@ -37,10 +37,15 @@ public class NoticeService implements INoticeService {
         return noticeMapper.getNoticeInfo(pDTO);
     }
 
+    // 게시글 조회수 카운트
     @Override
     public void updateNoticeReadCnt(NoticeDTO pDTO) throws Exception {
         noticeMapper.updateNoticeReadCnt(pDTO);
     }
 
-
+    // 게시글 수정
+    @Override
+    public void updateNoticeInfo(NoticeDTO pDTO) throws Exception {
+        noticeMapper.updateNoticeInfo(pDTO);
+    }
 }
