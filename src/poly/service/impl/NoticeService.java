@@ -18,6 +18,12 @@ public class NoticeService implements INoticeService {
     public List<NoticeDTO> getNoticeList() throws Exception {
         return noticeMapper.getNoticeList();
     }
+    // 게시판 분리 운동게시판
+    @Override
+    public List<NoticeDTO> getNoticeList_Work(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.getNoticeList_Work(pDTO);
+    }
+
 
     // 게시글 등록
     @Override
@@ -47,5 +53,10 @@ public class NoticeService implements INoticeService {
     @Override
     public void updateNoticeInfo(NoticeDTO pDTO) throws Exception {
         noticeMapper.updateNoticeInfo(pDTO);
+    }
+
+    @Override
+    public void deleteNoticeInfo(NoticeDTO pDTO) throws Exception {
+        noticeMapper.deleteNoticeInfo(pDTO);
     }
 }

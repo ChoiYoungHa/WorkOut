@@ -36,6 +36,13 @@
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID
     </select>
 
+    <!-- 게시판 리스트 쿼리 / 식단, 운동 게시판 분리 운동 게시판 출력 쿼리-->
+    <select id="getNoticeList_Work" parameterType="NoticeDTO" resultType="NoticeDTO">
+        SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
+        FROM work.POST P, work.MEMBER M
+        WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
+    </select>
+
     <!-- 게시판 상세보기 쿼리-->
     <select id="getNoticeInfo" parameterType="NoticeDTO" resultType="NoticeDTO">
         SELECT P.POST_ID, P.BOOKMARK, P.POST_TITLE, P.POST_VIEW, P.POST_RECOM,
@@ -59,4 +66,11 @@
         SET P.POST_TITLE = #{post_title}, T.CONTENT = #{content}, P.POST_CATEGORY = #{post_category}
         WHERE P.POST_ID = #{post_id}
     </update>
+
+    <!-- 게시판 삭제 쿼리 -->
+    <delete id="deleteNoticeInfo" parameterType="NoticeDTO">
+        DELETE FROM work.post
+        WHERE POST_ID = #{post_id}
+    </delete>
+
 </mapper>

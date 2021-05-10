@@ -12,7 +12,6 @@
 //게시판 조회 결과 보여주기
     if (rList==null){
         rList = new ArrayList<NoticeDTO>();
-
     }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -62,5 +61,6 @@
     %>
 </table>
 <a href="/notice/insertPage.do">[글쓰기]</a>
+<a href="/index.do">[메인]</a>
 </body>
 </html>

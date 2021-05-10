@@ -66,7 +66,6 @@
         //목록으로 이동
         function doList(){
             location.href="/notice/NoticeList.do";
-
         }
     </script>
 </head>

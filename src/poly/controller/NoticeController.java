@@ -111,7 +111,45 @@ public class NoticeController {
     }
 
     /**
-     * 게시판 리스트 보여주기
+     * 게시판 리스트 보여주기_분리 운동게시판, 식단 게시판
+     * */
+    @RequestMapping(value="notice/NoticeListCategory", method=RequestMethod.GET)
+    public String NoticeListWork(HttpServletRequest request, HttpServletResponse response,
+                             ModelMap model) throws Exception {
+
+        //로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
+        log.info(this.getClass().getName() + ".NoticeListCategory start!");
+
+        // 카테고리 받아오기
+        String post_category = CmmUtil.nvl(request.getParameter("category")); //카테고리
+        log.info("post_category : " + post_category );
+
+        NoticeDTO rDTO = new NoticeDTO();
+        rDTO.setPost_category(post_category);
+
+        //운동게시판 리스트 가져오기
+        List<NoticeDTO> rList = noticeService.getNoticeList_Work(rDTO);
+
+        if (rList==null){
+            rList = new ArrayList<NoticeDTO>();
+        }
+
+        //조회된 리스트 결과값 넣어주기
+        model.addAttribute("rList", rList);
+
+        //변수 초기화(메모리 효율화 시키기 위해 사용함)
+        rList = null;
+
+        //로그 찍기(추후 찍은 로그를 통해 이 함수 호출이 끝났는지 파악하기 용이하다.)
+        log.info(this.getClass().getName() + ".NoticeListCategory end!");
+
+        //함수 처리가 끝나고 보여줄 JSP 파일명(/WEB-INF/view/notice/NoticeList.jsp)
+        return "/notice/NoticeList";
+    }
+
+
+    /**
+     * 게시판 리스트 보여주기 게시판 전체
      * */
     @RequestMapping(value="notice/NoticeList", method=RequestMethod.GET)
     public String NoticeList(HttpServletRequest request, HttpServletResponse response,
@@ -294,7 +332,48 @@ public class NoticeController {
     }
 
 
+    /**
+     * 게시판 글 삭제
+     * */
+    @RequestMapping(value="notice/NoticeDelete", method=RequestMethod.GET)
+    public String NoticeDelete(HttpSession session, HttpServletRequest request, HttpServletResponse response,
+                               ModelMap model) throws Exception {
 
+        log.info(this.getClass().getName() + ".NoticeDelete start!");
+
+        String msg = "";
+
+        try{
+            String post_id = CmmUtil.nvl(request.getParameter("nSeq")); //글번호(PK)
+
+            log.info("post_id : "+ post_id);
+
+            NoticeDTO pDTO = new NoticeDTO();
+
+            pDTO.setPost_id(post_id);;
+
+            //게시글 삭제하기 DB
+            noticeService.deleteNoticeInfo(pDTO);;
+
+            msg = "삭제되었습니다.";
+
+            //변수 초기화(메모리 효율화 시키기 위해 사용함)
+            pDTO = null;
+
+        }catch(Exception e){
+            msg = "실패하였습니다. : "+ e.toString();
+            log.info(e.toString());
+            e.printStackTrace();
+
+        }finally{
+            log.info(this.getClass().getName() + ".NoticeDelete end!");
+
+            //결과 메시지 전달하기
+            model.addAttribute("msg", msg);
+        }
+        return "/notice/MsgToList";
+
+    }
 }
 
 
