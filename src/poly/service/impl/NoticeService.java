@@ -18,10 +18,10 @@ public class NoticeService implements INoticeService {
     public List<NoticeDTO> getNoticeList() throws Exception {
         return noticeMapper.getNoticeList();
     }
-    // 게시판 분리 운동게시판
+
     @Override
-    public List<NoticeDTO> getNoticeList_Work(NoticeDTO pDTO) throws Exception {
-        return noticeMapper.getNoticeList_Work(pDTO);
+    public List<NoticeDTO> getNoticeList_Category(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.getNoticeList_Category(pDTO);
     }
 
 

@@ -128,13 +128,14 @@ public class NoticeController {
         rDTO.setPost_category(post_category);
 
         //운동게시판 리스트 가져오기
-        List<NoticeDTO> rList = noticeService.getNoticeList_Work(rDTO);
+        List<NoticeDTO> rList = noticeService.getNoticeList_Category(rDTO);
 
         if (rList==null){
             rList = new ArrayList<NoticeDTO>();
         }
 
         //조회된 리스트 결과값 넣어주기
+        model.addAttribute("post_category", post_category);
         model.addAttribute("rList", rList);
 
         //변수 초기화(메모리 효율화 시키기 위해 사용함)
@@ -210,6 +211,7 @@ public class NoticeController {
         log.info("rDTO.getPost_category() : " + rDTO.getPost_category());
         log.info("rDTO.getMember_member_id() : " + rDTO.getMember_member_id()); // 작성자 회원 ID
 
+
         // 게시글 작성자를 조회하기 위해 ID 세팅
         String member_id = rDTO.getMember_member_id();
         MemberDTO fDTO = new MemberDTO();
@@ -234,7 +236,6 @@ public class NoticeController {
         fDTO = null;
 
         log.info(this.getClass().getName() + ".NoticeInfo end!");
-
 
         return "/notice/NoticeInfo";
     }

@@ -29,15 +29,15 @@
               )
     </insert>
 
-    <!-- 게시판 리스트 쿼리 / 식단, 운동 게시판 분리-->
+    <!-- 게시판 리스트 쿼리 / 식단, 운동 게시판 분리 전체게시물-->
     <select id="getNoticeList" resultType="NoticeDTO">
         SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
         FROM work.POST P, work.MEMBER M
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID
     </select>
 
-    <!-- 게시판 리스트 쿼리 / 식단, 운동 게시판 분리 운동 게시판 출력 쿼리-->
-    <select id="getNoticeList_Work" parameterType="NoticeDTO" resultType="NoticeDTO">
+    <!-- 게시판 리스트 쿼리 / 식단, 운동 게시판 분리쿼리-->
+    <select id="getNoticeList_Category" parameterType="NoticeDTO" resultType="NoticeDTO">
         SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
         FROM work.POST P, work.MEMBER M
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
