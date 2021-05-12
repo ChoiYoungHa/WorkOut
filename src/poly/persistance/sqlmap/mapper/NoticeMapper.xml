@@ -41,7 +41,7 @@
         SELECT P.POST_ID, P.BOOKMARK, P.POST_TITLE, P.POST_VIEW, P.POST_RECOM,
                P.POST_CATEGORY, C.CONTENT, P.MEMBER_MEMBER_ID
         FROM work.POST P, work.POST_CONTENT C
-        WHERE P.POST_ID = C.POST_POST_ID AND P.POST_ID = ${post_id}
+        WHERE P.POST_ID = C.POST_POST_ID AND P.POST_ID = #{post_id}
     </select>
 
     <!-- 게시판 조회수 카운트-->
