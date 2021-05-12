@@ -23,26 +23,13 @@
         category = "식단";
     }
 %>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>공지 리스트</title>
-    <script type="text/javascript">
-        //상세보기 이동
-        function doDetail(seq){
-            location.href="/notice/NoticeInfo.do?nSeq="+ seq;
-        }
-
-        function iClickHandler(e) {
-
-            e.classList.toggle("far");
-            e.classList.toggle("fas");
-
-        }
-
-
-    </script>
     <script src="https://kit.fontawesome.com/285f83e94b.js" crossorigin="anonymous"></script>
     <script src="/resource/js/jquery-3.4.1.min.js"></script>
 </head>
@@ -50,7 +37,6 @@
 <h2><%=category%>게시판</h2>
 <hr/>
 <br/>
-
 <table border="1" width="600px">
     <tr>
         <td width="200" align="center">제목</td>
@@ -65,7 +51,6 @@
             if (rDTO==null){
                 rDTO = new NoticeDTO();
             }
-
     %>
     <tr>
         <td align="center">
@@ -77,6 +62,59 @@
         <td align="center"><%=rDTO.getPost_recom() %></td>
         <td align="center"><%=rDTO.getMember_nic() %></td>
     </tr>
+
+    <script type="text/javascript">
+
+        const clicked_class = "fas";
+
+        //상세보기 이동
+        function doDetail(seq){
+            location.href="/notice/NoticeInfo.do?nSeq="+ seq;
+        }
+
+        function iClickHandler(e) {
+            // e.classList.toggle("far");
+            // e.classList.toggle("fas");
+            const hasClass = e.classList.contains(clicked_class);
+
+            if (!hasClass) { // 북마크 등록
+                e.classList.add(clicked_class); // 빨간하트
+                $.ajax({
+                    //function을 실행할 url
+                    url : "/notice/bookmark_insert.do",
+                    type : "post",
+                    dataType : "json",
+                    data : {
+                        "post_id": "<%=rDTO.getPost_id()%>",
+                        "member_id": "<%=SS_MEMBER_ID%>"
+                    },
+                    success : function(data) {
+                        if (data == 1) { // 북마크가 성공적으로 완료된다면
+                            alert("이 게시물을 좋아합니다.");
+                        }
+                    }
+                })
+            } else { // 북마크 제거
+                e.classList.remove(clicked_class); // 빈 하트
+                console.log("빈 하트");
+                $.ajax({
+                    //function을 실행할 url
+                    url : "/notice/bookmark_delete.do",
+                    type : "post",
+                    dataType : "json",
+                    data : {
+                        "post_id": "<%=rDTO.getPost_id()%>"
+                    },
+                    success : function(data) {
+                        if (data == 1) { // 북마크가 성공적으로 완료된다면
+                            alert("취소 되었습니다.");
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+
     <%
         }
     %>
@@ -84,35 +122,4 @@
 <a href="/notice/insertPage.do">[글쓰기]</a>
 <a href="/index.do">[메인]</a>
 </body>
-<%--<script type="text/javascript">--%>
-<%--        // var bt = document.querySelectorAll("i.far fa-heart"); // get all buttons with the class--%>
-<%--        // console.log(bt)--%>
-<%--        var bt = <%=i%>;--%>
-<%--        console.log(bt)--%>
-<%--            var temp = document.getElementById(i);--%>
-<%--            console.log(temp);--%>
-<%--            temp.onclick=function() { // assign anonymous handler--%>
-<%--                console.log(temp);--%>
-<%--                temp.classList.toggle('fas fa-heart');--%>
-<%--                // if(temp.className == 'far'){--%>
-<%--                //     temp.classList.remove('far');--%>
-<%--                //     temp.classList.add('fas');--%>
-<%--                //     console.log("동작");--%>
-<%--                // }--%>
-<%--                // else{--%>
-<%--                //     temp.classList.remove('fas');--%>
-<%--                //     temp.classList.add('far');--%>
-<%--                //     console.log("동작");--%>
-<%--                // }--%>
-<%--                // console.log("하트 바꾸기")--%>
-<%--                // temp.toggleClass('fas fa-heart');--%>
-<%--        }--%>
-<%--</script>--%>
-
-<%--<script type="text/javascript">--%>
-<%--    $('#heart').click(function() {--%>
-<%--        $(this).toggleClass('far fa-heart');--%>
-<%--        $(this).toggleClass('fas fa-heart');--%>
-<%--    });--%>
-<%--</script>--%>
 </html>

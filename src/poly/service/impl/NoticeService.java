@@ -55,8 +55,21 @@ public class NoticeService implements INoticeService {
         noticeMapper.updateNoticeInfo(pDTO);
     }
 
+    // 게시글 삭제
     @Override
     public void deleteNoticeInfo(NoticeDTO pDTO) throws Exception {
         noticeMapper.deleteNoticeInfo(pDTO);
     }
+
+    // 북마크 게시물 추가
+    @Override
+    public void bookmark_insert(NoticeDTO pDTO) throws Exception {
+        noticeMapper.bookmark_insert(pDTO);
+    }
+    // 북마크 게시물 삭제
+    @Override
+    public void bookmark_delete(NoticeDTO pDTO) throws Exception {
+        noticeMapper.bookmark_delete(pDTO);
+    }
+
 }

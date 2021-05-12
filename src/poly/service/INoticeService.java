@@ -30,6 +30,10 @@ public interface INoticeService {
     // 게시글 삭제
     void deleteNoticeInfo(NoticeDTO pDTO) throws Exception;
 
+    // 북마크 게시물 추가
+    void bookmark_insert(NoticeDTO pDTO) throws Exception;
 
+    // 북마크 게시물 삭제
+    void bookmark_delete(NoticeDTO pDTO) throws Exception;
 
 }

@@ -73,4 +73,27 @@
         WHERE POST_ID = #{post_id}
     </delete>
 
+    <!-- 북마크 게시물 등록 쿼리-->
+    <insert id="bookmark_insert" parameterType="NoticeDTO">
+        INSERT INTO work.bookmark
+                (
+                MEMBER_ID,
+                POST_ID
+                )
+        VALUES  (
+                #{member_id},
+                #{post_id}
+                )
+    </insert>
+
+    <!-- 북마크 게시물 등록 취소-->
+    <delete id="bookmark_delete" parameterType="NoticeDTO">
+        DELETE FROM work.bookmark
+        WHERE POST_ID = #{post_id}
+    </delete>
+
+
+
+
+
 </mapper>

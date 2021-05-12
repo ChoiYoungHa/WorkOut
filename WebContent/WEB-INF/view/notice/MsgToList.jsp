@@ -4,6 +4,8 @@
 <%
     //전달받은 메시지
     String msg = CmmUtil.nvl((String)request.getAttribute("msg"));
+    String post_category = CmmUtil.nvl((String) request.getAttribute("post_category"));
+    System.out.println("post_category = " + post_category);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,7 +14,12 @@
     <title>처리페이지</title>
     <script type="text/javascript">
         alert("<%=msg%>");
-        top.location.href="/notice/NoticeList.do";
+        if ("<%=post_category%>" === "work"){
+            top.location.href="/notice/NoticeListCategory.do?category=work";
+        }
+        else {
+            top.location.href="/notice/NoticeListCategory.do?category=menu";
+        }
     </script>
 </head>
 <body>
