@@ -64,9 +64,13 @@
             }
         }
         //목록으로 이동
-        function doList(){
-            location.href="/notice/NoticeList.do";
+        function doList(category){
 
+            if (category === 'work'){
+                location.href="/notice/NoticeListCategory.do?category=work";
+            }else {
+                location.href="/notice/NoticeListCategory.do?category=menu";
+            }
         }
     </script>
 </head>
@@ -101,7 +105,7 @@
         <td align="center" colspan="4">
             <a href="javascript:doEdit();">[수정]</a>
             <a href="javascript:doDelete();">[삭제]</a>
-            <a href="javascript:doList();">[목록]</a>
+            <a href="javascript:doList('<%=rDTO.getPost_category()%>');">[목록]</a>
         </td>
     </tr>
 </table>

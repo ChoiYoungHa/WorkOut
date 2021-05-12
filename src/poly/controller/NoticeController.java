@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import poly.dto.MemberDTO;
 import poly.dto.NoticeDTO;
 import poly.service.IMemberService;
@@ -30,10 +31,10 @@ public class NoticeController {
     private Logger log = Logger.getLogger(this.getClass());
 
     /**
-     *  게시글 작성 페이지 이동
+     * 게시글 작성 페이지 이동
      */
     @RequestMapping(value = "notice/insertPage")
-    public String insertPage(){
+    public String insertPage() {
         log.info(this.getClass().getName() + ".insertPage Start!");
         log.info(this.getClass().getName() + ".insertPage END!");
         return "/notice/NoticeReg";
@@ -42,8 +43,8 @@ public class NoticeController {
 
     /**
      * 게시판 글 등록
-     * */
-    @RequestMapping(value="notice/NoticeInsert", method= RequestMethod.POST)
+     */
+    @RequestMapping(value = "notice/NoticeInsert", method = RequestMethod.POST)
     public String NoticeInsert(HttpSession session, HttpServletRequest request, HttpServletResponse response,
                                ModelMap model) throws Exception {
 
@@ -51,11 +52,11 @@ public class NoticeController {
 
         String msg = "";
 
-        try{
+        try {
             /*
              * 게시판 글 등록되기 위해 사용되는 form객체의 하위 input 객체 등을 받아오기 위해 사용함
              * */
-            String member_id = CmmUtil.nvl((String)session.getAttribute("SS_MEMBER_ID")); // 회원번호
+            String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID")); // 회원번호
             String post_title = CmmUtil.nvl(request.getParameter("title")); //제목
             String post_category = CmmUtil.nvl(request.getParameter("category")); //카테고리
             String content = CmmUtil.nvl(request.getParameter("contents")); //내용
@@ -66,12 +67,15 @@ public class NoticeController {
              * 						반드시 작성할 것
              * #######################################################
              * */
-            log.info("member_id : "+ member_id);
-            log.info("post_title : "+ post_title);
-            log.info("post_category : "+ post_category);
-            log.info("content : "+ content);
+            log.info("member_id : " + member_id);
+            log.info("post_title : " + post_title);
+            log.info("post_category : " + post_category);
+            log.info("content : " + content);
 
             NoticeDTO pDTO = new NoticeDTO();
+
+            // 게시판 분류 리다이렉트
+            model.addAttribute("post_category", post_category);
 
             pDTO.setMember_id(member_id);
             pDTO.setPost_title(post_title);
@@ -93,14 +97,14 @@ public class NoticeController {
             //변수 초기화(메모리 효율화 시키기 위해 사용함)
             pDTO = null;
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             //저장이 실패되면 사용자에게 보여줄 메시지
-            msg = "실패하였습니다. : "+ e.toString();
+            msg = "실패하였습니다. : " + e.toString();
             log.info(e.toString());
             e.printStackTrace();
 
-        }finally{
+        } finally {
 
             log.info(this.getClass().getName() + ".NoticeInsert end!");
             //결과 메시지 전달 하기
@@ -111,30 +115,39 @@ public class NoticeController {
     }
 
     /**
-     * 게시판 리스트 보여주기
-     * */
-    @RequestMapping(value="notice/NoticeList", method=RequestMethod.GET)
-    public String NoticeList(HttpServletRequest request, HttpServletResponse response,
-                             ModelMap model) throws Exception {
+     * 게시판 리스트 보여주기_분리 운동게시판, 식단 게시판
+     */
+    @RequestMapping(value = "notice/NoticeListCategory", method = RequestMethod.GET)
+    public String NoticeListWork(HttpServletRequest request, HttpServletResponse response,
+                                 ModelMap model) throws Exception {
 
         //로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
-        log.info(this.getClass().getName() + ".NoticeList start!");
+        log.info(this.getClass().getName() + ".NoticeListCategory start!");
 
-        //공지사항 리스트 가져오기
-        List<NoticeDTO> rList = noticeService.getNoticeList();
+        // 카테고리 받아오기
+        String post_category = CmmUtil.nvl(request.getParameter("category")); //카테고리
+        log.info("post_category : " + post_category);
 
-        if (rList==null){
+        NoticeDTO rDTO = new NoticeDTO();
+        rDTO.setPost_category(post_category);
+
+        //운동게시판 리스트 가져오기
+        List<NoticeDTO> rList = noticeService.getNoticeList_Category(rDTO);
+
+        if (rList == null) {
             rList = new ArrayList<NoticeDTO>();
         }
 
         //조회된 리스트 결과값 넣어주기
+        // post_id 넘겨주어야함.
+        model.addAttribute("post_category", post_category);
         model.addAttribute("rList", rList);
 
         //변수 초기화(메모리 효율화 시키기 위해 사용함)
         rList = null;
 
         //로그 찍기(추후 찍은 로그를 통해 이 함수 호출이 끝났는지 파악하기 용이하다.)
-        log.info(this.getClass().getName() + ".NoticeList end!");
+        log.info(this.getClass().getName() + ".NoticeListCategory end!");
 
         //함수 처리가 끝나고 보여줄 JSP 파일명(/WEB-INF/view/notice/NoticeList.jsp)
         return "/notice/NoticeList";
@@ -172,6 +185,7 @@ public class NoticeController {
         log.info("rDTO.getPost_category() : " + rDTO.getPost_category());
         log.info("rDTO.getMember_member_id() : " + rDTO.getMember_member_id()); // 작성자 회원 ID
 
+
         // 게시글 작성자를 조회하기 위해 ID 세팅
         String member_id = rDTO.getMember_member_id();
         MemberDTO fDTO = new MemberDTO();
@@ -197,25 +211,25 @@ public class NoticeController {
 
         log.info(this.getClass().getName() + ".NoticeInfo end!");
 
-
         return "/notice/NoticeInfo";
     }
 
     /**
      * 게시판 수정 보기
-     * */
-    @RequestMapping(value="notice/NoticeEditInfo", method=RequestMethod.GET)
+     */
+    @RequestMapping(value = "notice/NoticeEditInfo", method = RequestMethod.GET)
     public String NoticeEditInfo(HttpServletRequest request, HttpServletResponse response,
                                  ModelMap model) throws Exception {
 
         log.info(this.getClass().getName() + ".NoticeEditInfo start!");
         String post_id = CmmUtil.nvl(request.getParameter("nSeq")); // 게시글번호
 
-        log.info("post_id : "+ post_id);
+        log.info("post_id : " + post_id);
 
         NoticeDTO pDTO = new NoticeDTO();
 
-        pDTO.setPost_id(post_id);;
+        pDTO.setPost_id(post_id);
+        ;
 
         /*
          * #######################################################
@@ -224,7 +238,7 @@ public class NoticeController {
          */
         NoticeDTO rDTO = noticeService.getNoticeInfo(pDTO);
 
-        if (rDTO==null){
+        if (rDTO == null) {
             rDTO = new NoticeDTO();
         }
 
@@ -242,8 +256,8 @@ public class NoticeController {
 
     /**
      * 게시판 글 수정
-     * */
-    @RequestMapping(value="notice/NoticeUpdate", method=RequestMethod.POST)
+     */
+    @RequestMapping(value = "notice/NoticeUpdate", method = RequestMethod.POST)
     public String NoticeUpdate(HttpSession session, HttpServletRequest request, HttpServletResponse response,
                                ModelMap model) throws Exception {
 
@@ -251,18 +265,18 @@ public class NoticeController {
 
         String msg = "";
 
-        try{
-            String member_id = CmmUtil.nvl((String)session.getAttribute("SS_MEMBER_ID")); //아이디
+        try {
+            String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID")); //아이디
             String post_id = CmmUtil.nvl(request.getParameter("nSeq")); //글번호(PK)
             String post_title = CmmUtil.nvl(request.getParameter("title")); //제목
             String post_category = CmmUtil.nvl(request.getParameter("category")); // 카테고리
             String content = CmmUtil.nvl(request.getParameter("contents")); //내용
 
 
-            log.info("post_id : "+ post_id);
-            log.info("post_title : "+ post_title);
-            log.info("post_category : "+ post_category);
-            log.info("content : "+ content);
+            log.info("post_id : " + post_id);
+            log.info("post_title : " + post_title);
+            log.info("post_category : " + post_category);
+            log.info("content : " + content);
 
             NoticeDTO pDTO = new NoticeDTO();
 
@@ -279,12 +293,12 @@ public class NoticeController {
             //변수 초기화(메모리 효율화 시키기 위해 사용함)
             pDTO = null;
 
-        }catch(Exception e){
-            msg = "실패하였습니다. : "+ e.toString();
+        } catch (Exception e) {
+            msg = "실패하였습니다. : " + e.toString();
             log.info(e.toString());
             e.printStackTrace();
 
-        }finally{
+        } finally {
             log.info(this.getClass().getName() + ".NoticeUpdate end!");
 
             //결과 메시지 전달하기
@@ -294,7 +308,121 @@ public class NoticeController {
     }
 
 
+    /**
+     * 게시판 글 삭제
+     */
+    @RequestMapping(value = "notice/NoticeDelete", method = RequestMethod.GET)
+    public String NoticeDelete(HttpSession session, HttpServletRequest request, HttpServletResponse response,
+                               ModelMap model) throws Exception {
+
+        log.info(this.getClass().getName() + ".NoticeDelete start!");
+
+        String msg = "";
+
+        try {
+            String post_id = CmmUtil.nvl(request.getParameter("nSeq")); //글번호(PK)
+
+            log.info("post_id : " + post_id);
+
+            NoticeDTO pDTO = new NoticeDTO();
+
+            pDTO.setPost_id(post_id);
+            ;
+
+            //게시글 삭제하기 DB
+            noticeService.deleteNoticeInfo(pDTO);
+            ;
+
+            msg = "삭제되었습니다.";
+
+            //변수 초기화(메모리 효율화 시키기 위해 사용함)
+            pDTO = null;
+
+        } catch (Exception e) {
+            msg = "실패하였습니다. : " + e.toString();
+            log.info(e.toString());
+            e.printStackTrace();
+
+        } finally {
+            log.info(this.getClass().getName() + ".NoticeDelete end!");
+
+            //결과 메시지 전달하기
+            model.addAttribute("msg", msg);
+        }
+        return "/notice/MsgToList";
+
+    }
+
+    @RequestMapping(value = "/notice/bookmark_insert")
+    @ResponseBody
+    public int bookmark_insert(HttpServletRequest request) throws Exception {
+        log.info(this.getClass().getName() + ".bookmark_insert Start!");
+        int res = 0;
+        try {
+            String post_id = CmmUtil.nvl(request.getParameter("post_id"));
+            String member_id = CmmUtil.nvl(request.getParameter("member_id"));
+
+            log.info("post_id : " + post_id);
+            log.info("member_id : " + member_id);
+
+            NoticeDTO pDTO = new NoticeDTO();
+
+            pDTO.setPost_id(post_id);
+            pDTO.setMember_id(member_id);
+
+            // 북마크 게시물 등록
+            noticeService.bookmark_insert(pDTO);
+
+            res = 1;
+
+            log.info("success!");
+        } catch (Exception e) {
+
+            res = 0;
+            log.info(e.toString());
+            e.printStackTrace();
+        } finally {
+            log.info(this.getClass().getName() + ".NoticeInsert end!");
+        }
+        return res;
+    }
+
+
+    @RequestMapping(value = "/notice/bookmark_delete")
+    @ResponseBody
+    public int bookmark_delete(HttpServletRequest request) throws Exception {
+        log.info(this.getClass().getName() + ".bookmark_delete Start!");
+        int res = 0;
+
+        try {
+            String post_id = CmmUtil.nvl(request.getParameter("post_id"));
+
+            log.info("post_id : " + post_id);
+
+            NoticeDTO pDTO = new NoticeDTO();
+
+            pDTO.setPost_id(post_id);
+
+            // 북마크 게시물 삭제
+            noticeService.bookmark_delete(pDTO);
+
+            res = 1;
+
+            log.info("success!");
+        } catch (Exception e) {
+
+            res = 0;
+            log.info(e.toString());
+            e.printStackTrace();
+        } finally {
+            log.info(this.getClass().getName() + ".bookmark_delete end!");
+        }
+        return res;
+    }
+
 
 }
+
+
 
 

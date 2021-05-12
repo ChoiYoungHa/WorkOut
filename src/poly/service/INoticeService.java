@@ -9,6 +9,9 @@ public interface INoticeService {
     // 게시글 리스트 가져오기
     List<NoticeDTO> getNoticeList() throws Exception;
 
+    // 게시판 분리 게시판
+    List<NoticeDTO> getNoticeList_Category(NoticeDTO pDTO) throws Exception;
+
     // 게시글 등록
     void InsertNoticeInfo(NoticeDTO pDTO) throws Exception;
 
@@ -24,7 +27,13 @@ public interface INoticeService {
     // 게시글 수정
     void updateNoticeInfo(NoticeDTO pDTO) throws Exception;
 
+    // 게시글 삭제
+    void deleteNoticeInfo(NoticeDTO pDTO) throws Exception;
 
+    // 북마크 게시물 추가
+    void bookmark_insert(NoticeDTO pDTO) throws Exception;
 
+    // 북마크 게시물 삭제
+    void bookmark_delete(NoticeDTO pDTO) throws Exception;
 
 }

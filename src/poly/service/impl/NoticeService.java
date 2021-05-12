@@ -19,6 +19,12 @@ public class NoticeService implements INoticeService {
         return noticeMapper.getNoticeList();
     }
 
+    @Override
+    public List<NoticeDTO> getNoticeList_Category(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.getNoticeList_Category(pDTO);
+    }
+
+
     // 게시글 등록
     @Override
     public void InsertNoticeInfo(NoticeDTO pDTO) throws Exception {
@@ -48,4 +54,22 @@ public class NoticeService implements INoticeService {
     public void updateNoticeInfo(NoticeDTO pDTO) throws Exception {
         noticeMapper.updateNoticeInfo(pDTO);
     }
+
+    // 게시글 삭제
+    @Override
+    public void deleteNoticeInfo(NoticeDTO pDTO) throws Exception {
+        noticeMapper.deleteNoticeInfo(pDTO);
+    }
+
+    // 북마크 게시물 추가
+    @Override
+    public void bookmark_insert(NoticeDTO pDTO) throws Exception {
+        noticeMapper.bookmark_insert(pDTO);
+    }
+    // 북마크 게시물 삭제
+    @Override
+    public void bookmark_delete(NoticeDTO pDTO) throws Exception {
+        noticeMapper.bookmark_delete(pDTO);
+    }
+
 }

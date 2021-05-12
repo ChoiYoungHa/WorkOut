@@ -12,6 +12,9 @@ public interface INoticeMapper {
     //게시판 리스트
     List<NoticeDTO> getNoticeList() throws Exception;
 
+    // 게시판 분리
+    List<NoticeDTO> getNoticeList_Category(NoticeDTO pDTO) throws Exception;
+
     //게시판 글 등록
     void InsertNoticeInfo(NoticeDTO pDTO) throws Exception;
 
@@ -26,6 +29,17 @@ public interface INoticeMapper {
 
     //게시글 수정
     void updateNoticeInfo(NoticeDTO pDTO) throws Exception;
+
+    //게시판 글 삭제
+    void deleteNoticeInfo(NoticeDTO pDTO) throws Exception;
+
+    //북마크 게시물 추가
+    void bookmark_insert(NoticeDTO pDTO) throws Exception;
+
+    //북마크 게시물 삭제
+    void bookmark_delete(NoticeDTO pDTO) throws Exception;
+
+
 
 
 
