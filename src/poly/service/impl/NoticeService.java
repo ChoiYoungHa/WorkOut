@@ -72,4 +72,13 @@ public class NoticeService implements INoticeService {
         noticeMapper.bookmark_delete(pDTO);
     }
 
+    // 북마크 게시물 확인
+    @Override
+    public List<NoticeDTO> bookmark_find(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.bookmark_find(pDTO);
+    }
+
+
+
+
 }

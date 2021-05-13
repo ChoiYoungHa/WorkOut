@@ -41,6 +41,7 @@
         SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
         FROM work.POST P, work.MEMBER M
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
+        ORDER BY P.POST_ID
     </select>
 
     <!-- 게시판 상세보기 쿼리-->
@@ -91,6 +92,14 @@
         DELETE FROM work.bookmark
         WHERE POST_ID = #{post_id}
     </delete>
+
+    <!-- 북마크 게시물 확인 -->
+    <select id="bookmark_find" parameterType="NoticeDTO" resultType="NoticeDTO">
+        SELECT POST_ID FROM work.bookmark
+        WHERE MEMBER_ID = #{member_id}
+        ORDER BY POST_ID
+    </select>
+
 
 
 

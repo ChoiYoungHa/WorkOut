@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -131,7 +132,7 @@ public class NoticeController {
         NoticeDTO rDTO = new NoticeDTO();
         rDTO.setPost_category(post_category);
 
-        //운동게시판 리스트 가져오기
+        //카테고리별 게시판 리스트 가져오기
         List<NoticeDTO> rList = noticeService.getNoticeList_Category(rDTO);
 
         if (rList == null) {
@@ -139,7 +140,6 @@ public class NoticeController {
         }
 
         //조회된 리스트 결과값 넣어주기
-        // post_id 넘겨주어야함.
         model.addAttribute("post_category", post_category);
         model.addAttribute("rList", rList);
 
@@ -353,7 +353,7 @@ public class NoticeController {
 
     }
 
-    @RequestMapping(value = "/notice/bookmark_insert")
+    @RequestMapping(value = "notice/bookmark_insert")
     @ResponseBody
     public int bookmark_insert(HttpServletRequest request) throws Exception {
         log.info(this.getClass().getName() + ".bookmark_insert Start!");
@@ -388,7 +388,7 @@ public class NoticeController {
     }
 
 
-    @RequestMapping(value = "/notice/bookmark_delete")
+    @RequestMapping(value = "notice/bookmark_delete")
     @ResponseBody
     public int bookmark_delete(HttpServletRequest request) throws Exception {
         log.info(this.getClass().getName() + ".bookmark_delete Start!");
@@ -420,7 +420,38 @@ public class NoticeController {
         return res;
     }
 
+    // 해당 member가 몇개의 게시물을 북마크 했는지 확인
+    // 맴버에 해당하는 게시물을 리스트형태로 받아와야함.
+    @RequestMapping(value = "notice/bookmark_find")
+    @ResponseBody
+    public ArrayList<String> bookmark_find(HttpServletRequest request) throws Exception{
+        log.info(this.getClass().getName() + ". bookmark_find Start!");
 
+        String member_id = CmmUtil.nvl(request.getParameter("member_id")); // 회원번호
+        log.info("member_id : " + member_id);
+
+        NoticeDTO rDTO = new NoticeDTO();
+        rDTO.setMember_id(member_id);
+
+        List<NoticeDTO> bookmark_find = noticeService.bookmark_find(rDTO);
+
+        ArrayList<String> rList = new ArrayList<>();
+
+        Iterator<NoticeDTO> it = bookmark_find.iterator();
+        while (it.hasNext()) {
+            NoticeDTO pNo = it.next();
+            rList.add(pNo.getPost_id());
+        }
+
+        // 값 잘들어갔는지 확인
+        for (String s : rList) {
+            log.info("post no : " + s);
+        }
+
+        log.info(this.getClass().getName() + ". bookmark_find END!");
+
+        return rList;
+    }
 }
 
 

@@ -36,4 +36,9 @@ public interface INoticeService {
     // 북마크 게시물 삭제
     void bookmark_delete(NoticeDTO pDTO) throws Exception;
 
+    // 북마크 게시물 확인
+    List<NoticeDTO> bookmark_find(NoticeDTO pDTO) throws Exception;
+
+
+
 }

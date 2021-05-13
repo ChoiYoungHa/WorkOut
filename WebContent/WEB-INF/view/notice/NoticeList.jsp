@@ -6,9 +6,9 @@
 <%@ page import="java.util.ArrayList"%>
 
 <%
-    String category = ((String)request.getAttribute("post_category"));
-    String SS_MEMBER_ID = ((String)session.getAttribute("SS_MEMBER_ID"));
-    List<NoticeDTO> rList =	(List<NoticeDTO>)request.getAttribute("rList");
+    String category = ((String)request.getAttribute("post_category")); // 어떤 게시판인지 구분
+    String SS_MEMBER_ID = ((String)session.getAttribute("SS_MEMBER_ID")); // 회원마다 북마크 표시가 다르게 보여야 함.
+    List<NoticeDTO> rList =	(List<NoticeDTO>)request.getAttribute("rList"); // 해당 카테고리에 맞는 게시물을 표시
     System.out.println("category = " + category);
 
 
@@ -32,6 +32,57 @@
     <title>공지 리스트</title>
     <script src="https://kit.fontawesome.com/285f83e94b.js" crossorigin="anonymous"></script>
     <script src="/resource/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        const clicked_class = "fas";
+
+        //상세보기 이동
+        function doDetail(seq){
+            location.href="/notice/NoticeInfo.do?nSeq="+ seq;
+        }
+
+        function iClickHandler(e, post_id) {
+            // e.classList.toggle("far");
+            // e.classList.toggle("fas");
+            const hasClass = e.classList.contains(clicked_class);
+
+            if (!hasClass) { // 북마크 등록
+                e.classList.add(clicked_class); // 빨간하트
+                console.log(post_id)
+                $.ajax({
+                    //function을 실행할 url
+                    url : "/notice/bookmark_insert.do",
+                    type : "post",
+                    dataType : "json",
+                    data : {
+                        "post_id": post_id,
+                        "member_id": "<%=SS_MEMBER_ID%>"
+                    },
+                    success : function(data) {
+                        if (data == 1) { // 북마크가 성공적으로 완료된다면
+                            alert("이 게시물을 좋아합니다.");
+                        }
+                    }
+                })
+            } else { // 북마크 제거
+                e.classList.remove(clicked_class); // 빈 하트
+                console.log("빈 하트");
+                $.ajax({
+                    //function을 실행할 url
+                    url : "/notice/bookmark_delete.do",
+                    type : "post",
+                    dataType : "json",
+                    data : {
+                        "post_id": post_id
+                    },
+                    success : function(data) {
+                        if (data == 1) { // 북마크가 성공적으로 취소된다면
+                            alert("취소 되었습니다.");
+                        }
+                    }
+                })
+            }
+        }
+    </script>
 </head>
 <body>
 <h2><%=category%>게시판</h2>
@@ -55,71 +106,45 @@
     <tr>
         <td align="center">
             <a href="javascript:doDetail('<%=CmmUtil.nvl(rDTO.getPost_id())%>');">
-                <%=CmmUtil.nvl(rDTO.getPost_title()) %></a><i onclick="iClickHandler(this);" class="far fa-heart" id="<%=i%>"></i>
+                <%=CmmUtil.nvl(rDTO.getPost_title()) %></a><i onclick="iClickHandler(this, '<%=rDTO.getPost_id()%>');" class="far fa-heart" id="<%=rDTO.getPost_id()%>"></i>
         </td>
 
         <td align="center"><%=rDTO.getPost_view() %></td>
         <td align="center"><%=rDTO.getPost_recom() %></td>
         <td align="center"><%=rDTO.getMember_nic() %></td>
     </tr>
-
-    <script type="text/javascript">
-
-        const clicked_class = "fas";
-
-        //상세보기 이동
-        function doDetail(seq){
-            location.href="/notice/NoticeInfo.do?nSeq="+ seq;
-        }
-
-        function iClickHandler(e) {
-            // e.classList.toggle("far");
-            // e.classList.toggle("fas");
-            const hasClass = e.classList.contains(clicked_class);
-
-            if (!hasClass) { // 북마크 등록
-                e.classList.add(clicked_class); // 빨간하트
-                $.ajax({
-                    //function을 실행할 url
-                    url : "/notice/bookmark_insert.do",
-                    type : "post",
-                    dataType : "json",
-                    data : {
-                        "post_id": "<%=rDTO.getPost_id()%>",
-                        "member_id": "<%=SS_MEMBER_ID%>"
-                    },
-                    success : function(data) {
-                        if (data == 1) { // 북마크가 성공적으로 완료된다면
-                            alert("이 게시물을 좋아합니다.");
-                        }
-                    }
-                })
-            } else { // 북마크 제거
-                e.classList.remove(clicked_class); // 빈 하트
-                console.log("빈 하트");
-                $.ajax({
-                    //function을 실행할 url
-                    url : "/notice/bookmark_delete.do",
-                    type : "post",
-                    dataType : "json",
-                    data : {
-                        "post_id": "<%=rDTO.getPost_id()%>"
-                    },
-                    success : function(data) {
-                        if (data == 1) { // 북마크가 성공적으로 완료된다면
-                            alert("취소 되었습니다.");
-                        }
-                    }
-                })
-            }
-        }
-    </script>
-
     <%
         }
     %>
 </table>
 <a href="/notice/insertPage.do">[글쓰기]</a>
 <a href="/index.do">[메인]</a>
+<script type="text/javascript">
+    function init(){
+        console.log("bookmark check!");
+        $.ajax({
+            //function을 실행할 url
+            url : "/notice/bookmark_find.do",
+            type : "post",
+            dataType : "json",
+            data : {
+                "member_id": "<%=SS_MEMBER_ID%>"
+            },
+            success : function(data) { // 북마크된 게시물의 번호를 받아오고, 번호에 해당하는 것은 빨간하트
+                console.log(data);
+                const clicked_class = "fas";
+
+                var i_list = document.querySelectorAll("i");
+                var i;
+                for (i = 0; i < i_list.length; i++) { // 게시물 수 만큼
+                        if (data.includes(i_list[i].id)) { // 받아온 post_id에 해당하는 게시물이 있는지 확인
+                            i_list[i].classList.add(clicked_class);
+                        }
+                }
+            }
+        })
+    }
+    init(); // 로드되는 순간 ajax 돌면서 북마크했는지 안했는지 구별해주자. body 에 쓴 이유는 쿼리셀렉터 때문이다.
+</script>
 </body>
 </html>
