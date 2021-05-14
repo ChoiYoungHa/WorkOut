@@ -16,6 +16,26 @@ public class NoticeDTO {
     private String member_nic; // 회원 닉네임
     private String member_member_id; // 작성자 회원번호
 
+    //댓글
+    private String comment_id; // 댓글번호
+    private String comment_ct; // 댓글내용
+
+    public String getComment_id() {
+        return comment_id;
+    }
+
+    public void setComment_id(String comment_id) {
+        this.comment_id = comment_id;
+    }
+
+    public String getComment_ct() {
+        return comment_ct;
+    }
+
+    public void setComment_ct(String comment_ct) {
+        this.comment_ct = comment_ct;
+    }
+
     public String getMember_member_id() {
         return member_member_id;
     }

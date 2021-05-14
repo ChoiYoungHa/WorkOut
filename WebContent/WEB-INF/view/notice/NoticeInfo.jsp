@@ -35,6 +35,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>게시판 글보기</title>
+    <script src="/resource/js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
         //수정하기
         function doEdit(){
@@ -72,6 +73,66 @@
                 location.href="/notice/NoticeListCategory.do?category=menu";
             }
         }
+
+        //댓글 전송시 유효성 체크
+        function doSubmit(){
+            const comment = document.querySelector("#comment");
+            console.log(comment.value)
+
+            if(comment.value == ""){
+                alert("내용을 입력하시기 바랍니다.");
+                comment.focus();
+                return false;
+            }
+
+            if(calBytes(comment.value) > 3000){
+                alert("최대 3000Bytes까지 입력 가능합니다.");
+                comment.focus();
+                return false;
+            }
+
+            //ajax 호출
+            else {
+                $.ajax({
+                    //function을 실행할 url
+                    url: "/notice/insert_comment.do",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "post_id": '<%=rDTO.getPost_id()%>',
+                        "comment": comment.value
+                    },
+                    success: function (data) {
+                        if (data == 1) { // 등록에 성공하면
+                            alert("댓글이 등록되었습니다.");
+                        } else if (data == 0) { // 등록에 실패하면
+                            console.log("댓글 등록에 실패함")
+                            return false;
+                        }
+                    }
+                })
+            }
+
+        }
+
+        //글자 길이 바이트 단위로 체크하기(바이트값 전달)
+        function calBytes(str){
+
+            var tcount = 0;
+            var tmpStr = new String(str);
+            var strCnt = tmpStr.length;
+            var onechar;
+            for (i=0;i<strCnt;i++){
+                onechar = tmpStr.charAt(i);
+
+                if (escape(onechar).length > 4){
+                    tcount += 2;
+                }else{
+                    tcount += 1;
+                }
+            }
+            return tcount;
+        }
     </script>
 </head>
 <body>
@@ -101,6 +162,21 @@
             <%=rDTO.getContent().replaceAll("\r\n", "<br/>")%>
         </td>
     </tr>
+    <!-- 댓글 -->
+    <tr>
+        <td align="center"><%=find_member.getMember_nic() %></td>
+    </tr>
+    <tr>
+        <td>
+            <textarea name="comment" id="comment" style="width: 200px; height: 100px" valign="top" placeholder="댓글을 남겨보세요"></textarea>
+        </td>
+    </tr>
+        <tr>
+        <td>
+            <input type="button" value="등록" onclick="doSubmit()"/>
+        </td>
+        </tr>
+
     <tr>
         <td align="center" colspan="4">
             <a href="javascript:doEdit();">[수정]</a>

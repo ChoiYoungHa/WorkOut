@@ -78,6 +78,11 @@ public class NoticeService implements INoticeService {
         return noticeMapper.bookmark_find(pDTO);
     }
 
+    // 댓글 등록
+    @Override
+    public void comment_insert(NoticeDTO pDTO) throws Exception {
+        noticeMapper.comment_insert(pDTO);
+    }
 
 
 

@@ -42,6 +42,9 @@ public interface INoticeMapper {
     //북마크 게시물 확인
     List<NoticeDTO> bookmark_find(NoticeDTO pDTO) throws Exception;
 
+    // 댓글 등록
+    void comment_insert(NoticeDTO pDTO) throws Exception;
+
 
 
 }

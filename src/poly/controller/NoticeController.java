@@ -424,7 +424,7 @@ public class NoticeController {
     // 맴버에 해당하는 게시물을 리스트형태로 받아와야함.
     @RequestMapping(value = "notice/bookmark_find")
     @ResponseBody
-    public ArrayList<String> bookmark_find(HttpServletRequest request) throws Exception{
+    public ArrayList<String> bookmark_find(HttpServletRequest request) throws Exception {
         log.info(this.getClass().getName() + ". bookmark_find Start!");
 
         String member_id = CmmUtil.nvl(request.getParameter("member_id")); // 회원번호
@@ -451,6 +451,53 @@ public class NoticeController {
         log.info(this.getClass().getName() + ". bookmark_find END!");
 
         return rList;
+    }
+
+    @RequestMapping(value = "notice/insert_comment")
+    @ResponseBody
+    public int insert_comment(HttpServletRequest request, HttpSession session, ModelMap model)
+            throws Exception {
+
+        log.info(this.getClass().getName() + ".insert_comment Start!");
+        String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
+        String comment_ct = CmmUtil.nvl(request.getParameter("comment"));
+        String post_id = CmmUtil.nvl(request.getParameter("post_id"));
+
+        int res;
+
+        try{
+
+            NoticeDTO pDTO = new NoticeDTO();
+
+            pDTO.setMember_id(member_id); // 회원번호
+            pDTO.setComment_ct(comment_ct); // 댓글내용
+            pDTO.setPost_id(post_id); // 게시글 번호
+
+
+            // 값이 잘 받아졌는지 확인
+            log.info("member_id : " + member_id);
+            log.info("comment_ct : " + comment_ct);
+            log.info("post_id : " + post_id);
+
+            // 댓글등록
+            noticeService.comment_insert(pDTO);
+
+            res = 1;
+
+            // 메모리를 비워줌
+            pDTO = null;
+
+        }catch (Exception e){
+            //저장이 실패되면
+            log.info(e.toString());
+            e.printStackTrace();
+
+            res = 0;
+
+        }finally {
+            log.info(this.getClass().getName() + ".insert_comment END!");
+        }
+        return res;
     }
 }
 

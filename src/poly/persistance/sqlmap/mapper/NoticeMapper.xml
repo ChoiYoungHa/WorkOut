@@ -100,6 +100,28 @@
         ORDER BY POST_ID
     </select>
 
+    <!-- 댓글 등록-->
+    <insert id="comment_insert" parameterType="NoticeDTO">
+        INSERT INTO work.comment
+        (
+         POST_ID,
+         COMMENT_CT,
+         MEMBER_ID
+        )
+        VALUES
+        (
+         #{post_id},
+         #{comment_ct},
+         #{member_id}
+        )
+    </insert>
+
+
+
+
+
+
+
 
 
 
