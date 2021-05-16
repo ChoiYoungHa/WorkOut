@@ -95,14 +95,11 @@ public class MemberController {
             msg = "환영합니다!";
 
             // 회원 번호로 세션 올림, "ㅇㅇㅇ님, 환영합니다" 같은 문구 표시를 위해 user_name도 세션에 올림
+            // 작성자와 현재 로그인한 사용자를 구분해주기 위해 닉네임도 세션에 올림
             session.setAttribute("SS_MEMBER_ID", rDTO.getMember_id());
             session.setAttribute("SS_MEMBER_NAME", rDTO.getMember_name());
+            session.setAttribute("SS_MEMBER_NIC", rDTO.getMember_nic());
             log.info("session.setAttribute 완료");
-
-
-            log.info("model.addAttribute 시작!");
-            model.addAttribute("member_nic", rDTO.getMember_nic());
-            log.info("model.addAttribute 끝!");
 
             url = "/index.do"; //로그인 성공 후 리턴할 페이지
         }
@@ -130,6 +127,7 @@ public class MemberController {
         // 세션 삭제(user_name, user_no) - invalidate() 또는 removeAttribute 함수 사용
         session.removeAttribute("SS_MEMBER_ID");
         session.removeAttribute("SS_MEMBER_NAME");
+        session.removeAttribute("SS_MEMBER_NIC");
 
         // 세션이 정상적으로 삭제되었는지 로그를 통해 확인
         log.info("session deleted ? : " + session.getAttribute("SS_MEMBER_ID"));

@@ -87,6 +87,14 @@
                 )
     </insert>
 
+    <!-- 추천수 증가 쿼리 -->
+    <update id="recom_update" parameterType="NoticeDTO">
+        UPDATE work.post SET
+            POST_RECOM = POST_RECOM + 1
+        WHERE
+            POST_ID = #{post_id}
+    </update>
+
     <!-- 북마크 게시물 등록 취소-->
     <delete id="bookmark_delete" parameterType="NoticeDTO">
         DELETE FROM work.bookmark
@@ -106,15 +114,33 @@
         (
          POST_ID,
          COMMENT_CT,
-         MEMBER_ID
+         MEMBER_NIC
         )
         VALUES
         (
          #{post_id},
          #{comment_ct},
-         #{member_id}
+         #{member_nic}
         )
     </insert>
+
+    <!--댓글 리스트 -->
+    <select id="comment_find" parameterType="NoticeDTO" resultType="NoticeDTO">
+        SELECT COMMENT_CT, MEMBER_NIC
+        FROM work.comment
+        WHERE POST_ID = #{post_id};
+    </select>
+
+    <!--인기순 게시판 정렬-->
+    <select id="hit_sort_board" resultType="NoticeDTO" parameterType="NoticeDTO">
+        SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
+        FROM work.POST P, work.MEMBER M
+        WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
+        ORDER BY P.POST_VIEW DESC
+    </select>
+
+
+
 
 
 

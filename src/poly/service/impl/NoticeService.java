@@ -66,6 +66,12 @@ public class NoticeService implements INoticeService {
     public void bookmark_insert(NoticeDTO pDTO) throws Exception {
         noticeMapper.bookmark_insert(pDTO);
     }
+
+    @Override
+    public void recom_update(NoticeDTO pDTO) throws Exception {
+        noticeMapper.recom_update(pDTO);
+    }
+
     // 북마크 게시물 삭제
     @Override
     public void bookmark_delete(NoticeDTO pDTO) throws Exception {
@@ -83,6 +89,19 @@ public class NoticeService implements INoticeService {
     public void comment_insert(NoticeDTO pDTO) throws Exception {
         noticeMapper.comment_insert(pDTO);
     }
+
+    // 댓글 가져오기
+    @Override
+    public List<NoticeDTO> comment_find(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.comment_find(pDTO);
+    }
+
+    // 게시판 인기순 정렬
+    @Override
+    public List<NoticeDTO> hit_sort_board(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.hit_sort_board(pDTO);
+    }
+
 
 
 

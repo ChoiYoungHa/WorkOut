@@ -6,7 +6,8 @@
 <%@ page import="java.util.ArrayList"%>
 
 <%
-    String category = ((String)request.getAttribute("post_category")); // 어떤 게시판인지 구분
+    String category = ((String)request.getAttribute("post_category")); // 어떤 게시판인지 게시판에 표기하기 위한 변수
+    String category_hit = ((String)request.getAttribute("post_category")); // 인기 게시물 카테고리 구분
     String SS_MEMBER_ID = ((String)session.getAttribute("SS_MEMBER_ID")); // 회원마다 북마크 표시가 다르게 보여야 함.
     List<NoticeDTO> rList =	(List<NoticeDTO>)request.getAttribute("rList"); // 해당 카테고리에 맞는 게시물을 표시
     System.out.println("category = " + category);
@@ -14,7 +15,7 @@
 
 //게시판 조회 결과 보여주기
     if (rList==null){
-        rList = new ArrayList<NoticeDTO>();
+        rList = new ArrayList<>();
     }
 
     if (category.equals("work")) {
@@ -119,6 +120,8 @@
 </table>
 <a href="/notice/insertPage.do">[글쓰기]</a>
 <a href="/index.do">[메인]</a>
+<a href="/notice/NoticeListCategory.do?category=<%=category_hit%>">전체 게시물</a>
+<a href="/notice/hit_sort_board.do?category=<%=category_hit%>">인기 게시물</a>
 <script type="text/javascript">
     function init(){
         console.log("bookmark check!");
