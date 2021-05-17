@@ -36,11 +36,27 @@ public interface INoticeMapper {
     //북마크 게시물 추가
     void bookmark_insert(NoticeDTO pDTO) throws Exception;
 
+    // 추천수 증가
+    void recom_update(NoticeDTO pDTO) throws Exception;
+
     //북마크 게시물 삭제
     void bookmark_delete(NoticeDTO pDTO) throws Exception;
 
     //북마크 게시물 확인
     List<NoticeDTO> bookmark_find(NoticeDTO pDTO) throws Exception;
+
+    // 댓글 등록
+    void comment_insert(NoticeDTO pDTO) throws Exception;
+
+    // 댓글 가져오기
+    List<NoticeDTO> comment_find(NoticeDTO pDTO) throws Exception;
+
+    // 게시판 인기순 정렬
+    List<NoticeDTO> hit_sort_board(NoticeDTO pDTO) throws Exception;
+
+
+
+
 
 
 
