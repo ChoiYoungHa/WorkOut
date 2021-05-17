@@ -134,7 +134,7 @@
                 console.log(data);
                 const clicked_class = "fas";
 
-                var i_list = document.querySelectorAll("i");
+                var i_list = document.querySelectorAll("i"); // i 태그를 list로 모두 담음
                 var i;
                 for (i = 0; i < i_list.length; i++) { // 게시물 수 만큼
                         if (data.includes(i_list[i].id)) { // 받아온 post_id에 해당하는 게시물이 있는지 확인
