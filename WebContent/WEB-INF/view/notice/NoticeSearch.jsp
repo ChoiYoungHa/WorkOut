@@ -29,7 +29,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>공지 리스트</title>
     <script src="https://kit.fontawesome.com/285f83e94b.js" crossorigin="anonymous"></script>
@@ -134,7 +133,6 @@
             <a href="javascript:doDetail('<%=CmmUtil.nvl(rDTO.getPost_id())%>');">
                 <%=CmmUtil.nvl(rDTO.getPost_title()) %></a><i onclick="iClickHandler(this, '<%=rDTO.getPost_id()%>');" class="far fa-heart" id="<%=rDTO.getPost_id()%>"></i>
         </td>
-
         <td align="center"><%=rDTO.getPost_view() %></td>
         <td align="center"><%=rDTO.getPost_recom() %></td>
         <td align="center"><%=rDTO.getMember_nic() %></td>

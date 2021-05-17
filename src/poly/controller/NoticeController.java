@@ -469,9 +469,7 @@ public class NoticeController {
         return rList;
     }
 
-<<<<<<< HEAD
-    
-=======
+
     // 댓글등록
     @RequestMapping(value = "notice/insert_comment")
     @ResponseBody
@@ -580,9 +578,61 @@ public class NoticeController {
         return "/notice/NoticeList";
     }
 
+    /***
+     * 게시판 검색
+     */
+    @RequestMapping(value = "/notice/searchBoard")
+    public String searchBoard(HttpServletRequest request, ModelMap model) throws Exception{
+        log.info(this.getClass().getName() + "searchBoard. Start!");
+
+        String post_category = CmmUtil.nvl(request.getParameter("category"));
+        String searchType = CmmUtil.nvl(request.getParameter("searchType"));
+        String keyword = CmmUtil.nvl(request.getParameter("keyword"));
+
+        String test = searchType;
+
+        log.info("category : " + post_category);
+        log.info("searchType : " + searchType);
+        log.info("keyword : " + keyword);
 
 
->>>>>>> d0818318dd5b461663869fb7e41be73038fbb2e9
+        NoticeDTO pDTO = new NoticeDTO();
+        pDTO.setPost_category(post_category);
+        pDTO.setKeyWord(keyword);
+
+        List<NoticeDTO> rList = null;
+
+        try{
+            if(test.equals("title")){
+                log.info("넘어가나?");
+                rList = noticeService.search_board_title(pDTO);
+            }
+            else if(test.equals("member_nic")){
+                log.info("넘어가나?");
+                rList = noticeService.search_board_member(pDTO);
+            }
+
+        } catch (Exception e){
+            log.info("실패! : " + e.toString());
+         }
+
+        finally {
+            if(rList == null){
+                rList = new ArrayList<>();
+            }
+        }
+
+        model.addAttribute("post_category", post_category);
+        model.addAttribute("rList", rList);
+
+        for (NoticeDTO noticeDTO : rList) {
+            System.out.println("noticeDTO.getMember_nic() = " + noticeDTO.getMember_nic());
+            System.out.println("noticeDTO.getPost_title() = " + noticeDTO.getPost_title());
+        }
+
+        log.info(this.getClass().getName() + "searchBoard. END!");
+        return "/notice/NoticeSearch";
+    }
 }
 
 

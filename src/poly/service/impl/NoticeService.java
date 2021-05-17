@@ -102,7 +102,15 @@ public class NoticeService implements INoticeService {
         return noticeMapper.hit_sort_board(pDTO);
     }
 
+    @Override
+    public List<NoticeDTO> search_board_title(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.search_board_title(pDTO);
+    }
 
+    @Override
+    public List<NoticeDTO> search_board_member(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.search_board_member(pDTO);
+    }
 
 
 }

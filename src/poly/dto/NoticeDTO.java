@@ -20,6 +20,17 @@ public class NoticeDTO {
     private String comment_id; // 댓글번호
     private String comment_ct; // 댓글내용
 
+    // 검색
+    private String keyword; // 검색어
+
+    public String getKeyWord() {
+        return keyword;
+    }
+
+    public void setKeyWord(String keyword) {
+        this.keyword = keyword;
+    }
+
     public String getComment_id() {
         return comment_id;
     }

@@ -51,6 +51,12 @@ public interface INoticeService {
     // 게시판 인기순 정렬
     List<NoticeDTO> hit_sort_board(NoticeDTO pDTO) throws Exception;
 
+    // 게시물 검색기능 (제목검색)
+    List<NoticeDTO> search_board_title(NoticeDTO pDTO) throws Exception;
+
+    // 게시물 검색기능 (닉네임 검색)
+    List<NoticeDTO> search_board_member(NoticeDTO pDTO) throws Exception;
+
 
 
 }

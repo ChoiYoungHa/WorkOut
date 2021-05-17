@@ -139,19 +139,21 @@
         ORDER BY P.POST_VIEW DESC
     </select>
 
+    <!--게시물 제목 검색 쿼리-->
+    <select id="search_board_title" resultType="NoticeDTO" parameterType="NoticeDTO">
+        SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
+        FROM work.POST P, work.MEMBER M
+        WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
+        AND P.POST_TITLE like %#{keyword}% ORDER BY P.POST_ID
+    </select>
 
-
-
-
-
-
-
-
-
-
-
-
-
+    <!--게시물 작성자 검색 쿼리-->
+    <select id="search_board_member" resultType="NoticeDTO" parameterType="NoticeDTO">
+        SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
+        FROM work.POST P, work.MEMBER M
+        WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
+          AND M.MEMBER_NIC like %#{keyword}% ORDER BY P.POST_ID
+    </select>
 
 
 
