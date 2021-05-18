@@ -9,7 +9,7 @@
     String category = ((String)request.getAttribute("post_category")); // 어떤 게시판인지 게시판에 표기하기 위한 변수
     String category_hit = ((String)request.getAttribute("post_category")); // 인기 게시물 카테고리 구분
     String SS_MEMBER_ID = ((String)session.getAttribute("SS_MEMBER_ID")); // 회원마다 북마크 표시가 다르게 보여야 함.
-    List<NoticeDTO> rList =	(List<NoticeDTO>)request.getAttribute("rList"); // 해당 카테고리에 맞는 게시물을 표시
+    List<NoticeDTO> rList =	(List<NoticeDTO>)request.getAttribute("sList"); // 해당 카테고리에 맞는 게시물을 표시
     System.out.println("category = " + category);
 
 

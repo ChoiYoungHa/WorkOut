@@ -607,6 +607,7 @@ public class NoticeController {
                 log.info("넘어가나?");
                 rList = noticeService.search_board_title(pDTO);
             }
+            
             else if(test.equals("member_nic")){
                 log.info("넘어가나?");
                 rList = noticeService.search_board_member(pDTO);
@@ -619,18 +620,26 @@ public class NoticeController {
         finally {
             if(rList == null){
                 rList = new ArrayList<>();
+                log.info("is null!");
             }
+
+            Iterator<NoticeDTO> it = rList.iterator();
+            while (it.hasNext()) {
+                NoticeDTO dDTO = it.next();
+                log.info("post_id : " + dDTO.getPost_id());
+                log.info("member_nic : " + dDTO.getMember_nic());
+                log.info("post_title : " + dDTO.getPost_title());
+            }
+            model.addAttribute("post_category", post_category);
+            model.addAttribute("sList", rList);
         }
 
-        model.addAttribute("post_category", post_category);
-        model.addAttribute("rList", rList);
 
-        for (NoticeDTO noticeDTO : rList) {
-            System.out.println("noticeDTO.getMember_nic() = " + noticeDTO.getMember_nic());
-            System.out.println("noticeDTO.getPost_title() = " + noticeDTO.getPost_title());
-        }
+        // 메모리초기화
+        rList = null;
 
         log.info(this.getClass().getName() + "searchBoard. END!");
+
         return "/notice/NoticeSearch";
     }
 }
