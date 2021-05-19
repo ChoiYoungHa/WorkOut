@@ -1,6 +1,7 @@
 package poly.service.impl;
 
 import org.springframework.stereotype.Service;
+import poly.dto.Criteria;
 import poly.dto.NoticeDTO;
 import poly.persistance.mapper.INoticeMapper;
 import poly.service.INoticeService;
@@ -110,6 +111,16 @@ public class NoticeService implements INoticeService {
     @Override
     public List<NoticeDTO> search_board_member(NoticeDTO pDTO) throws Exception {
         return noticeMapper.search_board_member(pDTO);
+    }
+
+    @Override
+    public List<NoticeDTO> selectPaging(Criteria pDTO) throws Exception {
+        return noticeMapper.selectPaging(pDTO);
+    }
+
+    @Override
+    public int cntNotice() throws Exception {
+        return noticeMapper.cntNotice();
     }
 
 

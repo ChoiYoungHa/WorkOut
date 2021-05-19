@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import poly.dto.Criteria;
 import poly.dto.MemberDTO;
 import poly.dto.NoticeDTO;
 import poly.service.IMemberService;
@@ -604,12 +606,10 @@ public class NoticeController {
 
         try{
             if(test.equals("title")){
-                log.info("넘어가나?");
                 rList = noticeService.search_board_title(pDTO);
             }
             
             else if(test.equals("member_nic")){
-                log.info("넘어가나?");
                 rList = noticeService.search_board_member(pDTO);
             }
 
@@ -620,20 +620,12 @@ public class NoticeController {
         finally {
             if(rList == null){
                 rList = new ArrayList<>();
-                log.info("is null!");
             }
 
-            Iterator<NoticeDTO> it = rList.iterator();
-            while (it.hasNext()) {
-                NoticeDTO dDTO = it.next();
-                log.info("post_id : " + dDTO.getPost_id());
-                log.info("member_nic : " + dDTO.getMember_nic());
-                log.info("post_title : " + dDTO.getPost_title());
-            }
             model.addAttribute("post_category", post_category);
             model.addAttribute("sList", rList);
+            model.addAttribute("keyword", keyword); // 검색어 유지를 위해 남겨둠
         }
-
 
         // 메모리초기화
         rList = null;
@@ -642,6 +634,53 @@ public class NoticeController {
 
         return "/notice/NoticeSearch";
     }
+
+
+    // 페이징 처리하여 불러오기
+    @RequestMapping(value="/pagingList")
+    public String pagingList(Criteria pDTO, ModelMap model,
+                             @RequestParam(value="nowPage", required = false) String nowPage,
+                             @RequestParam(value="cntPerPage", required = false) String cntPerPage,
+                             @RequestParam(value="category", required = false) String category)
+            throws Exception {
+
+        log.info(this.getClass().getName() + ".pagingList Start!");
+
+        // 총 게시물 수를 가져옴(count *)
+        int total = noticeService.cntNotice();
+        log.info("가져온 게시물 수(int total) : " + total);
+
+        // 페이지 정보를 받아오지 못할 경우, 기본값을 지정
+        if (nowPage == null & cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "10";
+
+        } else if (nowPage == null) {
+            nowPage = "1";
+
+        } else if (cntPerPage == null) {
+            cntPerPage = "10";
+
+        }
+
+        /**
+         * total 총 게시물 수
+         * nowPage 현재페이지
+         * cntPerPage 페이지당 게시물 수
+         */
+        // @RequestParam과 db쿼리를 통해 가져온 값을 pDTO에 세팅
+        pDTO = new Criteria(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), category);
+
+        model.addAttribute("paging",pDTO);
+        model.addAttribute("pageList", noticeService.selectPaging(pDTO));
+        model.addAttribute("post_category", category);
+
+        log.info(this.getClass().getName() + ".pagingList End!");
+
+        return "/notice/NoticeList";
+    }
+
+
 }
 
 

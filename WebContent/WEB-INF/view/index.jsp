@@ -22,8 +22,8 @@
     <a href="/logOut.do">로그아웃</a>
     <a href="/menu.do">식단관리</a>
     <a href="/notice/insertPage.do">게시글 작성</a>
-    <a href="/notice/NoticeListCategory.do?category=work">운동게시판</a>
-    <a href="/notice/NoticeListCategory.do?category=menu">식단게시판</a>
+    <a href="/pagingList.do?category=work">운동게시판</a>
+    <a href="/pagingList.do?category=menu">식단게시판</a>
 <% } %>
 </body>
 </html>

@@ -9,6 +9,7 @@
     String category = ((String)request.getAttribute("post_category")); // 어떤 게시판인지 게시판에 표기하기 위한 변수
     String category_hit = ((String)request.getAttribute("post_category")); // 인기 게시물 카테고리 구분
     String SS_MEMBER_ID = ((String)session.getAttribute("SS_MEMBER_ID")); // 회원마다 북마크 표시가 다르게 보여야 함.
+    String keyword = ((String) request.getAttribute("keyword")); // 검색 키워드유지
     List<NoticeDTO> rList =	(List<NoticeDTO>)request.getAttribute("sList"); // 해당 카테고리에 맞는 게시물을 표시
     System.out.println("category = " + category);
 
@@ -92,7 +93,7 @@
 <!-- search{s} -->
 
 <div class="form-group row justify-content-center">
-    <form action="/notice/searchBoard.do" method="POST">
+    <form action="/notice/searchBoard.do" method="GET">
     <div class="w100" style="padding-right:10px">
         <select class="form-control form-control-sm" name="searchType" id="searchType">
             <option value="title">제목</option>
@@ -100,7 +101,7 @@
         </select>
     </div>
     <div class="w300" style="padding-right:10px">
-        <input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+        <input type="text" class="form-control form-control-sm" name="keyword" id="keyword" value="<%=keyword%>">
         <input type="hidden" id="category" name="category" value="<%=category_hit%>">
     </div>
     <div>

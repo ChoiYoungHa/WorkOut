@@ -2,6 +2,7 @@ package poly.persistance.mapper;
 
 import config.Mapper;
 import org.aspectj.weaver.ast.Not;
+import poly.dto.Criteria;
 import poly.dto.NoticeDTO;
 
 import java.util.List;
@@ -60,6 +61,12 @@ public interface INoticeMapper {
 
     // 게시물 검색기능 (닉네임 검색)
     List<NoticeDTO> search_board_member(NoticeDTO pDTO) throws Exception;
+
+    // 페이징 처리한 게시판 리스트 불러오기
+    List<NoticeDTO> selectPaging(Criteria pDTO) throws Exception;
+
+    // 페이징을 위한 게시글 수 카운팅
+    int cntNotice() throws Exception;
 
 
 
