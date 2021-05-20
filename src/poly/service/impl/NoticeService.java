@@ -119,8 +119,13 @@ public class NoticeService implements INoticeService {
     }
 
     @Override
-    public int cntNotice() throws Exception {
-        return noticeMapper.cntNotice();
+    public List<NoticeDTO> selectPaging_sort(Criteria pDTO) throws Exception {
+        return noticeMapper.selectPaging_sort(pDTO);
+    }
+
+    @Override
+    public int cntNotice(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.cntNotice(pDTO);
     }
 
 

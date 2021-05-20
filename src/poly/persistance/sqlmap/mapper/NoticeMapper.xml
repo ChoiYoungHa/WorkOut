@@ -157,15 +157,25 @@
 
     <!-- 페이징 처리 후 게시글 리스트 불러오기 -->
     <select id="selectPaging" resultType="NoticeDTO">
-        SELECT * FROM (SELECT @rownum:=@rownum+1 rowNum,
-        N.* FROM (SELECT * FROM work.post) N, (SELECT @ROWNUM:=0) R
-        ORDER BY POST_ID DESC) A WHERE rowNum BETWEEN #{start} AND #{end}
-        AND POST_CATEGORY = #{category}
+        SELECT *
+        FROM (SELECT @rownum:=@rownum+1 rowNum,
+              N.*, M.MEMBER_NIC, M.MEMBER_ID FROM (SELECT * FROM work.post) N, (SELECT @ROWNUM:=0) R, (SELECT * FROM work.member) M
+              ORDER BY POST_ID DESC) A WHERE rowNum BETWEEN #{start} AND #{end}
+              AND POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID
     </select>
 
-    <!-- 페이징 -->
-    <select id="cntNotice" resultType="int">
-        SELECT COUNT(*) FROM work.post
+    <!-- 페이징 처리 후 게시글 리스트 불러오기 인기순 정렬-->
+    <select id="selectPaging_sort" resultType="NoticeDTO">
+        SELECT *
+        FROM (SELECT @rownum:=@rownum+1 rowNum,
+              N.*, M.MEMBER_NIC, M.MEMBER_ID FROM (SELECT * FROM work.post) N, (SELECT @ROWNUM:=0) R, (SELECT * FROM work.member) M
+              ORDER BY POST_VIEW DESC) A WHERE rowNum BETWEEN #{start} AND #{end}
+              AND POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID
+    </select>
+
+    <!-- 페이징처리에 사용 될 카테고리에 맞는 게시물 수 카운트 -->
+    <select id="cntNotice" resultType="int" parameterType="NoticeDTO">
+        SELECT COUNT(*) FROM work.post WHERE POST_CATEGORY = #{post_category}
     </select>
 
 

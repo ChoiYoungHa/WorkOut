@@ -42,7 +42,7 @@
         // 한 페이지당 게시물 보기 개수를 세팅하여 전달
         function selChange() {
             var sel = document.getElementById('cntPerPage').value;
-            location.href = "/pagingList.do?category=<%=category%>&nowPage=${paging.nowPage}&cntPerPage="+sel;
+            location.href = "/pagingList.do?category=<%=category_hit%>&nowPage=${paging.nowPage}&cntPerPage="+sel;
         }
 
         function iClickHandler(e, post_id) {
@@ -140,7 +140,7 @@
         <div class="col-3" width="100" align="center">조회수</div>
         <div class="col-3" width="100" align="center">추천수</div>
         <div class="col-3" width="100" align="center">작성자</div>
-</div>>
+</div>
 <div class="row">
     <%
         int i =0;
@@ -163,8 +163,47 @@
 </div>
 <a href="/notice/insertPage.do">[글쓰기]</a>
 <a href="/index.do">[메인]</a>
-<a href="/notice/NoticeListCategory.do?category=<%=category_hit%>">전체 게시물</a>
-<a href="/notice/hit_sort_board.do?category=<%=category_hit%>">인기 게시물</a>
+<a href="/pagingList.do?category=<%=category_hit%>&nowPage=${paging.nowPage}">전체 게시물</a>
+<a href="/pagingList.do?category=<%=category_hit%>&nowPage=${paging.nowPage}&sort=y">인기 게시물</a>
+<div>
+    <div id="paging">
+        <ul>
+            <%if (startPage != 1) { %>
+            <li><a href="/pagingList.do?nowPage=<%=startPage - 1%>&cntPerPage=<%=cntPerPage%>&category=<%=category_hit%>">&lt;</a>
+                    <%
+                            }
+                            %> <%
+                for (int j = startPage; j <= endPage; j++) {
+ %>             <%
+                if (j == nowPage) {
+ %>
+            <li class="active"><span><%=j%></span></li>
+            <%
+                }
+            %>
+            <%
+                if (j != nowPage) {
+            %>
+            <li><a
+                    href="/pagingList.do?nowPage=<%=j%>&cntPerPage=<%=cntPerPage%>&category=<%=category_hit%>"><%=j%></a></li>
+            <%
+                }
+            %>
+            <%
+                }
+            %>
+            <%
+                if (endPage != lastPage) {
+            %>
+            <li><a
+                    href="/pagingList.do?nowPage=<%=endPage + 1%>&cntPerPage=<%=cntPerPage%>&category=<%=category_hit%>">&gt;</a></li>
+            <%
+                }
+            %>
+        </ul>
+    </div>
+</div>
+</div>
 <script type="text/javascript">
     function init(){
         console.log("bookmark check!");

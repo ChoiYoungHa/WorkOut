@@ -75,9 +75,9 @@
         function doList(category){
 
             if (category === 'work'){
-                location.href="/notice/NoticeListCategory.do?category=work";
+                location.href="/pagingList.do?category=work";
             }else {
-                location.href="/notice/NoticeListCategory.do?category=menu";
+                location.href="/pagingList.do?category=menu";
             }
         }
 

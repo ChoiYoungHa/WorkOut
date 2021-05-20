@@ -15,10 +15,10 @@
     <script type="text/javascript">
         alert("<%=msg%>");
         if ("<%=post_category%>" === "work"){
-            top.location.href="/notice/NoticeListCategory.do?category=work";
+            top.location.href="/pagingList.do?category=work";
         }
         else {
-            top.location.href="/notice/NoticeListCategory.do?category=menu";
+            top.location.href="/pagingList.do?category=menu";
         }
     </script>
 </head>

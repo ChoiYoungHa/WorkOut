@@ -89,6 +89,7 @@ public class NoticeController {
 
             /*
              * 게시글 등록하기위한 비즈니스 로직을 호출
+             * 게시글 등록 / 게시글 내용 등록
              * */
             noticeService.InsertNoticeInfo(pDTO);
             noticeService.ContentNotice(pDTO);
@@ -461,11 +462,6 @@ public class NoticeController {
             rList.add(pNo.getPost_id());
         }
 
-        // 값 잘들어갔는지 확인
-        for (String s : rList) {
-            log.info("post no : " + s);
-        }
-
         log.info(this.getClass().getName() + ". bookmark_find END!");
 
         return rList;
@@ -543,42 +539,51 @@ public class NoticeController {
         return rList;
     }
 
-    /**
-     * 게시판 리스트 인기순
-     */
-    @RequestMapping(value = "notice/hit_sort_board", method = RequestMethod.GET)
-    public String hit_sort_board(HttpServletRequest request, ModelMap model) throws Exception {
-
-        //로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
-        log.info(this.getClass().getName() + ".hit_sort_board start!");
-
-        // 카테고리 받아오기
-        String post_category = CmmUtil.nvl(request.getParameter("category")); //카테고리
-        log.info("post_category : " + post_category);
-
-        NoticeDTO rDTO = new NoticeDTO();
-        rDTO.setPost_category(post_category);
-
-        //카테고리별 인기 게시물 리스트 가져오기
-        List<NoticeDTO> rList = noticeService.hit_sort_board(rDTO);
-
-        if (rList == null) {
-            rList = new ArrayList<NoticeDTO>();
-        }
-
-        //조회된 리스트 결과값 넣어주기
-        model.addAttribute("post_category", post_category);
-        model.addAttribute("rList", rList);
-
-        //변수 초기화(메모리 효율화 시키기 위해 사용함)
-        rList = null;
-
-        //로그 찍기(추후 찍은 로그를 통해 이 함수 호출이 끝났는지 파악하기 용이하다.)
-        log.info(this.getClass().getName() + ".hit_sort_board end!");
-
-        //함수 처리가 끝나고 보여줄 JSP 파일명(/WEB-INF/view/notice/NoticeList.jsp)
-        return "/notice/NoticeList";
-    }
+//    /**
+//     * 게시판 리스트 인기순
+//     */
+//    @RequestMapping(value = "notice/hit_sort_board", method = RequestMethod.GET)
+//    public String hit_sort_board(Criteria pDTO, ModelMap model,
+//                                 @RequestParam(value="nowPage", required = false) String nowPage,
+//                                 @RequestParam(value="cntPerPage", required = false) String cntPerPage,
+//                                 @RequestParam(value="category", required = false) String category)
+//            throws Exception {
+//
+//        log.info(this.getClass().getName() + ".hit_sort_board Start!");
+//
+//        // 총 게시물 수를 가져옴(count *)
+//        int total = noticeService.cntNotice();
+//        log.info("가져온 게시물 수(int total) : " + total);
+//
+//        // 페이지 정보를 받아오지 못할 경우, 기본값을 지정
+//        if (nowPage == null & cntPerPage == null) {
+//            nowPage = "1";
+//            cntPerPage = "10";
+//
+//        } else if (nowPage == null) {
+//            nowPage = "1";
+//
+//        } else if (cntPerPage == null) {
+//            cntPerPage = "10";
+//        }
+//        log.info("null 변환? : " + cntPerPage);
+//
+//        /**
+//         * total 총 게시물 수
+//         * nowPage 현재페이지
+//         * cntPerPage 페이지당 게시물 수
+//         */
+//        // @RequestParam과 db쿼리를 통해 가져온 값을 pDTO에 세팅
+//        pDTO = new Criteria(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), category);
+//
+//        model.addAttribute("paging",pDTO);
+//        model.addAttribute("pageList", noticeService.selectPaging_sort(pDTO));
+//        model.addAttribute("post_category", category);
+//
+//        log.info(this.getClass().getName() + ".hit_sort_board End!");
+//
+//        return "/notice/NoticeList";
+//    }
 
     /***
      * 게시판 검색
@@ -641,13 +646,25 @@ public class NoticeController {
     public String pagingList(Criteria pDTO, ModelMap model,
                              @RequestParam(value="nowPage", required = false) String nowPage,
                              @RequestParam(value="cntPerPage", required = false) String cntPerPage,
-                             @RequestParam(value="category", required = false) String category)
+                             @RequestParam(value="category", required = false) String category,
+                             @RequestParam(value="sort", required = false) String sortYn)
             throws Exception {
 
         log.info(this.getClass().getName() + ".pagingList Start!");
 
+        // 인기게시물 정렬이 아닐 경우 오류방지를 위해 사용
+        if(sortYn == null){
+            sortYn = "n";
+        }
+
+        log.info("category : " + category);
+        log.info("sortYn : " + sortYn);
+
+        NoticeDTO cDTO = new NoticeDTO();
+        cDTO.setPost_category(category);
+
         // 총 게시물 수를 가져옴(count *)
-        int total = noticeService.cntNotice();
+        int total = noticeService.cntNotice(cDTO);
         log.info("가져온 게시물 수(int total) : " + total);
 
         // 페이지 정보를 받아오지 못할 경우, 기본값을 지정
@@ -660,7 +677,6 @@ public class NoticeController {
 
         } else if (cntPerPage == null) {
             cntPerPage = "10";
-
         }
 
         /**
@@ -671,16 +687,19 @@ public class NoticeController {
         // @RequestParam과 db쿼리를 통해 가져온 값을 pDTO에 세팅
         pDTO = new Criteria(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), category);
 
+        // 인기순 정렬에 따른 결과값 분리
+        if(sortYn.equals("y")){
+            model.addAttribute("pageList", noticeService.selectPaging_sort(pDTO));
+        }else {
+            model.addAttribute("pageList", noticeService.selectPaging(pDTO));
+        }
+
         model.addAttribute("paging",pDTO);
-        model.addAttribute("pageList", noticeService.selectPaging(pDTO));
         model.addAttribute("post_category", category);
 
         log.info(this.getClass().getName() + ".pagingList End!");
-
         return "/notice/NoticeList";
     }
-
-
 }
 
 
