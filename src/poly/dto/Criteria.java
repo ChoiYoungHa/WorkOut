@@ -6,6 +6,7 @@ public class Criteria {
     // 한 번에 표시할 페이징 번호의 갯수
     private int cntPage = 5;
     private String category; // 카테고리에 맞는 페이징을 위해 사용
+    private String keyword; // 검색을 위해 사용
 
     public Criteria() {
 
@@ -19,6 +20,17 @@ public class Criteria {
         calcStartEndPage(getNowPage(), cntPage);
         calcStartEnd(getNowPage(), getCntPerPage());
         setCategory(category);
+    }
+
+    public Criteria(int total, int nowPage, int cntPerPage, String category, String keyword) {
+        setNowPage(nowPage);
+        setCntPerPage(cntPerPage);
+        setTotal(total);
+        calcLastPage(getTotal(), getCntPerPage());
+        calcStartEndPage(getNowPage(), cntPage);
+        calcStartEnd(getNowPage(), getCntPerPage());
+        setCategory(category);
+        setKeyword(keyword);
     }
 
     // 마지막 페이지 계산(전체 게시글수/페이지당 게시글수-> 올림 ex) 102개/20개 -> 6개의 페이지 필요)
@@ -101,6 +113,14 @@ public class Criteria {
     public void getCntPage(int cntPage) {
         this.cntPage = cntPage;
     }
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
     @Override
     public String toString() {
         return "Criteria [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total

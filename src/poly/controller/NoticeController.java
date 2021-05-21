@@ -589,32 +589,72 @@ public class NoticeController {
      * 게시판 검색
      */
     @RequestMapping(value = "/notice/searchBoard")
-    public String searchBoard(HttpServletRequest request, ModelMap model) throws Exception{
+    public String searchBoard(HttpServletRequest request, ModelMap model, Criteria pDTO,
+                              @RequestParam(value="nowPage", required = false) String nowPage,
+                              @RequestParam(value="cntPerPage", required = false) String cntPerPage)
+            throws Exception{
         log.info(this.getClass().getName() + "searchBoard. Start!");
 
-        String post_category = CmmUtil.nvl(request.getParameter("category"));
-        String searchType = CmmUtil.nvl(request.getParameter("searchType"));
+        String category = CmmUtil.nvl(request.getParameter("category"));
+        String searchType = CmmUtil.nvl(request.getParameter("searchType")); // 제목 혹은 글쓴이
         String keyword = CmmUtil.nvl(request.getParameter("keyword"));
 
-        String test = searchType;
-
-        log.info("category : " + post_category);
+        log.info("category : " + category);
         log.info("searchType : " + searchType);
         log.info("keyword : " + keyword);
 
+        log.info("if문 start!");
+        // 페이지 정보를 받아오지 못할 경우, 기본값을 지정
+        if (nowPage == null & cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "10";
 
-        NoticeDTO pDTO = new NoticeDTO();
-        pDTO.setPost_category(post_category);
-        pDTO.setKeyWord(keyword);
+        } else if (nowPage == null) {
+            nowPage = "1";
+
+        } else if (cntPerPage == null) {
+            cntPerPage = "10";
+        }
+        log.info("if문 end!");
+
+        log.info("dto setting start!");
+        NoticeDTO cDTO = new NoticeDTO();
+        cDTO.setKeyWord(keyword);
+        cDTO.setPost_category(category);
+        log.info("dto setting end!");
+
+
+
+        // 검색 조건에 따른 게시물 수를 가져옴(count *)
+        log.info("total value setting start!");
+        int total = 0;
+        if(searchType.equals("title")){
+            total = noticeService.searchNoticePcn(cDTO);
+        }
+        else if(searchType.equals("member_nic")) {
+            total = noticeService.searchNoticeMcn(cDTO);
+            log.info("넘어오나?");
+        }
+        log.info("total value setting end!");
+        log.info("total : " + total);
+
+        // 사용 후 메모리 초기화
+        cDTO = null;
+
+        /**
+         * total 총 게시물 수
+         * nowPage 현재페이지
+         * cntPerPage 페이지당 게시물 수
+         */
+        pDTO = new Criteria(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), category, keyword);
 
         List<NoticeDTO> rList = null;
-
         try{
-            if(test.equals("title")){
+            if(searchType.equals("title")){
                 rList = noticeService.search_board_title(pDTO);
             }
             
-            else if(test.equals("member_nic")){
+            else if(searchType.equals("member_nic")){
                 rList = noticeService.search_board_member(pDTO);
             }
 
@@ -627,16 +667,18 @@ public class NoticeController {
                 rList = new ArrayList<>();
             }
 
-            model.addAttribute("post_category", post_category);
-            model.addAttribute("sList", rList);
+            model.addAttribute("searchType", searchType);
+            model.addAttribute("post_category", category);
+            model.addAttribute("paging",pDTO);
+            model.addAttribute("pageList", rList);
             model.addAttribute("keyword", keyword); // 검색어 유지를 위해 남겨둠
         }
 
         // 메모리초기화
+        pDTO = null;
         rList = null;
 
         log.info(this.getClass().getName() + "searchBoard. END!");
-
         return "/notice/NoticeSearch";
     }
 
@@ -696,6 +738,9 @@ public class NoticeController {
 
         model.addAttribute("paging",pDTO);
         model.addAttribute("post_category", category);
+
+        // 메모리 비우기
+        pDTO = null;
 
         log.info(this.getClass().getName() + ".pagingList End!");
         return "/notice/NoticeList";

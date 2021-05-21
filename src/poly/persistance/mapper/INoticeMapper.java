@@ -57,10 +57,10 @@ public interface INoticeMapper {
     List<NoticeDTO> hit_sort_board(NoticeDTO pDTO) throws Exception;
 
     // 게시물 검색기능 (제목검색)
-    List<NoticeDTO> search_board_title(NoticeDTO pDTO) throws Exception;
+    List<NoticeDTO> search_board_title(Criteria pDTO) throws Exception;
 
     // 게시물 검색기능 (닉네임 검색)
-    List<NoticeDTO> search_board_member(NoticeDTO pDTO) throws Exception;
+    List<NoticeDTO> search_board_member(Criteria pDTO) throws Exception;
 
     // 페이징 처리한 게시판 리스트 불러오기
     List<NoticeDTO> selectPaging(Criteria pDTO) throws Exception;
@@ -70,6 +70,14 @@ public interface INoticeMapper {
 
     // 페이징을 위한 게시글 수 카운팅
     int cntNotice(NoticeDTO pDTO) throws Exception;
+
+    // 페이징 검색을 위한 게시글 수 카운팅 게시글제목
+    int searchNoticePcn(NoticeDTO pDTO) throws Exception;
+
+    // 페이징 검색을 위한 게시글 수 카운팅 작성자
+    int searchNoticeMcn(NoticeDTO pDTO) throws Exception;
+
+
 
 
 
