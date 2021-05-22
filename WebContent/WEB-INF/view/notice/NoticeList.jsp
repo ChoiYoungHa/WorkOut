@@ -54,7 +54,6 @@
                 e.classList.add(clicked_class); // 빨간하트
                 console.log(post_id)
                 $.ajax({
-                    //function을 실행할 url
                     url : "/notice/bookmark_insert.do",
                     type : "post",
                     dataType : "json",
@@ -72,7 +71,6 @@
                 e.classList.remove(clicked_class); // 빈 하트
                 console.log("빈 하트");
                 $.ajax({
-                    //function을 실행할 url
                     url : "/notice/bookmark_delete.do",
                     type : "post",
                     dataType : "json",
@@ -87,6 +85,26 @@
                 })
             }
         }
+
+        function getSearchList(){
+            $.ajax({
+                url : "/getSearchList.do",
+                type : "post",
+                success : function(data) {
+                    let searchList = "";
+                    for(let i = 0; i < data.length; i++){
+                        searchList += data[i] + "<br>";
+                    }
+                    $("#search_box").html(searchList);
+                    $("#search_box").show();
+                }
+            })
+        }
+
+        function removeSearchList(){
+            $("#search_box").hide();
+        }
+
     </script>
 </head>
 <body>
@@ -102,7 +120,8 @@
         </select>
     </div>
     <div class="w300" style="padding-right:10px">
-        <input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
+        <input type="text" class="form-control form-control-sm" name="keyword" id="keyword" onfocus=getSearchList() onblur=removeSearchList()>
+        <div id="search_box"></div>
         <input type="hidden" id="category" name="category" value="<%=category_hit%>">
     </div>
     <div>
