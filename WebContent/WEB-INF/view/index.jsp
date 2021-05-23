@@ -20,7 +20,7 @@
 <% } else { %> <!--세션이 설정된 경우에는, 이름 + 로그아웃 표시-->
     <%=SS_MEMBER_ID%>번 회원 <%=SS_MEMBER_NAME %>님 환영합니다~ <br>
     <a href="/logOut.do">로그아웃</a>
-    <a href="/menu.do">식단관리</a>
+    <a href="/checkMemberGk.do">식단관리</a>
     <a href="/notice/insertPage.do">게시글 작성</a>
     <a href="/pagingList.do?category=work">운동게시판</a>
     <a href="/pagingList.do?category=menu">식단게시판</a>

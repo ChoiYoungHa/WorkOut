@@ -4,6 +4,8 @@
 <%
     String msg = CmmUtil.nvl((String)request.getAttribute("msg"));
     String url = CmmUtil.nvl((String)request.getAttribute("url"));
+
+
 %>
 <!DOCTYPE html>
 <html>

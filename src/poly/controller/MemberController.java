@@ -128,6 +128,7 @@ public class MemberController {
         session.removeAttribute("SS_MEMBER_ID");
         session.removeAttribute("SS_MEMBER_NAME");
         session.removeAttribute("SS_MEMBER_NIC");
+        session.removeAttribute("SS_MEMBER_GK");
 
         // 세션이 정상적으로 삭제되었는지 로그를 통해 확인
         log.info("session deleted ? : " + session.getAttribute("SS_MEMBER_ID"));
@@ -327,7 +328,6 @@ public class MemberController {
         }
 
 
-        log.info("####################################################");
         log.info("인증번호 발송 END!!");
 
         return "/redirect";
@@ -429,7 +429,6 @@ public class MemberController {
 
         // 세션 비워주기
         session.removeAttribute("SS_EMAIL");
-        log.info("session deleted ? : " + session.getAttribute("SS_EMAIL"));
 
         log.info("find_pw_change_update End!");
         return "/redirect";

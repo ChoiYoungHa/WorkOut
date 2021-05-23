@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ICoreMapper">
+
+    <!-- // 맴버의 목표칼로리 산정여부 체크 -->
+    <select id="checkMemberGK" parameterType="MemberDTO" resultType="MemberDTO">
+        SELECT MEMBER_GK
+        FROM work.member
+        WHERE MEMBER_ID = #{member_id}
+    </select>
+    <!-- 목표칼로리 저장 -->
+    <update id="insertGk" parameterType="MemberDTO">
+        UPDATE work.member
+        SET MEMBER_GK = #{member_gk}
+        WHERE MEMBER_ID = #{member_id}
+    </update>
+
+
+</mapper>

@@ -7,7 +7,7 @@ public class MemberDTO {
     private String member_pw; //비밀번호
     private String member_name; //회원이름
     private String member_nic; // 닉네임
-    private int member_gk; // 목표칼로리
+    private String member_gk; // 목표칼로리
 
     //회원번호 생성, 데이터 전달을 위해 String 사용
     private String member_id; //회원번호
@@ -46,11 +46,11 @@ public class MemberDTO {
         this.member_nic = member_nic;
     }
 
-    public int getMember_gk() {
+    public String getMember_gk() {
         return member_gk;
     }
 
-    public void setMember_gk(int member_gk) {
+    public void setMember_gk(String member_gk) {
         this.member_gk = member_gk;
     }
 
