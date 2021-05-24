@@ -745,8 +745,6 @@ public class NoticeController {
         log.info(this.getClass().getName() + ".pagingList End!");
         return "/notice/NoticeList";
     }
-
-
 }
 
 
