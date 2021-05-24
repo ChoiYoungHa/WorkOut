@@ -13,6 +13,7 @@ import poly.dto.MemberDTO;
 import poly.dto.NoticeDTO;
 import poly.service.IMemberService;
 import poly.service.INoticeService;
+import poly.service.ISearchService;
 import poly.util.CmmUtil;
 
 import javax.annotation.Resource;
@@ -20,9 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Member;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class NoticeController {
@@ -31,6 +30,9 @@ public class NoticeController {
 
     @Resource(name = "MemberService")
     private IMemberService memberService;
+
+    @Resource(name = "SearchService")
+    private ISearchService searchService;
 
     private Logger log = Logger.getLogger(this.getClass());
 
@@ -589,7 +591,7 @@ public class NoticeController {
      * 게시판 검색
      */
     @RequestMapping(value = "/notice/searchBoard")
-    public String searchBoard(HttpServletRequest request, ModelMap model, Criteria pDTO,
+    public String searchBoard(HttpServletRequest request, ModelMap model, Criteria pDTO, HttpSession session,
                               @RequestParam(value="nowPage", required = false) String nowPage,
                               @RequestParam(value="cntPerPage", required = false) String cntPerPage)
             throws Exception{
@@ -598,12 +600,13 @@ public class NoticeController {
         String category = CmmUtil.nvl(request.getParameter("category"));
         String searchType = CmmUtil.nvl(request.getParameter("searchType")); // 제목 혹은 글쓴이
         String keyword = CmmUtil.nvl(request.getParameter("keyword"));
+        String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
 
         log.info("category : " + category);
         log.info("searchType : " + searchType);
         log.info("keyword : " + keyword);
+        log.info("member_id : " + member_id);
 
-        log.info("if문 start!");
         // 페이지 정보를 받아오지 못할 경우, 기본값을 지정
         if (nowPage == null & cntPerPage == null) {
             nowPage = "1";
@@ -615,27 +618,25 @@ public class NoticeController {
         } else if (cntPerPage == null) {
             cntPerPage = "10";
         }
-        log.info("if문 end!");
 
-        log.info("dto setting start!");
+
         NoticeDTO cDTO = new NoticeDTO();
         cDTO.setKeyWord(keyword);
         cDTO.setPost_category(category);
-        log.info("dto setting end!");
+        cDTO.setMember_id(member_id);
 
-
+        // 최근 검색어 저장
+        searchService.insertSearchList(cDTO);
 
         // 검색 조건에 따른 게시물 수를 가져옴(count *)
-        log.info("total value setting start!");
         int total = 0;
         if(searchType.equals("title")){
             total = noticeService.searchNoticePcn(cDTO);
         }
         else if(searchType.equals("member_nic")) {
             total = noticeService.searchNoticeMcn(cDTO);
-            log.info("넘어오나?");
         }
-        log.info("total value setting end!");
+
         log.info("total : " + total);
 
         // 사용 후 메모리 초기화
@@ -744,6 +745,28 @@ public class NoticeController {
 
         log.info(this.getClass().getName() + ".pagingList End!");
         return "/notice/NoticeList";
+    }
+
+    /***
+     * 최근 검색어 불러오기
+     */
+    @RequestMapping(value = "/getSearchList")
+    @ResponseBody
+    public Set getSearchList(HttpSession session) throws Exception {
+        log.info(this.getClass().getName() + ".getSearchList Start!");
+        String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
+
+        NoticeDTO pDTO = new NoticeDTO();
+        pDTO.setMember_id(member_id);
+
+        Set rList = searchService.getSearchList(pDTO);
+
+        if (rList == null) {
+            rList = new LinkedHashSet();
+        }
+
+        log.info(this.getClass().getName() + ".getSearchList END!");
+        return rList;
     }
 }
 

@@ -134,7 +134,6 @@ public class MyRedisMapper implements IMyRedisMapper {
         MyJsonDTO pDTO = null;
 
         if (redisDB.hasKey(redisKey)) {
-
             // Redis에 저장된 데이터 전체 가져오기
             // 데이터 인덱스는 0부터 시작하며, 세번째 인자값은 -1로 설정하면 모두 가져옴
             List<MyJsonDTO> pList = (List) redisDB.opsForList().range(redisKey, 0, -1);
@@ -268,7 +267,6 @@ public class MyRedisMapper implements IMyRedisMapper {
 
     @Override
     public void doSaveDataforZSet() throws Exception {
-
         // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
         log.info(this.getClass().getName() + ".doSaveDataforSet start!");
 
@@ -297,7 +295,6 @@ public class MyRedisMapper implements IMyRedisMapper {
                 String value = CmmUtil.nvl((String) it.next());
 
                 log.info("value" + value);
-
             }
 
         } else {

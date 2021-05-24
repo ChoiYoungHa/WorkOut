@@ -1,12 +1,17 @@
-<%--
+<%@ page import="poly.util.CmmUtil" %><%--
   Created by IntelliJ IDEA.
   User: askil
   Date: 2021-05-05
   Time: 오후 3:02
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <html>
+<%
+    String member_gk = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_GK"));
+
+%>
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -33,9 +38,8 @@
     <option value="6week">6주차</option>
     <option value="7week">7주차</option>
 </select>
-<h2>목표 칼로리 : </h2>
+<h2>목표 칼로리 : <%=member_gk%></h2>
 <h2>섭취 칼로리 : </h2>
-
 <button class="btn btn-default" id="popbutton">모달출력버튼</button><br/>
 <div class="modal fade">
     <div class="modal-dialog">
