@@ -2,6 +2,7 @@ package poly.service.impl;
 import org.apache.log4j.Logger;
 
 import org.springframework.stereotype.Service;
+import poly.dto.FoodDTO;
 import poly.dto.MemberDTO;
 import poly.persistance.mapper.ICoreMapper;
 import poly.service.ICoreService;
@@ -26,6 +27,12 @@ public class CoreService implements ICoreService {
     @Override
     public void insertGk(MemberDTO pDTO) throws Exception {
         coreMapper.insertGk(pDTO);
+    }
+
+    // 회원 별 섭취한 음식 저장
+    @Override
+    public void insertFood(FoodDTO pDTO) throws Exception {
+        coreMapper.insertFood(pDTO);
     }
 
 

@@ -16,5 +16,4 @@
 		class="org.springframework.data.redis.core.RedisTemplate"
 		p:connectionFactory-ref="jedisConnectionFactory">
 	</bean>
-
 </beans>

@@ -86,6 +86,7 @@
             }
         }
 
+        // 최근 검색어 불러오기
         function getSearchList(){
             $.ajax({
                 url : "/getSearchList.do",
@@ -101,6 +102,7 @@
             })
         }
 
+        // 검색창에서 포커스 벗어나면 최근검색어 감춤
         function removeSearchList(){
             $("#search_box").hide();
         }

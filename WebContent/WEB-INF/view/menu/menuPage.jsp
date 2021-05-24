@@ -10,7 +10,6 @@
 <html>
 <%
     String member_gk = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_GK"));
-
 %>
 <head>
     <title>Title</title>
@@ -28,7 +27,6 @@
 </head>
 <body>
 <label for="week-select">주차 별 칼로리 : </label>
-
 <select name="week" id="week-select">
     <option value="1week">1주차</option>
     <option value="2week">2주차</option>
@@ -48,5 +46,43 @@
         </div>
     </div>
 </div>
+<!-- search{s} -->
+<div>
+        <div class="w100" style="padding-right:10px">
+            <select name="searchType" id="searchType">
+                <option value="food_name">음식이름</option>
+                <option value="food_maker">브랜드</option>
+            </select>
+        </div>
+        <div class="w300" style="padding-right:10px">
+            <input type="text" class="form-control form-control-sm" id="keyword" />
+        </div>
+            <button type="submit" class="btn btn-sm btn-primary" value="검색" onclick="clickFoodList()"/>
+</div>
+<!-- search{e} -->
+<script type="text/javascript">
+    function clickFoodList(){
+        let searchType =$("#searchType").val();
+        let keyword = $("#keyword").val();
+
+        let search = "";
+
+        if (searchType === 'food_name'){
+            search = "DESC_KOR";
+        }else{
+            search = "MAKER_NAME";
+        }
+
+        $.ajax({
+            url : `http://openapi.foodsafetykorea.go.kr/api/d5388ab1d4d546a6b033/I2790/json/1/10/`+search+"="+keyword,
+            type : "get",
+            success : function(data) {
+                // data 크기만큼 for 돌면서 오브젝트.요소 들을 html 요소 하나하나 추가해서 리스트 형태로 추가.
+                console.log("대기?")
+                console.log(data)
+            }
+        })
+    }
+</script>
 </body>
 </html>

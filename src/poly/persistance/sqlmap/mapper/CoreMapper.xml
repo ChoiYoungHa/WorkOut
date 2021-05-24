@@ -9,12 +9,43 @@
         FROM work.member
         WHERE MEMBER_ID = #{member_id}
     </select>
+
     <!-- 목표칼로리 저장 -->
     <update id="insertGk" parameterType="MemberDTO">
         UPDATE work.member
         SET MEMBER_GK = #{member_gk}
         WHERE MEMBER_ID = #{member_id}
     </update>
+
+    <!-- 음식 리스트 저장-->
+    <insert id="insertFood" parameterType="FoodDTO">
+        INSERT INTO work.food
+        (
+         MEMBER_ID,
+         FOOD_TIME,
+         FOOD_NAME,
+         FOOD_GRAM,
+         FOOD_KCAL,
+         TAN,
+         DAN,
+         FAT,
+         AMOUNT
+        )
+        VALUES
+        (
+         #{member_id},
+         #{food_time},
+         #{food_name},
+         #{food_gram},
+         #{food_kcal},
+         #{tan},
+         #{dan},
+         #{fat},
+         #{amount}
+        )
+    </insert>
+
+
 
 
 </mapper>

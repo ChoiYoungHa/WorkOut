@@ -768,6 +768,9 @@ public class NoticeController {
         log.info(this.getClass().getName() + ".getSearchList END!");
         return rList;
     }
+
+    
+
 }
 
 
