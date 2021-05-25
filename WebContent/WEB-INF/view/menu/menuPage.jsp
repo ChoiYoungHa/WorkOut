@@ -54,13 +54,22 @@
                 <option value="food_maker">브랜드</option>
             </select>
         </div>
-        <div class="w300" style="padding-right:10px">
-            <input type="text" class="form-control form-control-sm" id="keyword" />
+        <div>
+            <input type="text" id="keyword" />
+            <button class="button" type="button" value="검색" onclick="clickFoodList()"/>
         </div>
-            <button type="submit" class="btn btn-sm btn-primary" value="검색" onclick="clickFoodList()"/>
 </div>
 <!-- search{e} -->
+<div id="searchList"></div>
 <script type="text/javascript">
+
+    // 엔터쳤을 때,
+    document.querySelector('#keyword').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            // code for enter
+        }
+    });
+    // 검색버튼을 클릭했을 때,
     function clickFoodList(){
         let searchType =$("#searchType").val();
         let keyword = $("#keyword").val();
@@ -77,12 +86,21 @@
             url : `http://openapi.foodsafetykorea.go.kr/api/d5388ab1d4d546a6b033/I2790/json/1/10/`+search+"="+keyword,
             type : "get",
             success : function(data) {
-                // data 크기만큼 for 돌면서 오브젝트.요소 들을 html 요소 하나하나 추가해서 리스트 형태로 추가.
-                console.log("대기?")
+                // 원하는 음식이 안나올 수 있어서 최대한 많은 데이터를 가져오고 페이징을 해야함.
+                // 각 요소마다 클릭되면 데이터가 저장될 수 있게 해야함.
+                let foodList = "";
                 console.log(data)
+                for(let i = 0; i < data.I2790.row.length; i++){
+                    foodList += data.I2790.row[i].DESC_KOR + "  "// 음식명
+                    foodList += data.I2790.row[i].MAKER_NAME  + "  " // 브랜드
+                    foodList += data.I2790.row[i].SERVING_SIZE  + "  "// 음식량
+                    foodList += data.I2790.row[i].NUTR_CONT1 + "<br>"// 칼로리
+                }
+                $('#searchList').html(foodList);
             }
         })
     }
+
 </script>
 </body>
 </html>
