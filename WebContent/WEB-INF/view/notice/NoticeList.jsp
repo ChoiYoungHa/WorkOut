@@ -45,6 +45,7 @@
             location.href = "/pagingList.do?category=<%=category_hit%>&nowPage=${paging.nowPage}&cntPerPage="+sel;
         }
 
+        // 북마크 기능
         function iClickHandler(e, post_id) {
             // e.classList.toggle("far");
             // e.classList.toggle("fas");
