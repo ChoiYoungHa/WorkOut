@@ -13,19 +13,66 @@
 %>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script src="/resource/js/jquery-3.4.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $("#popbutton").click(function(){
-                $('div.modal').modal({remote : 'layer.html'});
-            })
-        })
-    </script>
+    <link rel="stylesheet" href="/resources/css/bootstrap.css"/>
+    <script src="/resources/js/bootstrap.js"></script>
+    <style>
+        #content_left_box {
+            border: 1px solid red;
+            width: 600px;
+            height: 640px;
+        }
+
+        #content_right_box {
+            border: 1px solid red;
+            width: 600px;
+            height: 640px;
+        }
+
+        @media screen and (min-width: 676px) {
+            .modal-dialog {
+                max-width: 1200px; /* New width for default modal */
+            }
+        }
+
+        #food_list_head{
+            text-align: center;
+        }
+
+        #food_list{
+            border: 1px solid red;
+            height: 550px;
+            margin-top: 15px;
+        }
+
+        #right_one{
+            border: 1px solid red;
+            height: 180px;
+            margin-top: 20px;
+        }
+        #right_two{
+            border: 1px solid red;
+            height: 180px;
+            margin-top: 20px;
+        }
+        #right_three{
+            border: 1px solid red;
+            height: 180px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        #amount {
+            all: unset;
+            text-align: center;
+        }
+        #amount_box{
+            margin-left: 180px;
+        }
+    </style>
 </head>
+
 <body>
+
 <label for="week-select">주차 별 칼로리 : </label>
 <select name="week" id="week-select">
     <option value="1week">1주차</option>
@@ -38,14 +85,85 @@
 </select>
 <h2>목표 칼로리 : <%=member_gk%></h2>
 <h2>섭취 칼로리 : </h2>
-<button class="btn btn-default" id="popbutton">모달출력버튼</button><br/>
-<div class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <div>
+                        <select name="modal_searchType" id="modal_searchType">
+                            <option value="food_name">음식이름</option>
+                            <option value="food_maker">브랜드</option>
+                        </select>
+                        <input type="text" id="modal_keyword" />
+                        <button class="button-bar" type="button" value="검색" onclick="clickFoodList()">검색</button>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- content box left-->
+                <div class="container">
+                    <div class="row">
+                        <!--모달 왼쪽 박스 -->
+                        <div class="col-lg-6" id="content_left_box">
+                            <div id="food_list_head"><h3>음식목록</h3></div>
+                            <div id="food_list">
+                                <div id="searchList"></div>
+                                <div id="paging"></div>
+                            </div>
+                        </div>
+                        <!--모달 오른쪽 박스 -->
+                        <div class="col-lg-6" id="content_right_box">
+                            <div id="right_one">
+                                <div id="tan"></div>
+                                <input type="hidden" id="foodName">
+                                <input type="hidden" id="foodBrand">
+                                <input type="hidden" id="foodGram">
+                                <input type="hidden" id="foodKcal">
+                                <input type="hidden" id="foodTan">
+                                <input type="hidden" id="foodDan">
+                                <input type="hidden" id="foodFat">
+                            </div>
+                            <div id="right_two">
+                                <br>
+                                <div><h3 style="text-align: center">개수</h3></div>
+                                <br>
+                                <div id="amount_box">
+                                <input type="text" id="amount" value="1">
+                                </div>
+                                <hr>
+                            </div>
+                            <div id="right_three">
+                                <div>
+                                    <select name="modal_food_time" id="modal_food_time">
+                                        <option value="morning">아침</option>
+                                        <option value="lunch">점심</option>
+                                        <option value="dinner">저녁</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <br>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" onclick=saveFoodList()>등록</button>
+            </div>
         </div>
     </div>
+    </div>
 </div>
+
+
 <!-- search{s} -->
 <div>
         <div class="w100" style="padding-right:10px">
@@ -55,26 +173,26 @@
             </select>
         </div>
         <div>
-            <input type="text" id="keyword" />
-            <button class="button-bar" type="button" value="검색" onclick="clickFoodList()">전송</button>
+            <input type="text" id="keyword" data-target="#exampleModalCenter" data-toggle="modal"/>
+            <button class="button-bar" type="button" value="검색">검색</button>
         </div>
 </div>
 <!-- search{e} -->
-<div id="searchList"></div>
-<div id="paging"></div>
+<%--<div id="searchList"></div>--%>
+<%--<div id="paging"></div>--%>
 
 <div class="container">
     <!--음식 정보출력 및 등록(아침, 점심, 저녁 선택) / db 저장시키기 / 아침 점심 저녁 메뉴기억해두기 -->
-
+    <div class=""></div>
 </div>
 
 <script type="text/javascript">
 
     // 엔터쳤을 때,
-    document.querySelector('#keyword').addEventListener('keypress', function (e) {
+    document.querySelector('#modal_keyword').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-            let searchType =$("#searchType").val();
-            let keyword = $("#keyword").val();
+            let searchType =$("#modal_searchType").val();
+            let keyword = $("#modal_keyword").val();
 
             let search = "";
 
@@ -92,17 +210,16 @@
                     // 각 요소마다 클릭되면 데이터가 저장될 수 있게 해야함.
 
                     paging(data.I2790.row.length, 1, data);
-
-
                 }
             })
         }
     });
 
+
     // 검색버튼을 클릭했을 때,
     function clickFoodList(){
-        let searchType =$("#searchType").val();
-        let keyword = $("#keyword").val();
+        let searchType =$("#modal_searchType").val();
+        let keyword = $("#modal_keyword").val();
 
         let search = "";
 
@@ -118,14 +235,12 @@
             success : function(data) {
                 // 원하는 음식이 안나올 수 있어서 최대한 많은 데이터를 가져오고 페이징을 해야함.
                 // 각 요소마다 클릭되면 데이터가 저장될 수 있게 해야함.
-
                 paging(data.I2790.row.length, 1, data);
-
-
             }
         })
     }
 
+    // 페이징, 페이징 번호 선택, 음식선택 함수
     function paging(totalData, currentPage, data){
 
         var dataPerPage = 10;    // 한 페이지에 나타낼 데이터 수
@@ -205,9 +320,10 @@
         for(var i = start; i <= end; i++){
             foodList += "<a href='#' id=" + i + ">" + data.I2790.row[i].DESC_KOR + "  " + "</a> "// 음식명
             foodList += data.I2790.row[i].MAKER_NAME  + "  " // 브랜드
-            foodList += data.I2790.row[i].SERVING_SIZE  + "  "// 음식량
-            foodList += data.I2790.row[i].NUTR_CONT1 + "<br>"// 칼로리
+            foodList += data.I2790.row[i].SERVING_SIZE + "g" + "  "// 음식량
+            foodList += data.I2790.row[i].NUTR_CONT1 +"kcal"+ "<br>"// 칼로리
         }
+
         $('#searchList').html(foodList);
         $("#searchList a").css("color", "black");
         $("#searchList a").css({"text-decoration": "none"});
@@ -226,9 +342,27 @@
             var dan = data.I2790.row[id].NUTR_CONT3 // 단백질
             var fat = data.I2790.row[id].NUTR_CONT4 // 지방
 
+            console.log("food_name : " + food_name);
+            console.log("food_brand : " + food_brand);
+            console.log("food_gram : " + food_gram);
+            console.log("food_kcal : " + food_kcal);
+            console.log("tan : " + tan);
+            console.log("dan : " + dan);
+            console.log("fat : " + fat);
 
+            innerFoodData(tan,dan,fat,food_name,food_brand,food_kcal,food_gram);
 
+            $('#foodName').val(food_name);
+            $('#foodBrand').val(food_brand);
+            $('#foodGram').val(food_gram);
+            $('#foodKcal').val(food_kcal);
+            $('#foodTan').val(tan);
+            $('#foodDan').val(dan);
+            $('#foodFat').val(fat);
+
+            // hidden input에서 가져온 데이터 확인 후, ajax로 controller로 넘겨주면 됨.
         });
+
 
         var html = "";
 
@@ -248,6 +382,7 @@
             "color":"red",
             "font-weight":"bold"});    // 현재 페이지 표시
 
+        // 페이지번호를 클릭했을 때
         $("#paging a").click(function(){
 
             var $item = $(this);
@@ -261,6 +396,49 @@
         });
 
     }
+</script>
+<script type="text/javascript">
+    function innerFoodData(tan,dan,fat,food_name,food_brand,food_kcal,food_gram){
+        console.log("tan : " + tan)
+        console.log("dan : " + dan)
+        console.log("fat : " + fat)
+
+        var html = "음식이름 : " + food_name + "<br>" + "제조사 : " + food_brand + "<br>" +
+            "칼로리 : "+ food_kcal + "kcal" + "<br>" + "용량 : " + food_gram + "g" + "<br>" +
+            "탄수화물 : " + tan + "g" + "<br>" + "단백질 : " + dan + "g" + "<br>" + "지방 : " + fat + "g";
+        $("#tan").html(html);
+
+    }
+    // // api 정보 받아오기
+    // String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
+    // String food_time = CmmUtil.nvl(request.getParameter("food_time")); // 섭취 시간
+    // String food_name = CmmUtil.nvl(request.getParameter("food_name")); // 음식 이름
+    // String food_gram = CmmUtil.nvl(request.getParameter("food_gram")); // 음식 량
+    // String food_kcal = CmmUtil.nvl(request.getParameter("food_kcal")); // 음식 칼로리
+    // String tan = CmmUtil.nvl(request.getParameter("tan")); // 탄수화물
+    // String dan = CmmUtil.nvl(request.getParameter("dan")); // 단백질
+    // String fat = CmmUtil.nvl(request.getParameter("fat")); // 지방
+    // String amount = CmmUtil.nvl(request.getParameter("amount")); // 수량
+    //
+    function saveFoodList(){
+        var food_name = $('#foodName').val();
+        var food_brand = $('#foodBrand').val();
+        var food_gram = $('#foodGram').val();
+        var food_kcal = $('#foodKcal').val();
+        var tan = $('#foodTan').val();
+        var dan = $('#foodDan').val();
+        var fat = $('#foodFat').val();
+
+        console.log(food_name);
+        console.log(food_brand);
+        console.log(food_gram);
+        console.log(food_kcal);
+        console.log(tan);
+        console.log(dan);
+        console.log(fat);
+    }
+
+
 </script>
 </body>
 </html>

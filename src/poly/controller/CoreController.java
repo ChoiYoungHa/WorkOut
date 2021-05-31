@@ -127,6 +127,7 @@ public class CoreController {
         String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
         String food_time = CmmUtil.nvl(request.getParameter("food_time")); // 섭취 시간
         String food_name = CmmUtil.nvl(request.getParameter("food_name")); // 음식 이름
+        String food_brand = CmmUtil.nvl(request.getParameter("food_brand")); // 음식 제조사
         String food_gram = CmmUtil.nvl(request.getParameter("food_gram")); // 음식 량
         String food_kcal = CmmUtil.nvl(request.getParameter("food_kcal")); // 음식 칼로리
         String tan = CmmUtil.nvl(request.getParameter("tan")); // 탄수화물
@@ -138,6 +139,7 @@ public class CoreController {
         log.info("member_id : " + member_id);
         log.info("food_time : " + food_time);
         log.info("food_name : " + food_name);
+        log.info("food_gram : " + food_brand);
         log.info("food_gram : " + food_gram);
         log.info("food_kcal : " + food_kcal);
         log.info("tan : " + tan);
@@ -150,6 +152,7 @@ public class CoreController {
         pDTO.setMember_id(member_id);
         pDTO.setFood_time(food_time);
         pDTO.setFood_name(food_name);
+        pDTO.setFood_brand(food_brand);
         pDTO.setFood_gram(food_gram);
         pDTO.setFood_kcal(food_kcal);
         pDTO.setTan(tan);

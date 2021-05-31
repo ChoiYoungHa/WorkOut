@@ -5,12 +5,21 @@ public class FoodDTO {
     private String member_id; // 회원번호
     private String food_time; // 섭취 시간 (아침,점심,저녁)
     private String food_name; // 음식이름
+    private String food_brand; // 음식 제조사
     private String food_gram; // 음식 량
     private String food_kcal; // 음식 칼로리
     private String tan; // 탄수화물
     private String dan; // 단백질
     private String fat; // 지방
     private String amount; // 음식개수
+
+    public String getFood_brand() {
+        return food_brand;
+    }
+
+    public void setFood_brand(String food_brand) {
+        this.food_brand = food_brand;
+    }
 
     public String getFood_id() {
         return food_id;
