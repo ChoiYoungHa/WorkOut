@@ -158,8 +158,7 @@ public class CoreController {
         pDTO.setAmount(amount);
 
         coreService.insertFood(pDTO);
-
-
+        
 
 
         log.info(this.getClass().getName() + "insertFood. END!");
