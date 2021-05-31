@@ -268,7 +268,6 @@
         console.log("next : " + next);
         console.log("prev : " + prev);
 
-
         var start = 0;
         var end = 0;
 
@@ -360,6 +359,8 @@
             $('#foodDan').val(dan);
             $('#foodFat').val(fat);
 
+
+
             // hidden input에서 가져온 데이터 확인 후, ajax로 controller로 넘겨주면 됨.
         });
 
@@ -399,16 +400,13 @@
 </script>
 <script type="text/javascript">
     function innerFoodData(tan,dan,fat,food_name,food_brand,food_kcal,food_gram){
-        console.log("tan : " + tan)
-        console.log("dan : " + dan)
-        console.log("fat : " + fat)
 
         var html = "음식이름 : " + food_name + "<br>" + "제조사 : " + food_brand + "<br>" +
             "칼로리 : "+ food_kcal + "kcal" + "<br>" + "용량 : " + food_gram + "g" + "<br>" +
             "탄수화물 : " + tan + "g" + "<br>" + "단백질 : " + dan + "g" + "<br>" + "지방 : " + fat + "g";
         $("#tan").html(html);
-
     }
+
     // // api 정보 받아오기
     // String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
     // String food_time = CmmUtil.nvl(request.getParameter("food_time")); // 섭취 시간
@@ -419,7 +417,8 @@
     // String dan = CmmUtil.nvl(request.getParameter("dan")); // 단백질
     // String fat = CmmUtil.nvl(request.getParameter("fat")); // 지방
     // String amount = CmmUtil.nvl(request.getParameter("amount")); // 수량
-    //
+
+
     function saveFoodList(){
         var food_name = $('#foodName').val();
         var food_brand = $('#foodBrand').val();
@@ -428,6 +427,8 @@
         var tan = $('#foodTan').val();
         var dan = $('#foodDan').val();
         var fat = $('#foodFat').val();
+        var amount = $('#amount').val();
+        var food_time = $("#modal_food_time option:selected").val();
 
         console.log(food_name);
         console.log(food_brand);
@@ -436,6 +437,11 @@
         console.log(tan);
         console.log(dan);
         console.log(fat);
+        console.log(amount);
+        console.log(food_time);
+
+
+
     }
 
 
