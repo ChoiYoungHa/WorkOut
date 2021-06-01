@@ -12,6 +12,7 @@
     String member_gk = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_GK"));
 %>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Title</title>
     <script src="/resource/js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="/resources/css/bootstrap.css"/>
@@ -68,6 +69,50 @@
         #amount_box{
             margin-left: 180px;
         }
+        #food_time{
+            justify-content: space-around;
+        }
+        #food_morning_list{
+            border: 1px solid red;
+            height: 550px;
+            width: 250px;
+            margin-top: 15px;
+        }
+        #food_lunch_list{
+            border: 1px solid red;
+            height: 550px;
+            width: 250px;
+            margin-top: 15px;
+        }
+        #food_dinner_list{
+            border: 1px solid red;
+            height: 550px;
+            width: 250px;
+            margin-top: 15px;
+        }
+        #food_snack_list{
+            border: 1px solid red;
+            height: 550px;
+            width: 250px;
+            margin-top: 15px;
+        }
+        #food_info_box{
+            display: flex;
+            justify-content: center;
+        }
+
+        #food_info {
+            border: 1px solid red;
+            margin-top: 30px;
+            width: 800px;
+            height: 200px;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        li{
+            all:unset;
+        }
+
     </style>
 </head>
 
@@ -144,6 +189,7 @@
                                         <option value="morning">아침</option>
                                         <option value="lunch">점심</option>
                                         <option value="dinner">저녁</option>
+                                        <option value="snack">간식</option>
                                     </select>
                                 </div>
                                 <div>
@@ -156,13 +202,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary" onclick=saveFoodList()>등록</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick=saveFoodList()>등록</button>
             </div>
         </div>
     </div>
     </div>
 </div>
-
 
 <!-- search{s} -->
 <div>
@@ -177,17 +222,50 @@
             <button class="button-bar" type="button" value="검색">검색</button>
         </div>
 </div>
-<!-- search{e} -->
-<%--<div id="searchList"></div>--%>
-<%--<div id="paging"></div>--%>
 
 <div class="container">
-    <!--음식 정보출력 및 등록(아침, 점심, 저녁 선택) / db 저장시키기 / 아침 점심 저녁 메뉴기억해두기 -->
-    <div class=""></div>
+    <!--음식 정보출력 및 등록(아침, 점심, 저녁, 간식 선택) / db 저장시키기 / 아침 점심 저녁 메뉴기억해두기 / 저장한 내용 사용자에게 출력하기 -->
+    <div class="row" id="food_time">
+    <div id="morning_food" class="class=col-lg-3">
+        <div id="food_morning_head"><h3 style="text-align: center">아침</h3></div>
+        <div id="food_morning_list">
+        </div>
+    </div>
+        <div id="lunch_food" class="class=col-lg-3">
+            <div id="food_lunch_head"><h3 style="text-align: center">점심</h3></div>
+            <div id="food_lunch_list">
+            </div>
+        </div>
+        <div id="dinner_food" class="class=col-lg-3">
+            <div id="food_dinner_head"><h3 style="text-align: center">저녁</h3></div>
+            <div id="food_dinner_list">
+            </div>
+        </div>
+        <div id="snack_food" class="class=col-lg-3">
+            <div id="food_snack_head"><h3 style="text-align: center">간식</h3></div>
+            <div id="food_snack_list">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 추천 탄단지, 섭취 탄단지 정보 -->
+<div class="container" id="food_info_box">
+    <div class="row" id="food_info">
+        <!-- 추천 탄단지 -->
+        <div id="recom_info">
+        <div id="food_recom_head"><h3>추천 탄단지</h3></div>
+        <div id="food_recom_info"></div>
+        </div>
+        <!-- 섭취 탄단지 -->
+        <div id="intake_info">
+            <div id="food_intake_head"><h3>섭취 탄단지</h3></div>
+            <div id="food_intake_info"></div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
-
     // 엔터쳤을 때,
     document.querySelector('#modal_keyword').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
@@ -419,7 +497,8 @@
     // String amount = CmmUtil.nvl(request.getParameter("amount")); // 수량
 
 
-    function saveFoodList(){
+    // 음식 선택 후 저장하고 사용자에게 표현
+    function saveFoodList() {
         var food_name = $('#foodName').val();
         var food_brand = $('#foodBrand').val();
         var food_gram = $('#foodGram').val();
@@ -440,11 +519,69 @@
         console.log(amount);
         console.log(food_time);
 
+        $.ajax({
+            url: "/insertFood.do",
+            type: "post",
+            dataType: "json",
+            data: {
+                "food_name": food_name,
+                "food_brand": food_brand,
+                "food_gram": food_gram,
+                "food_kcal": food_kcal,
+                "tan": tan,
+                "dan": dan,
+                "fat": fat,
+                "amount": amount,
+                "food_time": food_time
+            },
+            success: function (data) {
+                console.log(data);
 
+                let food_name = data.food_name;
+                let food_brand = data.food_brand;
+                let food_gram = data.food_gram;
+                let food_kcal = data.food_kcal;
+                let tan = data.tan;
+                let dan = data.dan;
+                let fat = data.fat;
+                let amount = data.amount;
+                let food_time = data.food_time;
 
+                $.ajax({
+                    url: "/getFoodData.do",
+                    type: "post",
+                    success : function(data2) {
+                        let dataLength = data2.length;
+                        let food_data = "<li id=" + dataLength + ">" + "<hr>" + food_name + "    " + food_kcal + "kcal" + "<br>" + food_gram + "g" + " " + amount + "개" + "</li>";
+                        $('#' + 'food_' + food_time + '_list').append(food_data);
+                    }
+                })
+            }
+        })
     }
 
+    function init(){
+        $.ajax({
+            url : "/getFoodData.do",
+            type : "post",
+            success : function(data) {
+                // 데이터 받아와서 회원에 따라 음식목록 append
+                console.log(data);
+                let end = data.length;
+                for (let i = 0; i < end; i++) {
+                    let food_time = data[i].food_time;
+                    let food_name = data[i].food_name;
+                    let food_kcal = data[i].food_kcal;
+                    let food_gram = data[i].food_gram;
+                    let amount = data[i].amount;
 
+                    let food_data = "<li id=" + i +">" + "<hr>" + food_name + "    " + food_kcal + "kcal" + "<br>" + food_gram + "g" + " " + amount + "개" + "</li>";
+                    $('#' + 'food_' + food_time + '_list').append(food_data);
+                }
+            }
+        })
+    }
+    init();
 </script>
 </body>
 </html>
