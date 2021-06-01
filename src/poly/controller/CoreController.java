@@ -13,6 +13,7 @@ import poly.util.CmmUtil;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -120,7 +121,7 @@ public class CoreController {
      */
     @RequestMapping(value = "/insertFood")
     @ResponseBody
-    public List<FoodDTO> insertFood(HttpServletRequest request, HttpSession session) throws Exception {
+    public FoodDTO insertFood(HttpServletRequest request, HttpSession session) throws Exception {
         log.info(this.getClass().getName() + "insertFood. Start!");
 
         // api 정보 받아오기
@@ -160,15 +161,34 @@ public class CoreController {
         pDTO.setFat(fat);
         pDTO.setAmount(amount);
 
-        coreService.insertFood(pDTO);
-        
-
+        try{
+            coreService.insertFood(pDTO);
+        }catch (Exception e){
+            log.info(e.toString());
+            e.printStackTrace();
+        }
 
         log.info(this.getClass().getName() + "insertFood. END!");
-
-        return null;
-
+        return pDTO;
     }
 
+    @RequestMapping(value = "/getFoodData")
+    @ResponseBody
+    public List<FoodDTO> getFoodData(HttpServletRequest request,HttpSession session) throws Exception {
 
+        String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
+
+        FoodDTO pDTO = new FoodDTO();
+        pDTO.setMember_id(member_id);
+
+
+        // 회원이 등록한 음식 리스트 가져오기
+        List<FoodDTO> rList = coreService.find_FoodData(pDTO);
+
+        if (rList == null) {
+            rList = new ArrayList<>();
+        }
+
+        return rList;
+    }
 }

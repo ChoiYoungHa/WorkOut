@@ -24,6 +24,7 @@
          MEMBER_ID,
          FOOD_TIME,
          FOOD_NAME,
+         FOOD_BRAND,
          FOOD_GRAM,
          FOOD_KCAL,
          TAN,
@@ -36,6 +37,7 @@
          #{member_id},
          #{food_time},
          #{food_name},
+         #{food_brand},
          #{food_gram},
          #{food_kcal},
          #{tan},
@@ -44,6 +46,12 @@
          #{amount}
         )
     </insert>
+    
+    <select id="find_FoodData" parameterType="FoodDTO" resultType="FoodDTO">
+        SELECT *
+        FROM work.food
+        WHERE MEMBER_ID = #{member_id}
+    </select>
 
 
 
