@@ -140,7 +140,7 @@ public class CoreController {
         log.info("member_id : " + member_id);
         log.info("food_time : " + food_time);
         log.info("food_name : " + food_name);
-        log.info("food_gram : " + food_brand);
+        log.info("food_brand : " + food_brand);
         log.info("food_gram : " + food_gram);
         log.info("food_kcal : " + food_kcal);
         log.info("tan : " + tan);

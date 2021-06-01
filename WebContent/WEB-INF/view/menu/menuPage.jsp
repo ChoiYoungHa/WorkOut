@@ -1,10 +1,4 @@
-<%@ page import="poly.util.CmmUtil" %><%--
-  Created by IntelliJ IDEA.
-  User: askil
-  Date: 2021-05-05
-  Time: 오후 3:02
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="poly.util.CmmUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <html>
@@ -428,8 +422,11 @@
 
             innerFoodData(tan,dan,fat,food_name,food_brand,food_kcal,food_gram);
 
+            let replace = food_brand.replace(/\(주\)/i,'');
+            console.log(replace);
+
             $('#foodName').val(food_name);
-            $('#foodBrand').val(food_brand);
+            $('#foodBrand').val(replace);
             $('#foodGram').val(food_gram);
             $('#foodKcal').val(food_kcal);
             $('#foodTan').val(tan);
