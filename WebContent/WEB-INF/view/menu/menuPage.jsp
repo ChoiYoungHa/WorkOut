@@ -360,7 +360,6 @@
             $('#foodFat').val(fat);
 
 
-
             // hidden input에서 가져온 데이터 확인 후, ajax로 controller로 넘겨주면 됨.
         });
 
