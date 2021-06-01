@@ -117,7 +117,6 @@
 </head>
 
 <body>
-
 <label for="week-select">주차 별 칼로리 : </label>
 <select name="week" id="week-select">
     <option value="1week">1주차</option>
@@ -438,7 +437,6 @@
             $('#foodFat').val(fat);
 
 
-
             // hidden input에서 가져온 데이터 확인 후, ajax로 controller로 넘겨주면 됨.
         });
 
@@ -485,18 +483,6 @@
         $("#tan").html(html);
     }
 
-    // // api 정보 받아오기
-    // String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
-    // String food_time = CmmUtil.nvl(request.getParameter("food_time")); // 섭취 시간
-    // String food_name = CmmUtil.nvl(request.getParameter("food_name")); // 음식 이름
-    // String food_gram = CmmUtil.nvl(request.getParameter("food_gram")); // 음식 량
-    // String food_kcal = CmmUtil.nvl(request.getParameter("food_kcal")); // 음식 칼로리
-    // String tan = CmmUtil.nvl(request.getParameter("tan")); // 탄수화물
-    // String dan = CmmUtil.nvl(request.getParameter("dan")); // 단백질
-    // String fat = CmmUtil.nvl(request.getParameter("fat")); // 지방
-    // String amount = CmmUtil.nvl(request.getParameter("amount")); // 수량
-
-
     // 음식 선택 후 저장하고 사용자에게 표현
     function saveFoodList() {
         var food_name = $('#foodName').val();
@@ -538,12 +524,8 @@
                 console.log(data);
 
                 let food_name = data.food_name;
-                let food_brand = data.food_brand;
                 let food_gram = data.food_gram;
                 let food_kcal = data.food_kcal;
-                let tan = data.tan;
-                let dan = data.dan;
-                let fat = data.fat;
                 let amount = data.amount;
                 let food_time = data.food_time;
 
@@ -552,7 +534,7 @@
                     type: "post",
                     success : function(data2) {
                         let dataLength = data2.length;
-                        let food_data = "<li id=" + dataLength + ">" + "<hr>" + food_name + "    " + food_kcal + "kcal" + "<br>" + food_gram + "g" + " " + amount + "개" + "</li>";
+                        let food_data = "<li id=" + dataLength + ">" + "<hr>" + food_name + "    " + food_kcal + "kcal" + "<br>" + food_gram + "g" + " " + amount + "개" + "<i class=" + "'far" + " " + "fa-minus-square'" + ">" + "</i>" + "</li>";
                         $('#' + 'food_' + food_time + '_list').append(food_data);
                     }
                 })
@@ -575,13 +557,19 @@
                     let food_gram = data[i].food_gram;
                     let amount = data[i].amount;
 
-                    let food_data = "<li id=" + i +">" + "<hr>" + food_name + "    " + food_kcal + "kcal" + "<br>" + food_gram + "g" + " " + amount + "개" + "</li>";
+                    let food_data = "<li id=" + i +">" + "<hr>" + food_name + "    " + food_kcal + "kcal" + "<br>" + food_gram + "g" + " " + amount + "개" + "<i class=" + "'far" + " " + "fa-minus-square'" + "onclick='deleteFood(this)'" + ">" + "</i>" + "</li>";
                     $('#' + 'food_' + food_time + '_list').append(food_data);
                 }
             }
         })
     }
+
+    function deleteFood(e){
+        console.log(e);
+    }
+
     init();
 </script>
+<script src="https://kit.fontawesome.com/285f83e94b.js" crossorigin="anonymous"></script>
 </body>
 </html>
