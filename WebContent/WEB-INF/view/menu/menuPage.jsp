@@ -103,6 +103,12 @@
             justify-content: space-around;
             margin-bottom: 30px;
         }
+
+        #food_recom_info{
+            flex-direction : column-reverse;
+            justify-content : space-between;
+        }
+
         li{
             all:unset;
         }
@@ -119,11 +125,39 @@
             let select = $('#week-select').val();
             let goal_kcal = <%=member_gk%>;
 
+            if(select == '2week'){
+                goal_kcal = Math.ceil(goal_kcal - goal_kcal * 0.1);
+            }else if(select == '3week'){
+                goal_kcal = Math.ceil(goal_kcal - goal_kcal * 0.15);
+            }else if(select == '4week'){
+                goal_kcal = Math.ceil(goal_kcal - goal_kcal * 0.2);
+            }else if(select == '5week'){
+                goal_kcal = Math.ceil(goal_kcal - goal_kcal * 0.25);
+            }else if(select == '6week'){
+                goal_kcal = Math.ceil(goal_kcal - goal_kcal * 0.3);
+            }else if(select == '7week'){
+                goal_kcal = Math.ceil(goal_kcal - goal_kcal * 0.35);
+            }
 
-
+            ca_kcal(goal_kcal);
+            let html = "목표 칼로리 : " + goal_kcal;
+            $("#goal_kcal").html(html);
         }
 
+        function ca_kcal(kcal){
+            let tan_kcal = Math.ceil(kcal * 0.5);
+            let dan_kcal = Math.ceil(kcal * 0.3);
+            let fat_kcal = Math.ceil(kcal * 0.2);
 
+            let tan_gram = Math.ceil(tan_kcal / 4);
+            let dan_gram = Math.ceil(dan_kcal / 4);
+            let fat_gram = Math.ceil(fat_kcal / 9);
+
+            let html = "<span>" + "탄수화물 : " + tan_gram + "g" + "</span>" + "<span>" + "단백질 : " + dan_gram + "g" + "</span>" +
+                "<span>" + "지방 : " + fat_gram + "g" + "</span>";
+
+            $('#food_recom_info').html(html);
+        }
     </script>
 </head>
 
@@ -265,7 +299,7 @@
         <!-- 추천 탄단지 -->
         <div id="recom_info">
         <div id="food_recom_head"><h3>추천 탄단지</h3></div>
-        <div id="food_recom_info"></div>
+        <div id="food_recom_info" class="row"></div>
         </div>
         <!-- 섭취 탄단지 -->
         <div id="intake_info">
@@ -606,6 +640,7 @@
         })
     }
     init();
+    ca_kcal(<%=member_gk%>);
 </script>
 <script src="https://kit.fontawesome.com/285f83e94b.js" crossorigin="anonymous"></script>
 </body>
