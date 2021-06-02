@@ -108,6 +108,10 @@
             flex-direction : column-reverse;
             justify-content : space-between;
         }
+        #food_intake_info{
+            flex-direction : column-reverse;
+            justify-content : space-between;
+        }
 
         li{
             all:unset;
@@ -140,7 +144,8 @@
             }
 
             ca_kcal(goal_kcal);
-            let html = "목표 칼로리 : " + goal_kcal;
+
+            let html = "목표 칼로리 : " + goal_kcal + "kcal";
             $("#goal_kcal").html(html);
         }
 
@@ -158,9 +163,38 @@
 
             $('#food_recom_info').html(html);
         }
+
+
+        function eatFood(){
+            $.ajax({
+                url : "/getFoodData.do",
+                type : "get",
+                success : function(data) {
+                   let eat_kcal = 0;
+                   let eat_tan = 0;
+                   let eat_dan = 0;
+                   let eat_fat = 0;
+
+                    for (let i = 0; i < data.length; i++) {
+                        eat_kcal = eat_kcal + Number(data[i].food_kcal * data[i].amount);
+                        eat_tan = eat_tan + Number(data[i].tan * data[i].amount);
+                        eat_dan = eat_dan + Number(data[i].dan * data[i].amount);
+                        eat_fat = eat_fat + Number(data[i].fat * data[i].amount);
+                    }
+
+                    let html = "<span>" + "탄수화물 : " + eat_tan + "g" + "</span>" + "<span>" + "단백질 : " + eat_dan + "g" + "</span>" +
+                        "<span>" + "지방 : " + eat_fat + "g" + "</span>";
+
+                    let eat_kcal_html = "<h2> 섭취 칼로리 : " + eat_kcal + "kcal";
+                    $('#food_intake_info').html(html);
+                    $('#eat_kcal').html(eat_kcal_html);
+                }
+            })
+        }
+
+
     </script>
 </head>
-
 <body>
 <label for="week-select">주차 별 칼로리 : </label>
 <select name="week" id="week-select" onchange="goal_kcal_ch()">
@@ -172,8 +206,8 @@
     <option value="6week">6주차</option>
     <option value="7week">7주차</option>
 </select>
-<h2 id="goal_kcal">목표 칼로리 : <%=member_gk%></h2>
-<h2 id="eat_kcal">섭취 칼로리 : </h2>
+<h2 id="goal_kcal">목표 칼로리 : <%=member_gk%>kcal</h2>
+<div id="eat_kcal"></div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -263,7 +297,7 @@
         </div>
         <div>
             <input type="text" id="keyword" data-target="#exampleModalCenter" data-toggle="modal"/>
-            <button class="button-bar" type="button" value="검색">검색</button>
+            <button class="button-bar" type="button" value="검색" data-target="#exampleModalCenter" data-toggle="modal">검색</button>
         </div>
 </div>
 
@@ -304,7 +338,7 @@
         <!-- 섭취 탄단지 -->
         <div id="intake_info">
             <div id="food_intake_head"><h3>섭취 탄단지</h3></div>
-            <div id="food_intake_info"></div>
+            <div id="food_intake_info" class="row"></div>
         </div>
     </div>
 </div>
@@ -559,6 +593,7 @@
             },
             success: function (data) {
                 console.log(data);
+                eatFood();
 
                 let food_name = data.food_name;
                 let food_gram = data.food_gram;
@@ -622,10 +657,6 @@
         let food_kcal = split_res[1].replace(/kcal/,'');
         let food_gram = split_it[0].replace(/g/,'');
 
-        // 클릭한 요소의 부모 element id 받아오기
-        let temp_id = pa.id;
-        console.log(temp_id);
-        $('#'+temp_id).remove(); // 삭제
 
         // 서버로 전송
         $.ajax({
@@ -638,9 +669,14 @@
                 "food_gram" : food_gram
             }
         })
+        // 클릭한 요소의 부모 element id 받아오기
+        let temp_id = e.parentNode.id;
+        $('#'+temp_id).remove(); // 삭제
+        eatFood();
     }
     init();
     ca_kcal(<%=member_gk%>);
+    eatFood();
 </script>
 <script src="https://kit.fontawesome.com/285f83e94b.js" crossorigin="anonymous"></script>
 </body>

@@ -131,9 +131,9 @@ public class CoreController {
         String food_brand = CmmUtil.nvl(request.getParameter("food_brand")); // 음식 제조사
         String food_gram = CmmUtil.nvl(request.getParameter("food_gram")); // 음식 량
         String food_kcal = CmmUtil.nvl(request.getParameter("food_kcal")); // 음식 칼로리
-        String tan = CmmUtil.nvl(request.getParameter("tan")); // 탄수화물
-        String dan = CmmUtil.nvl(request.getParameter("dan")); // 단백질
-        String fat = CmmUtil.nvl(request.getParameter("fat")); // 지방
+        String tan = CmmUtil.nvl(request.getParameter("tan"), "0"); // 탄수화물
+        String dan = CmmUtil.nvl(request.getParameter("dan"), "0"); // 단백질
+        String fat = CmmUtil.nvl(request.getParameter("fat"), "0"); // 지방
         String amount = CmmUtil.nvl(request.getParameter("amount")); // 수량
 
         // 데이터 값 확인
@@ -172,6 +172,8 @@ public class CoreController {
         return pDTO;
     }
 
+
+    // 각 회원이 등록한 음식리스트 가져오기
     @RequestMapping(value = "/getFoodData")
     @ResponseBody
     public List<FoodDTO> getFoodData(HttpServletRequest request,HttpSession session) throws Exception {
@@ -190,13 +192,16 @@ public class CoreController {
         if (rList == null) {
             rList = new ArrayList<>();
         }
+
         log.info(this.getClass().getName() + "getFoodData. END!");
+
         return rList;
     }
 
+    // 음식 삭제
     @RequestMapping(value = "/deleteFoodData")
     @ResponseBody
-    public String deleteFoodData(HttpServletRequest request, HttpSession session){
+    public int deleteFoodData(HttpServletRequest request, HttpSession session){
         log.info(this.getClass().getName() + "deleteFoodData. Start!");
         String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
         String food_time = CmmUtil.nvl(request.getParameter("food_time"));
@@ -216,9 +221,12 @@ public class CoreController {
         pDTO.setFood_gram(food_gram);
 
 
+        int res = 0;
+
         try{
             coreService.deleteFood(pDTO);
             log.info("성공!");
+            res = 1;
 
         }catch (Exception e){
             log.info(e.toString());
@@ -229,6 +237,6 @@ public class CoreController {
         }
 
         log.info(this.getClass().getName() + "deleteFoodData. END!");
-        return "success";
+        return res;
     }
 }
