@@ -106,13 +106,30 @@
         li{
             all:unset;
         }
-
+        p {
+            all: unset;
+        }
+        span{
+            all:unset;
+        }
     </style>
+    <script type="text/javascript">
+
+        function goal_kcal_ch(){
+            let select = $('#week-select').val();
+            let goal_kcal = <%=member_gk%>;
+
+
+
+        }
+
+
+    </script>
 </head>
 
 <body>
 <label for="week-select">주차 별 칼로리 : </label>
-<select name="week" id="week-select">
+<select name="week" id="week-select" onchange="goal_kcal_ch()">
     <option value="1week">1주차</option>
     <option value="2week">2주차</option>
     <option value="3week">3주차</option>
@@ -121,8 +138,8 @@
     <option value="6week">6주차</option>
     <option value="7week">7주차</option>
 </select>
-<h2>목표 칼로리 : <%=member_gk%></h2>
-<h2>섭취 칼로리 : </h2>
+<h2 id="goal_kcal">목표 칼로리 : <%=member_gk%></h2>
+<h2 id="eat_kcal">섭취 칼로리 : </h2>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -423,7 +440,6 @@
             innerFoodData(tan,dan,fat,food_name,food_brand,food_kcal,food_gram);
 
             let replace = food_brand.replace(/\(주\)/i,'');
-            console.log(replace);
 
             $('#foodName').val(food_name);
             $('#foodBrand').val(replace);
@@ -433,8 +449,6 @@
             $('#foodDan').val(dan);
             $('#foodFat').val(fat);
 
-
-            // hidden input에서 가져온 데이터 확인 후, ajax로 controller로 넘겨주면 됨.
         });
 
 
@@ -471,6 +485,8 @@
 
     }
 </script>
+
+<!--식단 등록 및 삭제 섭취 식단 확인 -->
 <script type="text/javascript">
     function innerFoodData(tan,dan,fat,food_name,food_brand,food_kcal,food_gram){
 
@@ -491,16 +507,6 @@
         var fat = $('#foodFat').val();
         var amount = $('#amount').val();
         var food_time = $("#modal_food_time option:selected").val();
-
-        console.log(food_name);
-        console.log(food_brand);
-        console.log(food_gram);
-        console.log(food_kcal);
-        console.log(tan);
-        console.log(dan);
-        console.log(fat);
-        console.log(amount);
-        console.log(food_time);
 
         $.ajax({
             url: "/insertFood.do",
@@ -531,7 +537,10 @@
                     type: "post",
                     success : function(data2) {
                         let dataLength = data2.length;
-                        let food_data = "<li id=" + dataLength + ">" + "<hr>" + food_name + "    " + food_kcal + "kcal" + "<br>" + food_gram + "g" + " " + amount + "개" + "<i class=" + "'far" + " " + "fa-minus-square'" + ">" + "</i>" + "</li>";
+                        let food_data = "<li id=" + dataLength + ">" + "<hr>" + "<span>" + food_name + "    " + food_kcal + "kcal" +"</span>" +
+                            "<br>" + "<p>" + food_gram + "g" + " " + amount + "개" + "</p>" + "<i class=" + "'far" + " " + "fa-minus-square'" +
+                            "onclick='deleteFood(this)'" + dataLength +">" + "</i>" +
+                            "<input type='hidden' value=" + food_time + ">" + "</li>";
                         $('#' + 'food_' + food_time + '_list').append(food_data);
                     }
                 })
@@ -554,7 +563,8 @@
                     let food_gram = data[i].food_gram;
                     let amount = data[i].amount;
 
-                    let food_data = "<li id=" + i +">" + "<hr>" + food_name + "    " + food_kcal + "kcal" + "<br>" + food_gram + "g" + " " + amount + "개" + "<i class=" + "'far" + " " + "fa-minus-square'" + "onclick='deleteFood(this)'" + ">" + "</i>" + "</li>";
+                    let food_data = "<li id=" + i +">" + "<hr>" + "<span>" + food_name + "    " + food_kcal + "kcal" +"</span>" + "<br>" + "<p>" + food_gram + "g" + " " + amount + "개" + "</p>" + "<i class=" + "'far" + " " + "fa-minus-square'" + "onclick='deleteFood(this)'" + ">" + "</i>" +
+                        "<input type='hidden' value=" + food_time + ">" + "</li>";
                     $('#' + 'food_' + food_time + '_list').append(food_data);
                 }
             }
@@ -562,9 +572,39 @@
     }
 
     function deleteFood(e){
-        console.log(e);
-    }
 
+        // 부모요소에 접근 후 각 자식요소 데이터 추출
+        let pa = e.parentNode;
+        console.log(pa.childNodes[5].value); // 원하는 데이터 섭취시간
+
+        // 자식요소의 데이터 공백단위로 정제
+        let split_res = pa.childNodes[1].textContent.split("    ");
+        let split_it = pa.childNodes[3].textContent.split(" ");
+        console.log(split_res[1]); // 원하는 데이터 kcal
+        console.log(split_it[0]); // 원하는 데이터 g
+
+        // 필요한 데이터 정제
+        let food_time = pa.childNodes[5].value;
+        let food_kcal = split_res[1].replace(/kcal/,'');
+        let food_gram = split_it[0].replace(/g/,'');
+
+        // 클릭한 요소의 부모 element id 받아오기
+        let temp_id = pa.id;
+        console.log(temp_id);
+        $('#'+temp_id).remove(); // 삭제
+
+        // 서버로 전송
+        $.ajax({
+            url : "/deleteFoodData.do", // db 요소 삭제 로직작성
+            type : "post",
+            dataType : "json",
+            data : {
+                "food_time" : food_time,
+                "food_kcal" : food_kcal,
+                "food_gram" : food_gram
+            }
+        })
+    }
     init();
 </script>
 <script src="https://kit.fontawesome.com/285f83e94b.js" crossorigin="anonymous"></script>

@@ -42,5 +42,10 @@ public class CoreService implements ICoreService {
         return coreMapper.find_FoodData(pDTO);
     }
 
+    @Override
+    public void deleteFood(FoodDTO pDTO) throws Exception {
+        coreMapper.deleteFood(pDTO);
+    }
+
 
 }

@@ -20,6 +20,9 @@ public interface ICoreMapper {
     // 회원 별 섭취한 음식 리스트 가져오기
     public List<FoodDTO> find_FoodData(FoodDTO pDTO) throws Exception;
 
+    // 회원 별 섭취한 음식 삭제
+    public void deleteFood(FoodDTO pDTO) throws Exception;
+
 
 
 

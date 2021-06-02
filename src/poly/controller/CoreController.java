@@ -176,6 +176,8 @@ public class CoreController {
     @ResponseBody
     public List<FoodDTO> getFoodData(HttpServletRequest request,HttpSession session) throws Exception {
 
+        log.info(this.getClass().getName() + "getFoodData. Start!");
+
         String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
 
         FoodDTO pDTO = new FoodDTO();
@@ -188,7 +190,45 @@ public class CoreController {
         if (rList == null) {
             rList = new ArrayList<>();
         }
-
+        log.info(this.getClass().getName() + "getFoodData. END!");
         return rList;
+    }
+
+    @RequestMapping(value = "/deleteFoodData")
+    @ResponseBody
+    public String deleteFoodData(HttpServletRequest request, HttpSession session){
+        log.info(this.getClass().getName() + "deleteFoodData. Start!");
+        String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
+        String food_time = CmmUtil.nvl(request.getParameter("food_time"));
+        String food_kcal = CmmUtil.nvl(request.getParameter("food_kcal"));
+        String food_gram = CmmUtil.nvl(request.getParameter("food_gram"));
+
+        log.info("member_id : " + member_id);
+        log.info("food_time : " + food_time);
+        log.info("food_kcal : " + food_kcal);
+        log.info("food_gram : " + food_gram);
+
+        FoodDTO pDTO = new FoodDTO();
+
+        pDTO.setMember_id(member_id);
+        pDTO.setFood_time(food_time);
+        pDTO.setFood_kcal(food_kcal);
+        pDTO.setFood_gram(food_gram);
+
+
+        try{
+            coreService.deleteFood(pDTO);
+            log.info("성공!");
+
+        }catch (Exception e){
+            log.info(e.toString());
+            e.printStackTrace();
+            log.info("실패");
+        }finally {
+            pDTO = null;
+        }
+
+        log.info(this.getClass().getName() + "deleteFoodData. END!");
+        return "success";
     }
 }

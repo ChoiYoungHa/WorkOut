@@ -191,6 +191,7 @@
         SELECT COUNT(*) FROM work.post P, work.member M
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
         AND M.MEMBER_NIC LIKE '%' #{keyword} '%'
+        AND M.MEMBER_NIC LIKE '%' #{keyword} '%'
     </select>
 
 </mapper>

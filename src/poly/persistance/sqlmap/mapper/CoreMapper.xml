@@ -46,13 +46,19 @@
          #{amount}
         )
     </insert>
-    
+
+    <!-- 회원이 기록한 음식리스트 가져오기 -->
     <select id="find_FoodData" parameterType="FoodDTO" resultType="FoodDTO">
         SELECT *
         FROM work.food
         WHERE MEMBER_ID = #{member_id}
     </select>
 
+    <!-- 목록에서 음식 삭제 -->
+    <delete id="deleteFood" parameterType="FoodDTO">
+        DELETE FROM work.food
+        WHERE FOOD_TIME = #{food_time} AND FOOD_KCAL = #{food_kcal} AND FOOD_GRAM = #{food_gram} AND MEMBER_ID = #{member_id}
+    </delete>
 
 
 
