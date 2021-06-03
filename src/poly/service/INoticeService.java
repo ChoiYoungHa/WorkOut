@@ -73,6 +73,14 @@ public interface INoticeService {
     // 페이징 검색을 위한 게시글 수 카운팅 작성자
     int searchNoticeMcn(NoticeDTO pDTO) throws Exception;
 
+    // 댓글 수정하기
+    void editComment(NoticeDTO pDTO) throws Exception;
+
+    // 댓글을 수정할 때, 내용 표시를 위해 기존 댓글정보를 가져옴(게시물번호, 작성자이름)
+    NoticeDTO getCommentDetail(NoticeDTO pDTO) throws Exception;
+
+    // 댓글 삭제
+    void deleteComment(NoticeDTO pDTO) throws Exception;
 
 
 }

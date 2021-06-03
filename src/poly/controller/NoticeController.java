@@ -1,4 +1,5 @@
 package poly.controller;
+import com.mysql.cj.protocol.x.Notice;
 import org.apache.commons.collections.ArrayStack;
 import org.apache.log4j.Logger;
 
@@ -457,7 +458,6 @@ public class NoticeController {
 
         ArrayList<String> rList = new ArrayList<>();
 
-
         Iterator<NoticeDTO> it = bookmark_find.iterator();
         while (it.hasNext()) {
             NoticeDTO pNo = it.next();
@@ -484,7 +484,6 @@ public class NoticeController {
         int res;
 
         try {
-
             NoticeDTO pDTO = new NoticeDTO();
 
             pDTO.setMember_nic(member_nic); // 댓글작성자 닉네임
@@ -537,7 +536,6 @@ public class NoticeController {
         }
 
         log.info(this.getClass().getName() + ".find_comment END!");
-
         return rList;
     }
 
@@ -592,9 +590,9 @@ public class NoticeController {
      */
     @RequestMapping(value = "/notice/searchBoard")
     public String searchBoard(HttpServletRequest request, ModelMap model, Criteria pDTO, HttpSession session,
-                              @RequestParam(value="nowPage", required = false) String nowPage,
-                              @RequestParam(value="cntPerPage", required = false) String cntPerPage)
-            throws Exception{
+                              @RequestParam(value = "nowPage", required = false) String nowPage,
+                              @RequestParam(value = "cntPerPage", required = false) String cntPerPage)
+            throws Exception {
         log.info(this.getClass().getName() + "searchBoard. Start!");
 
         String category = CmmUtil.nvl(request.getParameter("category"));
@@ -630,10 +628,9 @@ public class NoticeController {
 
         // 검색 조건에 따른 게시물 수를 가져옴(count *)
         int total = 0;
-        if(searchType.equals("title")){
+        if (searchType.equals("title")) {
             total = noticeService.searchNoticePcn(cDTO);
-        }
-        else if(searchType.equals("member_nic")) {
+        } else if (searchType.equals("member_nic")) {
             total = noticeService.searchNoticeMcn(cDTO);
         }
 
@@ -650,27 +647,23 @@ public class NoticeController {
         pDTO = new Criteria(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), category, keyword);
 
         List<NoticeDTO> rList = null;
-        try{
-            if(searchType.equals("title")){
+        try {
+            if (searchType.equals("title")) {
                 rList = noticeService.search_board_title(pDTO);
-            }
-            
-            else if(searchType.equals("member_nic")){
+            } else if (searchType.equals("member_nic")) {
                 rList = noticeService.search_board_member(pDTO);
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             log.info("실패! : " + e.toString());
-         }
-
-        finally {
-            if(rList == null){
+        } finally {
+            if (rList == null) {
                 rList = new ArrayList<>();
             }
 
             model.addAttribute("searchType", searchType);
             model.addAttribute("post_category", category);
-            model.addAttribute("paging",pDTO);
+            model.addAttribute("paging", pDTO);
             model.addAttribute("pageList", rList);
             model.addAttribute("keyword", keyword); // 검색어 유지를 위해 남겨둠
         }
@@ -685,18 +678,18 @@ public class NoticeController {
 
 
     // 페이징 처리하여 불러오기
-    @RequestMapping(value="/pagingList")
+    @RequestMapping(value = "/pagingList")
     public String pagingList(Criteria pDTO, ModelMap model,
-                             @RequestParam(value="nowPage", required = false) String nowPage,
-                             @RequestParam(value="cntPerPage", required = false) String cntPerPage,
-                             @RequestParam(value="category", required = false) String category,
-                             @RequestParam(value="sort", required = false) String sortYn)
+                             @RequestParam(value = "nowPage", required = false) String nowPage,
+                             @RequestParam(value = "cntPerPage", required = false) String cntPerPage,
+                             @RequestParam(value = "category", required = false) String category,
+                             @RequestParam(value = "sort", required = false) String sortYn)
             throws Exception {
 
         log.info(this.getClass().getName() + ".pagingList Start!");
 
         // 인기게시물 정렬이 아닐 경우 오류방지를 위해 사용
-        if(sortYn == null){
+        if (sortYn == null) {
             sortYn = "n";
         }
 
@@ -731,13 +724,13 @@ public class NoticeController {
         pDTO = new Criteria(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), category);
 
         // 인기순 정렬에 따른 결과값 분리
-        if(sortYn.equals("y")){
+        if (sortYn.equals("y")) {
             model.addAttribute("pageList", noticeService.selectPaging_sort(pDTO));
-        }else {
+        } else {
             model.addAttribute("pageList", noticeService.selectPaging(pDTO));
         }
 
-        model.addAttribute("paging",pDTO);
+        model.addAttribute("paging", pDTO);
         model.addAttribute("post_category", category);
 
         // 메모리 비우기
@@ -769,7 +762,102 @@ public class NoticeController {
         return rList;
     }
 
-    
+    /**
+     * 댓글 수정
+     */
+    @RequestMapping(value = "/editComment")
+    @ResponseBody
+    public int editComment(HttpServletRequest request, HttpSession session) throws Exception {
+        log.info(this.getClass().getName() + "editComment. Start!");
+        String comment_ct = CmmUtil.nvl(request.getParameter("comment"));
+        String comment_id = CmmUtil.nvl(request.getParameter("comment_id"));
+
+        log.info("comment : " + comment_ct);
+        log.info("comment_id : " + comment_id);
+
+        NoticeDTO pDTO = new NoticeDTO();
+
+        pDTO.setComment_ct(comment_ct);
+        pDTO.setComment_id(comment_id);
+
+        int res = 0;
+
+        try {
+            noticeService.editComment(pDTO);
+            log.info("댓글 수정완료!");
+            res = 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info(e.toString());
+        } finally {
+            pDTO = null;
+        }
+
+        log.info(this.getClass().getName() + "editComment. END!");
+        return res;
+    }
+
+
+    /**
+     * 댓글 수정을 위해 기존 댓글 불러오기
+     * */
+    @RequestMapping(value = "/getCommentDetail")
+    @ResponseBody
+    public NoticeDTO getCommentDetail(HttpServletRequest request) throws Exception {
+        log.info(this.getClass().getName() + "getCommentDetail. Start!");
+        String comment_id = CmmUtil.nvl(request.getParameter("comment_id"));
+
+        log.info("comment_id : " + comment_id);
+
+        NoticeDTO pDTO = new NoticeDTO();
+        pDTO.setComment_id(comment_id);
+
+        NoticeDTO rDTO = noticeService.getCommentDetail(pDTO);
+
+        if(rDTO == null){
+            rDTO = new NoticeDTO();
+        }
+
+        log.info(this.getClass().getName() + "getCommentDetail. END!");
+
+        return rDTO;
+    }
+
+
+    /***
+     * 댓글 삭제
+     */
+    @RequestMapping(value = "/deleteComment")
+    @ResponseBody
+    public int deleteComment(HttpServletRequest request) throws Exception {
+        log.info(this.getClass().getName() + "deleteComment. Start!");
+        String comment_id = CmmUtil.nvl(request.getParameter("comment_id"));
+
+        log.info("comment_id: " + comment_id);
+
+        NoticeDTO pDTO = new NoticeDTO();
+
+        pDTO.setComment_id(comment_id);
+
+        int res = 0;
+
+        try{
+          noticeService.deleteComment(pDTO);
+          res = 1;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.info("댓글삭제 실패");
+        }finally {
+            pDTO = null;
+        }
+
+        log.info("res : " + res);
+        log.info(this.getClass().getName() + "deleteComment. END!");
+
+        return res;
+    }
+
 
 }
 

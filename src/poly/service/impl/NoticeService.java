@@ -20,6 +20,8 @@ public class NoticeService implements INoticeService {
         return noticeMapper.getNoticeList();
     }
 
+
+    // 카테고리별 게시판 리스트 가져오기
     @Override
     public List<NoticeDTO> getNoticeList_Category(NoticeDTO pDTO) throws Exception {
         return noticeMapper.getNoticeList_Category(pDTO);
@@ -104,39 +106,61 @@ public class NoticeService implements INoticeService {
     }
 
 
+    // 게시글 제목으로 검색
     @Override
     public List<NoticeDTO> search_board_title(Criteria pDTO) throws Exception {
         return noticeMapper.search_board_title(pDTO);
     }
 
+    // 글쓴이로 검색
     @Override
     public List<NoticeDTO> search_board_member(Criteria pDTO) throws Exception {
         return noticeMapper.search_board_member(pDTO);
     }
 
+    // 페이징 처리한 게시판 리스트 불러오기
     @Override
     public List<NoticeDTO> selectPaging(Criteria pDTO) throws Exception {
         return noticeMapper.selectPaging(pDTO);
     }
-
+    // 인기순으로 페이징 처리한 게시판 리스트 불러오기
     @Override
     public List<NoticeDTO> selectPaging_sort(Criteria pDTO) throws Exception {
         return noticeMapper.selectPaging_sort(pDTO);
     }
-
+    // 페이징을 위한 게시글 수 카운팅
     @Override
     public int cntNotice(NoticeDTO pDTO) throws Exception {
         return noticeMapper.cntNotice(pDTO);
     }
-
+    // 페이징 검색을 위한 게시글 수 카운팅 게시글제목
     @Override
     public int searchNoticePcn(NoticeDTO pDTO) throws Exception {
         return noticeMapper.searchNoticePcn(pDTO);
     }
 
+    // 페이징 검색을 위한 게시글 수 카운팅 작성자
     @Override
     public int searchNoticeMcn(NoticeDTO pDTO) throws Exception {
         return noticeMapper.searchNoticeMcn(pDTO);
+    }
+
+    // 댓글 수정하기
+    @Override
+    public void editComment(NoticeDTO pDTO) throws Exception {
+        noticeMapper.editComment(pDTO);
+    }
+
+    // 댓글을 수정할 때, 내용 표시를 위해 기존 댓글정보를 가져옴(게시물번호, 작성자이름)
+    @Override
+    public NoticeDTO getCommentDetail(NoticeDTO pDTO) throws Exception {
+        return noticeMapper.getCommentDetail(pDTO);
+    }
+
+    // 댓글 삭제
+    @Override
+    public void deleteComment(NoticeDTO pDTO) throws Exception {
+        noticeMapper.deleteComment(pDTO);
     }
 
 }
