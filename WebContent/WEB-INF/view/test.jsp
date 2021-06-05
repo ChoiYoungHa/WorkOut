@@ -1,627 +1,683 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Deerhost Template">
-    <meta name="keywords" content="Deerhost, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DEERHOST | Template</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> Hosting | Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="resource/boots/hosting_tp/assets/img/favicon.ico">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap"
-          rel="stylesheet">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/slicknav.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/flaticon.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/progressbar_barfiller.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/gijgo.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/animate.min.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/animated-headline.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/slick.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/nice-select.css">
+    <link rel="stylesheet" href="resource/boots/hosting_tp/assets/css/style.css">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="/resource/boot/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/resource/boot/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/resource/boot/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="/resource/boot/css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="/resource/boot/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/resource/boot/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/resource/boot/css/style.css" type="text/css">
 </head>
-
 <body>
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-
-<!-- Offcanvas Menu Begin -->
-<div class="offcanvas__menu__overlay"></div>
-<div class="offcanvas__menu__wrapper">
-    <div class="canvas__close">
-        <span class="fa fa-times-circle-o"></span>
-    </div>
-    <div class="offcanvas__logo">
-        <a href="#"><img src="/resource/boot/img/logo.png" alt=""></a>
-    </div>
-    <nav class="offcanvas__menu mobile-menu">
-        <ul>
-            <li class="active"><a href="./index.html">Home</a></li>
-            <li><a href="./about.html">About</a></li>
-            <li><a href="./hosting.html">Hosting</a></li>
-            <li><a href="#">Pages</a>
-                <ul class="dropdown">
-                    <li><a href="./pricing.html">Pricing</a></li>
-                    <li><a href="./blog-details.html">Blog Details</a></li>
-                    <li><a href="./404.html">404</a></li>
-                </ul>
-            </li>
-            <li><a href="./blog.html">News</a></li>
-            <li><a href="./contact.html">Contact</a></li>
-        </ul>
-    </nav>
-    <div id="mobile-menu-wrap"></div>
-    <div class="offcanvas__auth">
-        <ul>
-            <li><a href="#"><span class="icon_chat_alt"></span> Live chat</a></li>
-            <li><a href="#"><span class="fa fa-user"></span> Login / Register</a></li>
-        </ul>
-    </div>
-    <div class="offcanvas__info">
-        <ul>
-            <li><span class="icon_phone"></span> +1 123-456-7890</li>
-            <li><span class="fa fa-envelope"></span> Support@gmail.com</li>
-        </ul>
+<!-- ? Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="resource/boots/hosting_tp/assets/img/logo/loder.png" alt="">
+            </div>
+        </div>
     </div>
 </div>
-<!-- Offcanvas Menu End -->
-
-<!-- Header Section Begin -->
-<header class="header-section">
-    <div class="header__info">
+<!-- Preloader Start -->
+<header>
+    <!-- Header Start -->
+    <div class="header-area header-transparent">
+        <div class="main-header ">
+            <div class="header-bottom  header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo">
+                                <a href="index.html"><img src="resource/boots/hosting_tp/assets/img/logo/workout_logo.png" alt="" style="width : 200px" height="95px"></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="menu-wrapper d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li class="button-header margin-left"><a href="/test.do" class="btn">메인</a></li>
+                                            <li><a href="/pagingList.do?category=work">운동게시판</a></li>
+                                            <li><a href="/pagingList.do?category=menu">식단게시판</a></li>
+                                            <li><a href="contact.html">마이페이지</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>
+<main>
+    <!-- Slider Area Start-->
+    <div class="slider-area slider-bg ">
+        <div class="slider-active">
+            <!-- Single Slider -->
+            <div class="single-slider d-flex align-items-center slider-height ">
+                <div class="container">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-xl-5 col-lg-5 col-md-9 ">
+                            <div class="hero__caption">
+                                <span data-animation="fadeInLeft" data-delay=".3s">Best Domain & hosting service provider</span>
+                                <h1 data-animation="fadeInLeft" data-delay=".6s ">Powerful web hosting</h1>
+                                <p data-animation="fadeInLeft" data-delay=".8s">Supercharge your WordPress hosting with detailed
+                                    website analytics, marketing tools, security, and data
+                                    backups all in one place.</p>
+                                <!-- Slider btn -->
+                                <div class="slider-btns">
+                                    <!-- Hero-btn -->
+                                    <a data-animation="fadeInLeft" data-delay="1s" href="industries.html" class="btn radius-btn">get started</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="hero__img d-none d-lg-block f-right">
+                                <img src="resource/boots/hosting_tp/assets/img/hero/hero_right.png" alt="" data-animation="fadeInRight" data-delay="1s">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Slider -->
+            <div class="single-slider d-flex align-items-center slider-height ">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-9 ">
+                            <div class="hero__caption">
+                                <span data-animation="fadeInLeft" data-delay=".3s">Best Domain & hosting service provider</span>
+                                <h1 data-animation="fadeInLeft" data-delay=".6s">Powerful web hosting</h1>
+                                <p data-animation="fadeInLeft" data-delay=".8s">Supercharge your WordPress hosting with detailed
+                                    website analytics, marketing tools, security, and data
+                                    backups all in one place.</p>
+                                <!-- Slider btn -->
+                                <div class="slider-btns">
+                                    <!-- Hero-btn -->
+                                    <a data-animation="fadeInLeft" data-delay="1s" href="industries.html" class="btn radius-btn">get started</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="hero__img d-none d-lg-block f-right">
+                                <img src="resource/boots/hosting_tp/assets/img/hero/hero_right.png" alt="" data-animation="fadeInRight" data-delay="1s">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slider Shape -->
+        <div class="slider-shape d-none d-lg-block">
+            <img class="slider-shape1" src="resource/boots/hosting_tp/assets/img/hero/top-left-shape.png" alt="">
+        </div>
+    </div>
+    <!-- Slider Area End -->
+    <!-- Domain-search start -->
+    <div class="domain-search-area section-bg1">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__info-left">
-                        <ul>
-                            <li><span class="icon_phone"></span> +1 123-456-7890</li>
-                            <li><span class="fa fa-envelope"></span> Support@gmail.com</li>
-                        </ul>
-                    </div>
+                <div class="col-xl-4 col-lg-5">
+                    <h2>Search new domain</h2>
+                    <p>Supercharge your WordPress hosting with detailed  website analytics, marketing tools.</p>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__info-right">
+                <div class="col-xl-8 col-lg-7">
+                    <!--Hero form -->
+                    <form action="#" class="search-box">
+                        <div class="input-form">
+                            <input type="text" placeholder="Search for a domain">
+                            <!-- icon search -->
+                            <div class="search-form">
+                                <button><i class="ti-search"></i></button>
+                            </div>
+                            <!-- icon search -->
+                            <div class="world-form">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Domain List -->
+                    <div class="single-domain pt-30 pb-30">
                         <ul>
-                            <li><a href="#"><span class="icon_chat_alt"></span> Live chat</a></li>
-                            <li><a href="#"><span class="fa fa-user"></span> Login / Register</a></li>
+                            <li><span>.com</span> <p>$15.99</p></li>
+                            <li><span>.net</span> <p>$10.99</p></li>
+                            <li><span>.rog</span> <p>$10.99</p></li>
+                            <li><span>.me</span> <p>$10.99</p></li>
                         </ul>
                     </div>
+                    <!-- Domain List  End-->
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <div class="header__logo">
-                    <a href="./index.html"><img src="/resource/boot/img/logo3.png" style="width:200px; height:50px; object-fit:contain;" alt=""></a>
+    <!-- Domain-search End -->
+    <!--? Team -->
+    <section class="team-area section-padding40 section-bg1">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-12">
+                    <div class="section-tittle text-center mb-105">
+                        <h2>Most amazing features</h2>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-9">
-                <nav class="header__menu">
-                    <ul>
-                        <li class="active"><a href="./index.html">Home</a></li>
-                        <li><a href="./about.html">About</a></li>
-                        <li><a href="./hosting.html">Hosting</a></li>
-                        <li><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li><a href="./pricing.html">Pricing</a></li>
-                                <li><a href="./blog-details.html">Blog Details</a></li>
-                                <li><a href="./404.html">404</a></li>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-cat">
+                    <div class="cat-icon">
+                        <img src="resource/boots/hosting_tp/assets/img/icon/services1.svg" alt="">
+                    </div>
+                    <div class="cat-cap">
+                        <h5><a href="#">Employee Owned</a></h5>
+                        <p>Supercharge your WordPress hosting with detailed website analytics, marketing tools.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-cat">
+                    <div class="cat-icon">
+                        <img src="resource/boots/hosting_tp/assets/img/icon/services2.svg" alt="">
+                    </div>
+                    <div class="cat-cap">
+                        <h5><a href="#">Commitment to Security</a></h5>
+                        <p>Supercharge your WordPress hosting with detailed website analytics, marketing tools.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-cat">
+                    <div class="cat-icon">
+                        <img src="resource/boots/hosting_tp/assets/img/icon/services3.svg" alt="">
+                    </div>
+                    <div class="cat-cap">
+                        <h5><a href="#">Passion for Privacy</a></h5>
+                        <p>Supercharge your WordPress hosting with detailed website analytics, marketing tools.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-cat">
+                    <div class="cat-icon">
+                        <img src="resource/boots/hosting_tp/assets/img/icon/services4.svg" alt="">
+                    </div>
+                    <div class="cat-cap">
+                        <h5><a href="#">Employee Owned</a></h5>
+                        <p>Supercharge your WordPress hosting with detailed website analytics, marketing tools.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-cat">
+                    <div class="cat-icon">
+                        <img src="resource/boots/hosting_tp/assets/img/icon/services5.svg" alt="">
+                    </div>
+                    <div class="cat-cap">
+                        <h5><a href="#">24/7 Support</a></h5>
+                        <p>Supercharge your WordPress hosting with detailed website analytics, marketing tools.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-cat">
+                    <div class="cat-icon">
+                        <img src="resource/boots/hosting_tp/assets/img/icon/services6.svg" alt="">
+                    </div>
+                    <div class="cat-cap">
+                        <h5><a href="#">100% Uptime Guaranteed</a></h5>
+                        <p>Supercharge your WordPress hosting with detailed website analytics, marketing tools.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Services End -->
+    <!--? Pricing Card Start -->
+    <section class="pricing-card-area fix">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8">
+                    <div class="section-tittle text-center mb-90">
+                        <h2>Choose plan which fit for you</h2>
+                        <p>Supercharge your WordPress hosting with detailed website analytics, marketing tools. Our experts are just part of the reason Bluehost is the ideal home for your WordPress website. We're here to help you succeed!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                    <div class="single-card text-center mb-30">
+                        <div class="card-top">
+                            <img src="resource/boots/hosting_tp/assets/img/icon/price1.svg" alt="">
+                            <h4>Shared Hosting</h4>
+                            <p>Starting at</p>
+                        </div>
+                        <div class="card-mid">
+                            <h4>$4.67 <span>/ month</span></h4>
+                        </div>
+                        <div class="card-bottom">
+                            <ul>
+                                <li>2 TB of space</li>
+                                <li>unlimited bandwidth</li>
+                                <li>full backup systems</li>
+                                <li>free domain</li>
+                                <li>unlimited database</li>
                             </ul>
-                        </li>
-                        <li><a href="./blog.html">News</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <div class="canvas__open">
-            <span class="fa fa-bars"></span>
-        </div>
-    </div>
-</header>
-<!-- Header End -->
-
-<!-- Hero Section Begin -->
-<section class="hero-section">
-    <div class="hero__slider owl-carousel">
-        <div class="hero__item set-bg" data-setbg="/resource/boot/img/hero/hero-1.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero__text">
-                            <h5>Starting At Only $ 2.8/month</h5>
-                            <h2>Welcome to the best<br /> hosting company</h2>
-                            <a href="#" class="primary-btn">Get started now</a>
+                            <a href="#" class="borders-btn">Get Started</a>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="hero__img">
-                            <img src="/resource/boot/img/hero/hero-right.png" alt="">
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                    <div class="single-card text-center mb-30">
+                        <div class="card-top">
+                            <img src="resource/boots/hosting_tp/assets/img/icon/price2.svg" alt="">
+                            <h4>Dedicated Hosting</h4>
+                            <p>Starting at</p>
+                        </div>
+                        <div class="card-mid">
+                            <h4>$4.67 <span>/ month</span></h4>
+                        </div>
+                        <div class="card-bottom">
+                            <ul>
+                                <li>2 TB of space</li>
+                                <li>unlimited bandwidth</li>
+                                <li>full backup systems</li>
+                                <li>free domain</li>
+                                <li>unlimited database</li>
+                            </ul>
+                            <a href="#" class="borders-btn">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                    <div class="single-card text-center mb-30">
+                        <div class="card-top">
+                            <img src="resource/boots/hosting_tp/assets/img/icon/price3.svg" alt="">
+                            <h4>Cloud Hosting</h4>
+                            <p>Starting at</p>
+                        </div>
+                        <div class="card-mid">
+                            <h4>$4.67 <span>/ month</span></h4>
+                        </div>
+                        <div class="card-bottom">
+                            <ul>
+                                <li>2 TB of space</li>
+                                <li>unlimited bandwidth</li>
+                                <li>full backup systems</li>
+                                <li>free domain</li>
+                                <li>unlimited database</li>
+                            </ul>
+                            <a href="#" class="borders-btn">Get Started</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="hero__item set-bg" data-setbg="/resource/boot/img/hero/hero-1.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero__text">
-                            <h5>Starting At Only $ 2.8/month</h5>
-                            <h2>Welcome to the best<br /> hosting company</h2>
-                            <a href="#" class="primary-btn">Get started now</a>
-                        </div>
+    </section>
+    <!-- Pricing Card End -->
+    <!--? About-1 Area Start -->
+    <div class="about-area1 section-padding40">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-xl-5 col-lg-5 col-md-8 col-sm-10">
+                    <!-- about-img -->
+                    <div class="about-img ">
+                        <img src="resource/boots/hosting_tp/assets/img/gallery/about1.png" alt="">
                     </div>
-                    <div class="col-lg-6">
-                        <div class="hero__img">
-                            <img src="/resource/boot/img/hero/hero-right.png" alt="">
+                </div>
+                <div class="col-xl-7 col-lg-7 col-md-12">
+                    <div class="about-caption ">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle section-tittle2 mb-30">
+                            <h2>Global server location</h2>
                         </div>
+                        <p class="mb-40">Supercharge your WordPress hosting with detailed website analytics, marketing tools. Our experts are just part of the reason Bluehost is the ideal home for your WordPress website. We're here to help you succeed!</p>
+                        <ul>
+                            <li>
+                                <img src="resource/boots/hosting_tp/assets/img/icon/right.svg" alt="">
+                                <p>WordPress hosting with detailed website</p>
+                            </li>
+                            <li>
+                                <img src="resource/boots/hosting_tp/assets/img/icon/right.svg" alt="">
+                                <p>Our experts are just part of the reason</p>
+                            </li>
+                            <li>
+                                <img src="resource/boots/hosting_tp/assets/img/icon/right.svg" alt="">
+                                <p> Detailed website analytics</p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-<!-- Hero Section End -->
-
-<!-- Register Domain Section Begin -->
-<section class="register-domain spad">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-lg-8">
-                <div class="register__text">
-                    <div class="section-title">
-                        <h3>Register Your Domain Now!</h3>
+    <!-- About-1 Area End -->
+    <!--? About-2 Area Start -->
+    <div class="about-area1 pb-bottom">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-xl-7 col-lg-7 col-md-12">
+                    <div class="about-caption about-caption3 mb-50">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle section-tittle2 mb-30">
+                            <h2>Dedicated support</h2>
+                        </div>
+                        <p class="mb-40">Supercharge your WordPress hosting with detailed website analytics, marketing tools. Our experts are just part of the reason Bluehost is the ideal home for your WordPress website. We're here to help you succeed!</p>
+                        <ul class="mb-30">
+                            <li>
+                                <img src="resource/boots/hosting_tp/assets/img/icon/right.svg" alt="">
+                                <p>WordPress hosting with detailed website</p>
+                            </li>
+                            <li>
+                                <img src="resource/boots/hosting_tp/assets/img/icon/right.svg" alt="">
+                                <p>Our experts are just part of the reason</p>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn"><i class="fas fa-phone-alt"></i>(10) 892-293 2678</a>
                     </div>
-                    <div class="register__form">
-                        <form action="#">
-                            <input type="text" placeholder="ex: cloudhost">
-                            <div class="change__extension">
-                                .com
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-8 col-sm-10">
+                    <!-- about-img -->
+                    <div class="about-img ">
+                        <img src="resource/boots/hosting_tp/assets/img/gallery/about2.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About-2 Area End -->
+    <!-- ask questions -->
+    <section class="ask-questions section-bg1 section-padding30 fix">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-9 col-md-10 ">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-90">
+                        <h2>Frequently ask questions</h2>
+                        <p>Supercharge your WordPress hosting with detailed website analytics, marketing tools. Our experts are just part of the reason Bluehost is the ideal home for your WordPress website. We're here to help you succeed!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="single-question d-flex mb-50">
+                        <span> Q.</span>
+                        <div class="pera">
+                            <h2>Why can't people connect to the web server on my PC?</h2>
+                            <p>We operate one of the most advanced 100 Gbit networks in the world, complete with Anycast support and extensive DDoS protection.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="single-question d-flex mb-50">
+                        <span> Q.</span>
+                        <div class="pera">
+                            <h2>What domain name should I choose for my site?</h2>
+                            <p>We operate one of the most advanced 100 Gbit networks in the world, complete with Anycast support and extensive DDoS protection.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="single-question d-flex mb-50">
+                        <span> Q.</span>
+                        <div class="pera">
+                            <h2>How can I make my website work without www. in front?</h2>
+                            <p>We operate one of the most advanced 100 Gbit networks in the world, complete with Anycast support and extensive DDoS protection.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="single-question d-flex mb-50">
+                        <span> Q.</span>
+                        <div class="pera">
+                            <h2>Why does Internet Information Server want a password?</h2>
+                            <p>We operate one of the most advanced 100 Gbit networks in the world, complete with Anycast support and extensive DDoS protection.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 ">
+                    <div class="more-btn text-center mt-20">
+                        <a href="#" class="btn">Go to Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End ask questions -->
+    <!--? Testimonial Area Start -->
+    <section class="testimonial-area section-bg1">
+        <div class="container" >
+            <div class="testimonial-wrapper">
+                <div class="row align-items-center justify-content-center">
+                    <div class=" col-lg-10 col-md-12 col-sm-11">
+                        <!-- Testimonial Start -->
+                        <div class="h1-testimonial-active">
+                            <!-- Single Testimonial -->
+                            <div class="single-testimonial text-center mt-55">
+                                <div class="testimonial-caption">
+                                    <img src="resource/boots/hosting_tp/assets/img/icon/quotes-sign.png" alt="" class="quotes-sign">
+                                    <p>Brook presents your services with flexible, convenient and cdpose layouts. You can select your favorite layouts & elements for cular ts with unlimited ustomization possibilities. Pixel-perfect replica;ition of thei designers ijtls intended csents your se.</p>
+                                </div>
+                                <!-- founder -->
+                                <div class="testimonial-founder d-flex align-items-center justify-content-center">
+                                    <div class="founder-img">
+                                        <img src="resource/boots/hosting_tp/assets/img/icon/testimonial.png" alt="">
+                                    </div>
+                                    <div class="founder-text">
+                                        <span>Jacson Miller</span>
+                                        <p>Designer @Colorlib</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Single Testimonial -->
+                            <div class="single-testimonial text-center mt-55">
+                            <div class="testimonial-caption">
+                                <img src="resource/boots/hosting_tp/assets/img/icon/quotes-sign.png" alt="" class="quotes-sign">
+                                <p>Brook presents your services with flexible, convenient and cdpose layouts. You can select your favorite layouts & elements for cular ts with unlimited ustomization possibilities. Pixel-perfect replica;ition of thei designers ijtls intended csents your se.</p>
+                            </div>
+                            <!-- founder -->
+                            <div class="testimonial-founder d-flex align-items-center justify-content-center">
+                                <div class="founder-img">
+                                    <img src="resource/boots/hosting_tp/assets/img/icon/testimonial.png" alt="">
+                                </div>
+                                <div class="founder-text">
+                                    <span>Jacson Miller</span>
+                                    <p>Designer @Colorlib</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial End -->
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!--? Testimonial Area End -->
+</main>
+<footer>
+    <div class="footer-wrappr " data-background="resource/boots/hosting_tp/assets/img/gallery/footer-bg.png">
+        <div class="footer-area footer-padding ">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <!-- logo -->
+                            <div class="footer-logo mb-25">
+                                <a href="index.html"><img src="resource/boots/hosting_tp/assets/img/logo/logo2_footer.png" alt=""></a>
+                            </div>
+                            <div class="footer-tittle mb-50">
+                                <p>Subscribe our newsletter to get updates about our services</p>
+                            </div>
+                            <!-- Form -->
+                            <div class="footer-form">
+                                <div id="mc_embed_signup">
+                                    <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
+                                        <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'">
+                                        <div class="form-icon">
+                                            <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">
+                                                Subscribe
+                                            </button>
+                                        </div>
+                                        <div class="mt-10 info"></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- social -->
+                            <div class="footer-social mt-50">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Company</h4>
                                 <ul>
-                                    <li>.net</li>
-                                    <li>.org</li>
-                                    <li>.me</li>
+                                    <li><a href="#">Why choose us</a></li>
+                                    <li><a href="#"> Review</a></li>
+                                    <li><a href="#">Customers</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Carrier</a></li>
                                 </ul>
                             </div>
-                            <button type="submit" class="site-btn">Search</button>
-                        </form>
+                        </div>
                     </div>
-                    <div class="register__result">
-                        <ul>
-                            <li>.com <span>$1.95</span></li>
-                            <li>.net <span>$1.95</span></li>
-                            <li>.org <span>$1.95</span></li>
-                            <li>.us <span>$1.95</span></li>
-                            <li>.in <span>$1.95</span></li>
-                        </ul>
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Products</h4>
+                                <ul>
+                                    <li><a href="#">Why choose us</a></li>
+                                    <li><a href="#"> Review</a></li>
+                                    <li><a href="#">Customers</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Carrier</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Support</h4>
+                                <ul>
+                                    <li><a href="#">Technology</a></li>
+                                    <li><a href="#">  Products</a></li>
+                                    <li><a href="#">Customers</a></li>
+                                    <li><a href="#">Quality</a></li>
+                                    <li><a href="#">Sales geography</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Register Domain Section End -->
-
-<!-- Services Section Begin -->
-<section class="services-section spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h3>Choose the right hosting solution</h3>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <h5>Shared Hosting</h5>
-                    <span>Starts At $1.84</span>
-                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <h5>Wordpress Hosting</h5>
-                    <span>Starts At $1.84</span>
-                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <h5>Dedicated Hosting</h5>
-                    <span>Starts At $1.84</span>
-                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <h5>SSL certificate</h5>
-                    <span>Starts At $1.84</span>
-                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <h5>Web Hosting</h5>
-                    <span>Starts At $1.84</span>
-                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <h5>Cloud server</h5>
-                    <span>Starts At $1.84</span>
-                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Services Section End -->
-
-<!-- Pricing Section Begin -->
-<section class="pricing-section spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 col-md-7">
-                <div class="section-title normal-title">
-                    <h3>Choose your plan</h3>
-                </div>
-            </div>
-            <div class="col-lg-5 col-md-5">
-                <div class="pricing__swipe-btn">
-                    <label for="month" class="active">Monthly
-                        <input type="radio" id="month">
-                    </label>
-                    <label for="yearly">Yearly
-                        <input type="radio" id="yearly">
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row monthly__plans active">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <h4>Started</h4>
-                    <h3>$15.90 <span>/ month</span></h3>
-                    <ul>
-                        <li>2,5 GB web space</li>
-                        <li>Free site buiding tools</li>
-                        <li>Free domain registar</li>
-                        <li>24/7 Support</li>
-                        <li>Free marketing tool</li>
-                        <li>99,9% Services uptime</li>
-                        <li>30 day money back</li>
-                    </ul>
-                    <a href="#" class="primary-btn">Choose plan</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <h4>Business</h4>
-                    <h3>$25.90 <span>/ month</span></h3>
-                    <ul>
-                        <li>90 GB web space</li>
-                        <li>Free site buiding tools</li>
-                        <li>Free domain registar</li>
-                        <li>24/7 Support</li>
-                        <li>Free marketing tool</li>
-                        <li>99,9% Services uptime</li>
-                        <li>30 day money back</li>
-                    </ul>
-                    <a href="#" class="primary-btn">Choose plan</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <h4>Premium</h4>
-                    <h3>$35.90 <span>/ month</span></h3>
-                    <ul>
-                        <li>150 GB web space</li>
-                        <li>Free site buiding tools</li>
-                        <li>Free domain registar</li>
-                        <li>24/7 Support</li>
-                        <li>Free marketing tool</li>
-                        <li>99,9% Services uptime</li>
-                        <li>30 day money back</li>
-                    </ul>
-                    <a href="#" class="primary-btn">Choose plan</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <h4>Dedicated</h4>
-                    <h3>$45.90 <span>/ month</span></h3>
-                    <ul>
-                        <li>Unlimited web space</li>
-                        <li>Free site buiding tools</li>
-                        <li>Free domain registar</li>
-                        <li>24/7 Support</li>
-                        <li>Free marketing tool</li>
-                        <li>99,9% Services uptime</li>
-                        <li>30 day money back</li>
-                    </ul>
-                    <a href="#" class="primary-btn">Choose plan</a>
-                </div>
-            </div>
-        </div>
-        <div class="row yearly__plans">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <h4>Started</h4>
-                    <h3>$150 <span>/ month</span></h3>
-                    <ul>
-                        <li>2,5 GB web space</li>
-                        <li>Free site buiding tools</li>
-                        <li>Free domain registar</li>
-                        <li>24/7 Support</li>
-                        <li>Free marketing tool</li>
-                        <li>99,9% Services uptime</li>
-                        <li>30 day money back</li>
-                    </ul>
-                    <a href="#" class="primary-btn">Choose plan</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <h4>Business</h4>
-                    <h3>$250 <span>/ month</span></h3>
-                    <ul>
-                        <li>90 GB web space</li>
-                        <li>Free site buiding tools</li>
-                        <li>Free domain registar</li>
-                        <li>24/7 Support</li>
-                        <li>Free marketing tool</li>
-                        <li>99,9% Services uptime</li>
-                        <li>30 day money back</li>
-                    </ul>
-                    <a href="#" class="primary-btn">Choose plan</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <h4>Premium</h4>
-                    <h3>$350 <span>/ month</span></h3>
-                    <ul>
-                        <li>150 GB web space</li>
-                        <li>Free site buiding tools</li>
-                        <li>Free domain registar</li>
-                        <li>24/7 Support</li>
-                        <li>Free marketing tool</li>
-                        <li>99,9% Services uptime</li>
-                        <li>30 day money back</li>
-                    </ul>
-                    <a href="#" class="primary-btn">Choose plan</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="pricing__item">
-                    <h4>Dedicated</h4>
-                    <h3>$450 <span>/ month</span></h3>
-                    <ul>
-                        <li>Unlimited web space</li>
-                        <li>Free site buiding tools</li>
-                        <li>Free domain registar</li>
-                        <li>24/7 Support</li>
-                        <li>Free marketing tool</li>
-                        <li>99,9% Services uptime</li>
-                        <li>30 day money back</li>
-                    </ul>
-                    <a href="#" class="primary-btn">Choose plan</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Pricing Section End -->
-
-<!-- Achievement Section Begin -->
-<section class="achievement-section set-bg spad" data-setbg="/resource/boot/img/achievement-bg.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="achievement__item">
-                    <span class="fa fa-user-o"></span>
-                    <h2 class="achieve-counter">2468</h2>
-                    <p>Clients</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="achievement__item">
-                    <span class="fa fa-edit"></span>
-                    <h2 class="achieve-counter">2468</h2>
-                    <p>Domains</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="achievement__item">
-                    <span class="fa fa-clone"></span>
-                    <h2 class="achieve-counter">2468</h2>
-                    <p>Server</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="achievement__item">
-                    <span class="fa fa-cog"></span>
-                    <h2 class="achieve-counter">2468</h2>
-                    <p>Installs</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Achievement Section End -->
-
-<!-- Work Section Begin -->
-<section class="work-section spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h3>HOW TO BUILD YOUR WEBSITE ONLINE TODAY?</h3>
-                </div>
-                <div class="work__text">
+        <!-- footer-bottom area -->
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="footer-border">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="work__item">
-                                <i class="fa fa-desktop"></i>
-                                <span>CREATE YOUR OWN WEBSITE WITH OUR</span>
-                                <h3>WEB SITE BUILDER</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                                    gravida facilisis. </p>
-                                <a href="#" class="primary-btn">Read More</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="work__item">
-                                <i class="fa fa-shopping-bag"></i>
-                                <span>EASY CREATE, MANAGE & SELL</span>
-                                <h3>ONLINE STORE</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                                    gravida facilisis. </p>
-                                <a href="#" class="primary-btn">Read More</a>
+                        <div class="col-xl-12">
+                            <div class="footer-copy-right text-center">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Work Section End -->
-
-<!-- Choose Plan Section Begin -->
-<section class="choose-plan-section spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <img src="/resource/boot/img/choose-plan.png" alt="">
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="plan__text">
-                    <h3>up to 70% discount with free domain name registration included!</h3>
-                    <ul>
-                        <li><span class="fa fa-check"></span> FREE Domain Name</li>
-                        <li><span class="fa fa-check"></span> FREE Email Address</li>
-                        <li><span class="fa fa-check"></span> Plently of disk space</li>
-                        <li><span class="fa fa-check"></span> FREE Website Bullder</li>
-                        <li><span class="fa fa-check"></span> FREE Marketing Tools</li>
-                        <li><span class="fa fa-check"></span> 1-Click WordPress Install</li>
-                    </ul>
-                    <a href="#" class="primary-btn">Get start now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Choose Plan Section End -->
-
-<!-- Footer Section Begin -->
-<footer class="footer-section">
-    <div class="footer__top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="footer__top-call">
-                        <h5>Need Help? Call us</h5>
-                        <h2>+1 175 946 2316 096</h2>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="footer__top-auth">
-                        <h5>Join Now And Have Free Month Of Deluxe Hosting</h5>
-                        <a href="#" class="primary-btn">Log in</a>
-                        <a href="#" class="primary-btn sign-up">Sign Up</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer__text set-bg" data-setbg="/resource/boot/img/footer-bg.png">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="footer__text-about">
-                        <div class="footer__logo">
-                            <a href="./index.html"><img src="/resource/boot/img/logo.png" alt=""></a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida viverra maecen
-                            lacus vel facilisis. </p>
-                        <div class="footer__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-6">
-                    <div class="footer__text-widget">
-                        <h5>Company</h5>
-                        <ul>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Press & Media</a></li>
-                            <li><a href="#">News / Blogs</a></li>
-                            <li><a href="#">Careers</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-6">
-                    <div class="footer__text-widget">
-                        <h5>Hosting</h5>
-                        <ul>
-                            <li><a href="#">Web Hosting</a></li>
-                            <li><a href="#">Reseller Hosting</a></li>
-                            <li><a href="#">VPS Hosting</a></li>
-                            <li><a href="#">Dedicated Servers</a></li>
-                            <li><a href="#">Cloud Hosting</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="footer__text-widget">
-                        <h5>cONTACT US</h5>
-                        <ul class="footer__widget-info">
-                            <li><span class="fa fa-map-marker"></span> 500 South Main Street Los Angeles,<br />
-                                ZZ-96110 USA</li>
-                            <li><span class="fa fa-mobile"></span> 125-711-811 | 125-668-886</li>
-                            <li><span class="fa fa-headphones"></span> Support.hosting@gmail.com</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer__text-copyright">
-                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
             </div>
         </div>
     </div>
 </footer>
-<!-- Footer Section End -->
+<!-- Scroll Up -->
+<div id="back-top" >
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
 
-<!-- Js Plugins -->
-<script src="/resource/boot/js/jquery-3.3.1.min.js"></script>
-<script src="/resource/boot/js/bootstrap.min.js"></script>
-<script src="/resource/boot/js/jquery.slicknav.js"></script>
-<script src="/resource/boot/js/owl.carousel.min.js"></script>
-<script src="/resource/boot/js/main.js"></script>
+<!-- JS here -->
+
+<script src="./resource/boots/hosting_tp/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="./resource/boots/hosting_tp/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/popper.min.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/bootstrap.min.js"></script>
+<!-- Jquery Mobile Menu -->
+<script src="./resource/boots/hosting_tp/assets/js/jquery.slicknav.min.js"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="./resource/boots/hosting_tp/assets/js/owl.carousel.min.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/slick.min.js"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="./resource/boots/hosting_tp/assets/js/wow.min.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/animated.headline.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/jquery.magnific-popup.js"></script>
+
+<!-- Date Picker -->
+<script src="./resource/boots/hosting_tp/assets/js/gijgo.min.js"></script>
+
+<!-- Video bg -->
+<script src="./resource/boots/hosting_tp/assets/js/jquery.vide.js"></script>
+
+<!-- Nice-select, sticky -->
+<script src="./resource/boots/hosting_tp/assets/js/jquery.nice-select.min.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/jquery.sticky.js"></script>
+<!-- Progress -->
+<script src="./resource/boots/hosting_tp/assets/js/jquery.barfiller.js"></script>
+
+<!-- counter , waypoint,Hover Direction -->
+<script src="./resource/boots/hosting_tp/assets/js/jquery.counterup.min.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/waypoints.min.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/jquery.countdown.min.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/hover-direction-snake.min.js"></script>
+
+<!-- contact js -->
+<script src="./resource/boots/hosting_tp/assets/js/contact.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/jquery.form.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/jquery.validate.min.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/mail-script.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/jquery.ajaxchimp.min.js"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="./resource/boots/hosting_tp/assets/js/plugins.js"></script>
+<script src="./resource/boots/hosting_tp/assets/js/main.js"></script>
+
 </body>
-
 </html>
