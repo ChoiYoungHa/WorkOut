@@ -116,7 +116,7 @@ public class CoreController {
         return "/redirect";
     }
 
-    /***
+    /**
      * API 에서 받아온 식단 리스트 저장
      */
     @RequestMapping(value = "/insertFood")
@@ -177,7 +177,6 @@ public class CoreController {
     @RequestMapping(value = "/getFoodData")
     @ResponseBody
     public List<FoodDTO> getFoodData(HttpServletRequest request,HttpSession session) throws Exception {
-
         log.info(this.getClass().getName() + "getFoodData. Start!");
 
         String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
@@ -219,7 +218,6 @@ public class CoreController {
         pDTO.setFood_time(food_time);
         pDTO.setFood_kcal(food_kcal);
         pDTO.setFood_gram(food_gram);
-
 
         int res = 0;
 
