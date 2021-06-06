@@ -4,8 +4,6 @@ import org.springframework.stereotype.Controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.HttpRequestHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,7 +46,7 @@ public class MemberController {
     @RequestMapping(value = "logIn")
     public String logIn() {
         log.info(this.getClass().getName() + ".login 시작!");
-        return "/user/logIn";
+        return "/user/login";
     }
 
     //로그인 진행
@@ -101,7 +99,7 @@ public class MemberController {
             session.setAttribute("SS_MEMBER_NIC", rDTO.getMember_nic());
             log.info("session.setAttribute 완료");
 
-            url = "/index.do"; //로그인 성공 후 리턴할 페이지
+            url = "/main.do"; //로그인 성공 후 리턴할 페이지
         }
 
         model.addAttribute("msg", msg);
@@ -152,7 +150,7 @@ public class MemberController {
     @RequestMapping(value = "find_pw")
     public String find_pw() {
         log.info(this.getClass().getName() + ".signup 시작!");
-        return "/user/find_pw_email";
+        return "find_pw_email_back";
     }
 
 

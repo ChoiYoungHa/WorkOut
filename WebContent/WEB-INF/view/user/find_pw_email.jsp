@@ -1,25 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
-    <meta charset="UTF-8">
-    <title>비밀번호 찾기</title>
-    <!-- jquery -->
-    <script src="/resource/js/jquery-3.4.1.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>비밀번호찾기</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%@include file="../include/css.jsp"%>
 </head>
 <body>
-
-<div>
-    <form action="find_pw_email.do" method="post">
-        <br>
-        <div>
-           <input type="email" name="email" id="email" placeholder="이메일을 입력하세요." onfocusout="emailCheck()" required="required"/>
+<%@include file="../include/preloader.jsp"%>
+<main class="login-body" data-vide-bg="/resource/boots/hosting_tp/assets/img/login-pullup.mp4">
+    <!-- Login Admin -->
+    <form class="form-default" action="find_pw_email.do" method="POST">
+        <div class="login-form">
+            <!-- logo-login -->
+            <div class="logo-login">
+                <a href="/index.do"><img src="/resource/boots/hosting_tp/assets/img/logo/workout_logo_test.png" alt=""></a>
+            </div>
+            <h2>이메일을 입력해주세요.</h2>
+            <div class="form-input">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-input pt-30">
+                <input type="submit" name="submit" value="전송">
+            </div>
         </div>
-        <br> <br>
-        <button type="submit" name="submit">인증메일 전송</button>
     </form>
-</div>
-<script type="text/javascript" src="/resource/valid/pw_find_emailCk.js"></script>
+    <!-- /end login form -->
+</main>
+<%@include file="../include/js.jsp"%>
 </body>
 </html>

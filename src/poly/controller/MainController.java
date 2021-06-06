@@ -13,23 +13,19 @@ public class MainController {
 	@RequestMapping(value="index")
 	public String Index() {
 		log.info(this.getClass());
-		
-		return "/index";
+		return "/user/login";
 	}
 
-	@RequestMapping(value="test")
-	public String test() {
-		log.info(this.getClass());
-
-		return "/test";
+	@RequestMapping(value = "main")
+	public String main(){
+		return "/main";
 	}
 
 
 	@RequestMapping(value = "/menu")
-	public String menu(){
+	public String menu() {
 		return "/menu/menuPage";
 	}
-
 
 			
 }

@@ -1,35 +1,63 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>회원가입</title>
-    <!-- jquery -->
-    <script src="/resource/js/jquery-3.4.1.min.js"></script>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%@include file="../include/css.jsp"%>
 </head>
 <body>
-<div class="container">
-    <form action="/insertMember.do" method="POST">
-        <!-- 이메일 입력 후, ajax를 통해 이메일 중복 여부 검사 -->
-        <input type="email" name="email" id="email" placeholder="이메일을 입력해 주세요." onfocusout="emailCheck()" required="required"/>
-        <a id="btn-id">중복확인</a>
-        <br/>
-        <input type="text" name="member_name" id="name" placeholder="이름을 입력해 주세요." required="required"/>
-        <br/>
-        <input type="password" name="password" id="password_1" placeholder="비밀번호를 입력해 주세요." required="required"/>
-        <br/>
-        <input type="password" name="password2" id="password_2" placeholder="비밀번호 확인을 입력해 주세요." required="required" />
-        <br/>
-        <input type="text" name="member_nic" id="member_nic" placeholder="닉네임을 입력해주세요." required="required" />
-        <br/>
+<!-- ? Preloader Start -->
+<%@include file="../include/preloader.jsp"%>
+<!-- Preloader Start-->
 
-<input type="submit" value="회원가입">
-</form>
-</div>
 
-<!-- bootstrap, css 파일 -->
-<link rel="stylesheet" href="/resource/css/user.css"/>
-<script src="/resources/js/bootstrap.js"></script>
-<link rel="stylesheet" href="/resources/css/bootstrap.css"/>
+<!-- Register -->
 
+<main class="login-body" data-vide-bg="/resource/boots/hosting_tp/assets/img/signup-pushup.mp4">
+    <!-- Login Admin -->
+    <form class="form-default" action="/insertMember.do" method="POST">
+        <div class="login-form">
+            <!-- logo-login -->
+            <div class="logo-login">
+                <a href="/index.do"><img src="/resource/boots/hosting_tp/assets/img/logo/workout_logo_test.png" alt=""></a>
+            </div>
+            <h2>Registration Here</h2>
+
+            <div class="form-input">
+                <label for="member_name">이름</label>
+                <input id="member_name" type="text" name="name" placeholder="Full name">
+            </div>
+            <div class="form-input">
+                <label for="member_nic">닉네임</label>
+                <input id="member_nic" type="text" name="name" placeholder="Full name">
+            </div>
+            <div class="form-input">
+                <label for="email">이메일</label>
+                <input id="email" type="email" name="email" placeholder="Email Address" onfocusout="emailCheck()">
+            </div>
+            <div class="form-input">
+                <label for="password_1">비밀번호</label>
+                <input id="password_1" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-input">
+                <label for="password_2">비밀번호 확인</label>
+                <input id="password_2" type="password" name="password" placeholder="Confirm Password">
+            </div>
+            <div class="form-input pt-30">
+                <input type="submit" name="submit" value="Registration">
+            </div>
+            <!-- Forget Password -->
+            <a href="/logIn.do" class="registration">login</a>
+        </div>
+    </form>
+    <!-- /end login form -->
+</main>
+
+<%@include file="../include/js.jsp"%>
 <!-- 회원가입 유효성 체크 js -->
 <script type="text/javascript" src="/resource/valid/signupCheck.js"></script>
 </body>
