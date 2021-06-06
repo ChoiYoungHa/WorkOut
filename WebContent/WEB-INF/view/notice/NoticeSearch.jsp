@@ -163,7 +163,7 @@
     %>
 </div>
 <a href="/notice/insertPage.do">[글쓰기]</a>
-<a href="/index.do">[메인]</a>
+<a href="/main.do">[메인]</a>
 <a href="/pagingList.do?category=<%=category_hit%>&nowPage=${paging.nowPage}">전체 게시물</a>
 <a href="/pagingList.do?category=<%=category_hit%>&nowPage=${paging.nowPage}&sort=y">인기 게시물</a>
 <div>

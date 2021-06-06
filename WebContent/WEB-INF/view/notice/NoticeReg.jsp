@@ -99,7 +99,7 @@
             <td align="center" colspan="2">
                 <input type="submit" value="등록" />
                 <input type="reset" value="다시 작성" />
-                <button><a href="/index.do">돌아가기</a></button>
+                <button><a href="/main.do">돌아가기</a></button>
             </td>
         </tr>
     </table>

@@ -237,4 +237,9 @@ public class CoreController {
         log.info(this.getClass().getName() + "deleteFoodData. END!");
         return res;
     }
+
+    @RequestMapping(value = "/workMain")
+    public String work_main(){
+        return "/work/workMain";
+    }
 }

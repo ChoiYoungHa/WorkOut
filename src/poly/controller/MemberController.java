@@ -150,7 +150,7 @@ public class MemberController {
     @RequestMapping(value = "find_pw")
     public String find_pw() {
         log.info(this.getClass().getName() + ".signup 시작!");
-        return "find_pw_email_back";
+        return "user/find_pw_email";
     }
 
 
@@ -307,7 +307,7 @@ public class MemberController {
 
             log.info("인증번호 발송 END!!");
 
-            return "/user/find_pw_check";
+            return "user/find_pw_check";
 
         } catch (Exception e) {
             msg = "실패하였습니다. : " + e.toString();

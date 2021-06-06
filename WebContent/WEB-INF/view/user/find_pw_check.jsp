@@ -1,33 +1,43 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@page import="poly.util.CmmUtil"%>
+<%@ page import="poly.util.CmmUtil" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String msg = CmmUtil.nvl((String)request.getAttribute("msg"));
 %>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <!-- jquery -->
-    <script src="/resource/js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript">
-        alert("<%=msg%>");
-    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>인증번호 입력</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%@include file="../include/css.jsp"%>
 </head>
 <body>
-<div>
-        <span>입력한 이메일로 받은 인증번호를 입력하세요. (인증번호가 맞아야 비밀번호를 변경하실 수 있습니다.)</span>
-    <div>
-        <form action="find_pw_result.do" method="post">
-            <br>
-            <div>
-                인증번호 입력 : <input type="text" name="client_auth" placeholder="  인증번호를 입력하세요. ">
+<%@include file="../include/preloader.jsp"%>
+<main class="login-body" data-vide-bg="/resource/boots/hosting_tp/assets/img/login-pullup.mp4">
+    <!-- Login Admin -->
+    <form class="form-default" action="find_pw_result.do" method="POST">
+        <div class="login-form">
+            <!-- logo-login -->
+            <div class="logo-login">
+                <a href="/index.do"><img src="/resource/boots/hosting_tp/assets/img/logo/workout_logo_test.png" alt=""></a>
             </div>
-            <br>
-            <button type="submit" name="submit">인증번호 전송</button>
-        </form>
-    </div>
-</div>
+            <h2>인증번호를 입력해주세요.</h2>
+            <div class="form-input">
+                <label for="client_auth">인증번호</label>
+                <input id="client_auth" type="text" name="client_auth" placeholder="인증번호">
+            </div>
+            <div class="form-input pt-30">
+                <input type="submit" name="submit" value="전송">
+            </div>
+        </div>
+    </form>
+    <!-- /end login form -->
+</main>
+<%@include file="../include/js.jsp"%>
+<script type="text/javascript">
+    alert("<%=msg%>");
+</script>
 </body>
 </html>

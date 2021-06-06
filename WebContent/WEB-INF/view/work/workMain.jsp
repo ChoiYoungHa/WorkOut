@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@include file="include/session.jsp"%>
+<%@include file="../include/session.jsp"%>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -10,13 +10,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- css import-->
-    <%@include file="include/css.jsp"%>
+    <%@include file="../include/css.jsp"%>
 </head>
 <body>
 <!-- Preloader Start -->
-<%@ include file="include/preloader.jsp"%>
+<%@include file="../include/preloader.jsp"%>
 <!-- Preloader End -->
-<%@include file="include/navbar.jsp"%>
+<%@include file="../include/navbar.jsp"%>
 <main>
     <!-- Slider Area Start-->
     <div class="slider-area slider-bg ">
@@ -43,7 +43,7 @@
     <section class="pricing-card-area pricing-card-area2 fix">
         <div class="container">
             <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-10">
                     <div class="single-card text-center mb-30">
                         <div class="card-top">
                             <img src="/resource/boots/hosting_tp/assets/img/icon/babel.png" style="width: auto" height="110px" alt="">
@@ -51,11 +51,11 @@
                             <p>Starting at</p>
                         </div>
                         <div class="card-bottom">
-                            <a href="workMain.do" class="borders-btn">Get Started</a>
+                            <a href="#" class="borders-btn">Get Started</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                <div class="col-xl-6 col-lg-4 col-md-6 col-sm-10">
                     <div class="single-card text-center mb-30">
                         <div class="card-top">
                             <img src="/resource/boots/hosting_tp/assets/img/icon/food.png" style="width: auto" height="110px" alt="">
@@ -64,18 +64,6 @@
                         </div>
                         <div class="card-bottom">
                             <a href="/checkMemberGk.do" class="borders-btn">Get Started</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
-                    <div class="single-card text-center mb-30">
-                        <div class="card-top">
-                            <img src="/resource/boots/hosting_tp/assets/img/icon/heart.png" style="width: auto" height="110px" alt="">
-                            <h4>기초대사량 계산기</h4>
-                            <p>Starting at</p>
-                        </div>
-                        <div class="card-bottom">
-                            <a href="#" class="borders-btn">Get Started</a>
                         </div>
                     </div>
                 </div>
@@ -183,25 +171,6 @@
 <div id="back-top" >
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
-<%@include file="include/js.jsp"%>
-<script type="text/javascript">
-    function validateCheck(){
-        console.log(<%=SS_MEMBER_ID%>);
-        if ('<%=SS_MEMBER_ID%>' == 'null') {
-            Swal.fire({
-                title: "<%=msg%>",
-                icon: 'success',
-            }).then(val => {
-                if (val) {
-                    location.href = "<%=url%>";
-                }
-            });
-        }
-    }
-    function init(){
-        validateCheck();
-    }
-    init();
-</script>
+<%@include file="../include/js.jsp"%>
 </body>
 </html>
