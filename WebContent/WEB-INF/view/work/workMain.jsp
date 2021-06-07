@@ -46,8 +46,8 @@
                 <div class="col-xl-6 col-lg-4 col-md-6 col-sm-10">
                     <div class="single-card text-center mb-30">
                         <div class="card-top">
-                            <img src="/resource/boots/hosting_tp/assets/img/icon/babel.png" style="width: auto" height="110px" alt="">
-                            <h4>인공지능 홈트레이닝</h4>
+                            <img src="/resource/boots/hosting_tp/assets/img/icon/pushup.png" style="width: auto" height="110px" alt="">
+                            <h4>Push Up</h4>
                             <p>Starting at</p>
                         </div>
                         <div class="card-bottom">
@@ -58,8 +58,8 @@
                 <div class="col-xl-6 col-lg-4 col-md-6 col-sm-10">
                     <div class="single-card text-center mb-30">
                         <div class="card-top">
-                            <img src="/resource/boots/hosting_tp/assets/img/icon/food.png" style="width: auto" height="110px" alt="">
-                            <h4>식단관리</h4>
+                            <img src="/resource/boots/hosting_tp/assets/img/icon/squat.png" style="width: auto" height="110px" alt="">
+                            <h4>Squat</h4>
                             <p>Starting at</p>
                         </div>
                         <div class="card-bottom">

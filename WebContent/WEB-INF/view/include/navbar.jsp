@@ -10,7 +10,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="/main.do"><img src="/resource/boots/hosting_tp/assets/img/logo/workout_logo_test.png" style="width: 150px" height="85px" alt=""></a>
+                                <a href="main.do"><img src="/resource/boots/hosting_tp/assets/img/logo/workout_logo_test.png" style="width: 150px" height="85px" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10">
