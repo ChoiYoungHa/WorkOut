@@ -143,7 +143,7 @@
 </aside>
 <aside class="single_sidebar_widget instagram_feeds">
   <h4 class="widget_title" style="color: #2d2d2d; text-align: center">반복회수</h4>
-
+    <div id="reps"></div>
 </aside>
 </div>
 </div>
@@ -333,6 +333,7 @@
       let status = "stand";
       let count  = 0;
 
+
       async function predict() {
           // Prediction #1: run input through posenet
           // estimatePose can take in an image, video or canvas html element
@@ -340,14 +341,21 @@
           // Prediction 2: run input through teachable machine classification model
           const prediction = await model.predict(posenetOutput);
 
-          if (prediction[0].probability.toFixed(2) == 1.00){
+          if (prediction[0].probability.toFixed(2) > 0.90){
               if (status = "squat"){
                   count++;
+                  let audio = new Audio(count%10 + '.mp3');
+                  audio.play();
+                  document.getElementById("reps").value(count);
               }
               status = "stand";
           } else if (prediction[1].probability.toFixed(2) == 1.00){
               status = "squat";
           } else if (prediction[2].probability.toFixed(2) == 1.00){
+              if(status == "squat" || status == "stand"){
+                  let audio = new Audio('bent.mp3');
+                  audio.play();
+              }
               status = "bent";
           }
 
