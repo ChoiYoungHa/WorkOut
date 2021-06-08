@@ -22,7 +22,7 @@
                                             <li><a href="/main.do">메인페이지</a></li>
                                             <li><a href="/pagingList.do?category=work">운동게시판</a></li>
                                             <li><a href="/pagingList.do?category=menu">식단게시판</a></li>
-                                            <li><a href="contact.html">마이페이지</a></li>
+                                            <li><a href="/myPage.do">마이페이지</a></li>
                                             <% if (SS_MEMBER_ID == null) { %>
                                             <li><a href="/logIn.do">로그인</a></li>
                                             <%} else if (SS_MEMBER_ID != null) { %>

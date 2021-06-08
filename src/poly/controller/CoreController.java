@@ -242,4 +242,11 @@ public class CoreController {
     public String work_main(){
         return "/work/workMain";
     }
+
+    @RequestMapping(value = "/MyPage")
+    public String myPage(){
+        return "/myPage";
+    }
+
+
 }

@@ -1,0 +1,468 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Workout</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="hosting_tp/assets/img/workout_logo_test.png">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="hosting_tp/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/slicknav.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/animate.min.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/hamburgers.min.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/slick.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/nice-select.css">
+    <link rel="stylesheet" href="hosting_tp/assets/css/style.css">
+    <script>
+        function setHref() {
+            document.getElementById('mainLogo').href = 'http:' + "//" + 'localhost' + ":8082/main.do";
+            document.getElementById('mainWork').href = 'http:' + "//" + 'localhost' + ":8082/main.do";
+            document.getElementById('workBoard').href = 'http:' + "//" + 'localhost' + ":8082/pagingList.do?category=work";
+            document.getElementById('menuBoard').href = 'http:' + "//" + 'localhost' + ":8082/pagingList.do?category=menu";
+            document.getElementById('myPage').href = 'http:' + "//" + 'localhost' + ":8082/contact.do"; // 마이페이지 세팅해야 됨.
+            document.getElementById('logoutWork').href = 'http:' + "//" + 'localhost' + ":8082/logOut.do";
+            document.getElementById('footerLogo').href = 'http:' + "//" + 'localhost' + ":8082/main.do";
+        }
+    </script>
+</head>
+
+<body onload="setHref()">
+
+<div id='loading_layer'
+     style='position: fixed;z-index: 3000;top: 0;left: 0;width: 100%;height: 100%;display: none;justify-content: center;align-items: center;background-color: rgba(123, 123, 123, 0.4);writing-mode: vertical-lr;'>
+    <img style='width:30%' src='hosting_tp/assets/img/workout_logo_test.png'/></div>
+<!-- ? Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="hosting_tp/assets/img/logo/workout_logo_test.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+
+<header>
+    <!-- Header Start -->
+    <div class="header-area header-transparent">
+        <div class="main-header ">
+            <div class="header-bottom  header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo">
+                                <a href="main.do" id="mainLogo"><img
+                                        src="hosting_tp/assets/img/logo/workout_logo_test.png" style="width: 150px"
+                                        height="85px" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="menu-wrapper d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a id="mainWork" href="/main.do">메인페이지</a></li>
+                                            <li><a id="workBoard" href="/pagingList.do?category=work">운동게시판</a></li>
+                                            <li><a id="menuBoard" href="/pagingList.do?category=menu">식단게시판</a></li>
+                                            <li><a id="myPage" href="contact.html">마이페이지</a></li>
+                                            <li><a id="logoutWork" href="/logOut.do">로그아웃</a></li>
+                                            <!-- Button -->
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>
+<main>
+    <!-- Slider Area Start-->
+    <div class="slider-area slider-bg ">
+        <!-- Single Slider -->
+        <div class="single-slider d-flex align-items-center slider-height3">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-xl-8 col-lg-9 col-md-12 ">
+                        <div class="hero__caption hero__caption3 text-center">
+                            <h1 data-animation="fadeInLeft" data-delay=".6s ">푸쉬업 AI FITNESS TRAINING</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slider Shape -->
+        <div class="slider-shape d-none d-lg-block">
+            <img class="slider-shape1" src="hosting_tp/assets/img/hero/top-left-shape.png" alt="">
+        </div>
+    </div>
+    <!-- Slider Area End -->
+    <!--? Blog Area Start -->
+    <section class="blog_area single-post-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                    <div class="single-post">
+                        <div class="blog_details">
+                            <h2 style="color: #2d2d2d; text-align: center">전신이 나오도록 해주세요</h2>
+                            <div class="quote-wrapper">
+                                <div class="quotes" style="height: 500px">
+                                    <div>
+                                        <canvas id="canvas"></canvas>
+                                    </div>
+                                    <div id="label-container"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder='반복회수를 입력해주세요'
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = '반복회수를 입력해주세요'"
+                                           style="text-align: center" id="goal_reps">
+                                </div>
+                            </div>
+                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    onclick="init()">시작
+                            </button>
+                        </aside>
+                        <aside class="single_sidebar_widget instagram_feeds">
+                            <h4 class="widget_title" style="color: #2d2d2d; text-align: center;">반복회수</h4>
+                            <div class="instagram_row flex-wrap">
+                                <div class="frame">
+                                    <div class="center">
+                                        <div class="headline">
+                                            <div class="small">your reps</div>
+                                            counter
+                                        </div>
+                                        <div class="circle-big">
+                                            <div class="text">
+                                                <span id="counter">0</span>
+                                                <div class="small">개</div>
+                                            </div>
+                                            <svg>
+                                                <circle class="bg" cx="57" cy="57" r="52"/>
+                                                <circle class="progress" cx="57" cy="57" r="52"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Area End -->
+</main>
+<footer>
+    <div class="footer-wrappr " data-background="hosting_tp/assets/img/gallery/footer-bg.png">
+        <div class="footer-area footer-padding ">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <!-- logo -->
+                            <div class="footer-logo mb-25">
+                                <a id="footerLogo" href="main.do"><img
+                                        src="hosting_tp/assets/img/logo/workout_logo_test.png" alt=""
+                                        style="width: 150px" height="85px"></a>
+                            </div>
+                            <div class="footer-tittle mb-50">
+                                <p>오늘 먹고 싶은 치킨은 내일로 미루자</p>
+                            </div>
+
+                            <!-- social -->
+                            <div class="footer-social mt-50">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1"></div>
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Company</h4>
+                                <ul>
+                                    <li><a href="#">Why choose us</a></li>
+                                    <li><a href="#"> Review</a></li>
+                                    <li><a href="#">Customers</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Carrier</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Products</h4>
+                                <ul>
+                                    <li><a href="#">Why choose us</a></li>
+                                    <li><a href="#"> Review</a></li>
+                                    <li><a href="#">Customers</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Carrier</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Support</h4>
+                                <ul>
+                                    <li><a href="#">Technology</a></li>
+                                    <li><a href="#"> Products</a></li>
+                                    <li><a href="#">Customers</a></li>
+                                    <li><a href="#">Quality</a></li>
+                                    <li><a href="#">Sales geography</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom area -->
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="footer-border">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="footer-copy-right text-center">
+                                <p>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                                    All rights reserved | This template is made with <i class="fa fa-heart"
+                                                                                        aria-hidden="true"></i> by <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</footer>
+<!-- Scroll Up -->
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
+<!-- JS here -->
+
+<script src="./hosting_tp/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="./hosting_tp/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="./hosting_tp/assets/js/popper.min.js"></script>
+<script src="./hosting_tp/assets/js/bootstrap.min.js"></script>
+<!-- Jquery Mobile Menu -->
+<script src="./hosting_tp/assets/js/jquery.slicknav.min.js"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="./hosting_tp/assets/js/owl.carousel.min.js"></script>
+<script src="./hosting_tp/assets/js/slick.min.js"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="./hosting_tp/assets/js/wow.min.js"></script>
+<script src="./hosting_tp/assets/js/animated.headline.js"></script>
+<script src="./hosting_tp/assets/js/jquery.magnific-popup.js"></script>
+
+<!-- Date Picker -->
+<script src="./hosting_tp/assets/js/gijgo.min.js"></script>
+<!-- Nice-select, sticky -->
+<script src="./hosting_tp/assets/js/jquery.nice-select.min.js"></script>
+<script src="./hosting_tp/assets/js/jquery.sticky.js"></script>
+
+<!-- counter , waypoint,Hover Direction -->
+<script src="./hosting_tp/assets/js/jquery.counterup.min.js"></script>
+<script src="./hosting_tp/assets/js/waypoints.min.js"></script>
+<script src="./hosting_tp/assets/js/jquery.countdown.min.js"></script>
+<script src="./hosting_tp/assets/js/hover-direction-snake.min.js"></script>
+
+<!-- contact js -->
+<script src="./hosting_tp/assets/js/contact.js"></script>
+<script src="./hosting_tp/assets/js/jquery.form.js"></script>
+<script src="./hosting_tp/assets/js/jquery.validate.min.js"></script>
+<script src="./hosting_tp/assets/js/mail-script.js"></script>
+<script src="./hosting_tp/assets/js/jquery.ajaxchimp.min.js"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="./hosting_tp/assets/js/plugins.js"></script>
+<script src="./hosting_tp/assets/js/main.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+
+<script type="text/javascript">
+    // More API functions here:
+    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
+
+    // the link to your model provided by Teachable Machine export panel
+    const URL = "teachable/my-pose-model/";
+    let model, webcam, ctx, labelContainer, maxPredictions;
+
+    async function init() {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        // load the model and metadata
+        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+        // Note: the pose library adds a tmPose object to your window (window.tmPose)
+        model = await tmPose.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+        // Convenience function to setup a webcam
+        const size = 450;
+        const flip = true; // whether to flip the webcam
+        webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
+
+        reloading_st();
+        await webcam.setup(); // request access to the webcam
+        loading_ed();
+        await webcam.play();
+
+
+        window.requestAnimationFrame(loop);
+
+        // append/get elements to the DOM
+        const canvas = document.getElementById("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        ctx = canvas.getContext("2d");
+        labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < maxPredictions; i++) { // and class labels
+            labelContainer.appendChild(document.createElement("div"));
+        }
+    }
+
+    async function loop(timestamp) {
+        webcam.update(); // update the webcam frame
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
+
+    let status = "stand";
+    let count = 0;
+    let progress = 327
+
+    async function predict() {
+        // Prediction #1: run input through posenet
+        // estimatePose can take in an image, video or canvas html element
+        const {pose, posenetOutput} = await model.estimatePose(webcam.canvas);
+        // Prediction 2: run input through teachable machine classification model
+        const prediction = await model.predict(posenetOutput);
+
+        let goal_reps = $('#goal_reps').val();
+
+        if (prediction[0].probability.toFixed(2) > 0.90) {
+            //console.log("stand");
+            // 스쿼트 자세가 올바를 때 카운트
+            if (status == "squat") {
+                count++;
+
+                // 개수를 전부 채워서 종료 되었을 때,
+                if (count == goal_reps) {
+                    count = 0;
+                    let audio = new Audio('end.mp3');
+                    audio.play();
+                    $('#counter').html(count);
+                    progress = 327;
+                    $('.progress').css('stroke-dashoffset', progress);
+                } else if (count != goal_reps) {
+                    let audio = new Audio(count % 10 + '.mp3');
+                    audio.play();
+                }
+
+                progress = progress - 32.7
+                if (progress <= 0) {
+                    progress = 327 - 32.7
+                }
+                $('.progress').css('stroke-dashoffset', progress);
+                $('#counter').html(count);
+            }
+
+            console.log(goal_reps);
+
+            status = "stand";
+        } else if (prediction[1].probability.toFixed(2) == 1.00) {
+            status = "squat";
+        } else if (prediction[2].probability.toFixed(2) == 1.00) {
+            if (status == "squat" || status == "stand") {
+                let audio = new Audio('bent.mp3');
+                audio.play();
+            }
+            status = "bent";
+        }
+
+        // for (let i = 0; i < maxPredictions; i++) {
+        //     const classPrediction =
+        //         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+        //     labelContainer.childNodes[i].innerHTML = classPrediction;
+        // }
+
+        // finally draw the poses
+        drawPose(pose);
+    }
+
+    function drawPose(pose) {
+        if (webcam.canvas) {
+            ctx.drawImage(webcam.canvas, 0, 0);
+            // draw the keypoints and skeleton
+            if (pose) {
+                const minPartConfidence = 0.5;
+                tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+                tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+            }
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function loading_st() {
+        layer_str = "<div id='loading_layer' style='position: fixed;z-index: 3000;top: 0;left: 0;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;background-color: rgba(123 ,123 ,123 , 0.4);writing-mode: vertical-lr;'><img style='width:30%' src='hosting_tp/assets/img/workout_logo_test.png'/></div>"
+        document.write(layer_str);
+    }
+
+    function loading_ed() {
+        var ta = document.getElementById('loading_layer');
+        ta.style.display = 'none';
+    }
+
+    function reloading_st() {
+        var re = document.getElementById('loading_layer');
+        re.style.display = 'flex';
+    }
+
+</script>
+</body>
+</html>

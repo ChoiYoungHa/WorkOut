@@ -51,7 +51,7 @@
                             <p>Starting at</p>
                         </div>
                         <div class="card-bottom">
-                            <a href="#" class="borders-btn">Get Started</a>
+                            <a href="https://ai-fitness-pushup.netlify.app" class="borders-btn">Get Started</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                             <p>Starting at</p>
                         </div>
                         <div class="card-bottom">
-                            <a href="/checkMemberGk.do" class="borders-btn">Get Started</a>
+                            <a href="https://ai-fitness-squat.netlify.app" class="borders-btn">Get Started</a>
                         </div>
                     </div>
                 </div>
