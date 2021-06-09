@@ -19,8 +19,39 @@
 <%@include file="../include/navbar.jsp"%>
 <main>
     <!-- Slider Area Start-->
+    <section class="team-area section-padding40 section-bg1">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-12">
+                    <div class="section-tittle text-center mb-105">
+                        <h2>식단 관리하기</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="justify-content: center">
+                <div class="col-2">
+                    <h1 style="color: white;">주차 별 칼로리</h1>
+                </div>
+            </div>
+            <div class="row" style="justify-content: center">
+                <div class="col-2">
+                    <select class="form-select" id="week-select">
+                        <option value="1week">1주차</option>
+                        <option value="2week">2주차</option>
+                        <option value="3week">3주차</option>
+                        <option value="4week">4주차</option>
+                        <option value="5week">5주차</option>
+                        <option value="6week">6주차</option>
+                        <option value="7week">7주차</option>
+                    </select>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="slider-area slider-bg ">
         <!-- Single Slider -->
+
         <div class="single-slider d-flex align-items-center slider-height2">
             <div class="container">
                 <div class="row">
@@ -44,27 +75,12 @@
                             </div>
                         </form>
                         <!-- Domain List -->
-                        <div class="single-domain pt-30 pb-30">
-                            <ul>
-                                <li><span>.com</span> <p>$15.99</p></li>
-                                <li><span>.net</span> <p>$10.99</p></li>
-                                <li><span>.rog</span> <p>$10.99</p></li>
-                                <li><span>.me</span> <p>$10.99</p></li>
-                            </ul>
-                        </div>
+
                         <!-- Domain List  End-->
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-xl-8 col-lg-9 col-md-12 ">
-                        <div class="hero__caption hero__caption2 text-center">
-                            <h1 data-animation="fadeInLeft" data-delay=".6s ">식단 관리하기</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <!-- Slider Shape -->
         <div class="slider-shape d-none d-lg-block">
