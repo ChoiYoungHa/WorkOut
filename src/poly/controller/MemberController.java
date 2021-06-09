@@ -4,11 +4,13 @@ import org.springframework.stereotype.Controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import poly.dto.MailDTO;
 import poly.dto.MemberDTO;
+import poly.dto.NoticeDTO;
 import poly.service.IMailService;
 import poly.service.IMemberService;
 import poly.util.CmmUtil;
@@ -26,6 +28,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Controller 선언해야만 Spring 프레임워크에서 Controller인지 인식 가능
@@ -431,6 +435,100 @@ public class MemberController {
         log.info("find_pw_change_update End!");
         return "/redirect";
     }
+
+
+    // 마이페이지
+    @RequestMapping(value = "/MyPage")
+    public String myPage(HttpSession session, ModelMap model) throws Exception {
+        log.info(this.getClass().getName() + "MyPage. Start!");
+        String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
+
+        log.info("member_id : " + member_id);
+        MemberDTO pDTO = new MemberDTO();
+
+        pDTO.setMember_id(member_id);
+        MemberDTO rDTO = memberService.member_find(pDTO);
+
+        if (rDTO == null) {
+            rDTO = new MemberDTO();
+        }
+
+        model.addAttribute("rDTO", rDTO);
+        log.info(this.getClass().getName() + "MyPage. END!");
+
+        return "/myPage";
+    }
+
+    // 마이페이지 비밀번호 변경
+    @RequestMapping(value = "/myPage_Change_pw")
+    public String myPageChangePw(HttpServletRequest request, HttpSession session, ModelMap model) throws Exception {
+        log.info(this.getClass().getName() + "myPageChangePw. Start!");
+
+        String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
+        String password = EncryptUtil.encHashSHA256(CmmUtil.nvl(request.getParameter("password1")));
+
+        log.info("member_id : " + member_id);
+        log.info("password : " + password);
+
+        MemberDTO pDTO = new MemberDTO();
+
+        pDTO.setMember_id(member_id);
+        pDTO.setMember_pw(password);
+
+        int res = memberService.myPage_update_pw(pDTO);
+
+        String msg = "";
+        String url = "";
+
+        if(res == 1){
+            msg = "변경되었습니다.";
+            url = "/main.do";
+        }else {
+            msg = "변경에 실패하였습니다.";
+            url = "/MyPage.do";
+        }
+
+        model.addAttribute("msg", msg);
+        model.addAttribute("url", url);
+
+        log.info(this.getClass().getName() + "myPageChangePw. END!");
+        return "/redirect";
+    }
+
+    // 북마크 페이지 이동
+    @RequestMapping(value = "/bookmarkPage")
+    public String bookMarkPage(){
+        return "/user/bookmark";
+    }
+
+    // 북마크 게시물리스트 가져오기
+    @RequestMapping(value = "/getBookMarkList")
+    public String getBookMarkList(HttpSession session, ModelMap model) throws Exception {
+        log.info(this.getClass().getName() + "getBookMarkList. Start!");
+        String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
+        log.info("member_id : " + member_id);
+
+        NoticeDTO pDTO = new NoticeDTO();
+        pDTO.setMember_id(member_id);
+
+        List<NoticeDTO> rList = memberService.bookMarkGetList(pDTO);
+
+        if (rList == null) {
+            rList = new ArrayList<>();
+        }
+
+        model.addAttribute("rList", rList);
+
+        log.info(this.getClass().getName() + "getBookMarkList. END!");
+        return "/user/bookmark";
+    }
+
+
+
+
+
+
+
 
 
 

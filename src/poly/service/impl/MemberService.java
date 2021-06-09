@@ -3,10 +3,12 @@ package poly.service.impl;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import poly.dto.MemberDTO;
+import poly.dto.NoticeDTO;
 import poly.persistance.mapper.IMemberMapper;
 import poly.service.IMemberService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("MemberService")
 public class MemberService implements IMemberService {
@@ -45,6 +47,17 @@ public class MemberService implements IMemberService {
     @Override
     public MemberDTO member_find(MemberDTO pDTO) throws Exception {
         return memberMapper.member_find(pDTO);
+    }
+
+    // 마이페이지에서 비밀번호 변경
+    @Override
+    public int myPage_update_pw(MemberDTO pDTO) throws Exception {
+        return memberMapper.myPage_update_pw(pDTO);
+    }
+
+    @Override
+    public List<NoticeDTO> bookMarkGetList(NoticeDTO pDTO) throws Exception {
+        return memberMapper.bookMarkGetList(pDTO);
     }
 
 

@@ -42,6 +42,7 @@
             AND MEMBER_PW = #{member_pw}
     </select>
 
+    <!-- 비밀번호 변경-->
     <update id="update_pw" parameterType="MemberDTO">
         UPDATE work.member
         SET
@@ -50,9 +51,28 @@
             EMAIL = #{email}
     </update>
 
+    <!-- 회원 정보 조회 -->
     <select id="member_find" parameterType="MemberDTO" resultType="MemberDTO">
         SELECT MEMBER_NAME, MEMBER_NIC, MEMBER_GK
         FROM work.member
         WHERE MEMBER_ID = ${member_id}
     </select>
+
+    <!-- 마이페이지에서 비밀번호 변경-->
+    <update id="myPage_update_pw" parameterType="MemberDTO">
+        UPDATE work.member
+        SET
+            MEMBER_PW = #{member_pw}
+        WHERE
+            MEMBER_ID = #{member_id}
+    </update>
+
+    <!-- 북마크 게시물 가져오기-->
+    <select id="bookMarkGetList" parameterType="NoticeDTO" resultType="NoticeDTO">
+        SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
+        FROM work.POST P, work.MEMBER M
+        WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND POST_ID IN (SELECT POST_ID FROM work.BOOKMARK
+        WHERE MEMBER_ID = #{member_id})
+    </select>
+
 </mapper>

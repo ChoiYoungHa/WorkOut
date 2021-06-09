@@ -46,7 +46,7 @@
 
     <!-- 게시판 상세보기 쿼리-->
     <select id="getNoticeInfo" parameterType="NoticeDTO" resultType="NoticeDTO">
-        SELECT P.POST_ID, P.BOOKMARK, P.POST_TITLE, P.POST_VIEW, P.POST_RECOM,
+        SELECT P.POST_ID, P.POST_TITLE, P.POST_VIEW, P.POST_RECOM,
                P.POST_CATEGORY, C.CONTENT, P.MEMBER_MEMBER_ID
         FROM work.POST P, work.POST_CONTENT C
         WHERE P.POST_ID = C.POST_POST_ID AND P.POST_ID = #{post_id}
@@ -218,5 +218,7 @@
         DELETE FROM work.comment
         WHERE COMMENT_ID = #{comment_id}
     </delete>
+
+
 
 </mapper>

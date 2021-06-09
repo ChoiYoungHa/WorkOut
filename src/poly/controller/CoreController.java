@@ -69,6 +69,7 @@ public class CoreController {
         return "/menu/metabolism";
     }
 
+
     // 기초대사량 등록
     @RequestMapping(value = "/MetabolismResult")
     public String MetabolismResult(HttpServletRequest request, HttpSession session, ModelMap model){
@@ -241,11 +242,6 @@ public class CoreController {
     @RequestMapping(value = "/workMain")
     public String work_main(){
         return "/work/workMain";
-    }
-
-    @RequestMapping(value = "/MyPage")
-    public String myPage(){
-        return "/myPage";
     }
 
 
