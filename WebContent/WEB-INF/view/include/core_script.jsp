@@ -73,6 +73,7 @@
     // 엔터쳤을 때,
     document.querySelector('#modal_keyword').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
+            reloading_st();
             let searchType =$("#modal_searchType").val();
             let keyword = $("#modal_keyword").val();
 
@@ -91,6 +92,7 @@
                     // 원하는 음식이 안나올 수 있어서 최대한 많은 데이터를 가져오고 페이징을 해야함.
                     // 각 요소마다 클릭되면 데이터가 저장될 수 있게 해야함.
 
+                    loading_ed();
                     paging(data.I2790.row.length, 1, data);
                 }
             })
@@ -100,6 +102,7 @@
 
     // 검색버튼을 클릭했을 때,
     function clickFoodList(){
+        reloading_st();
         let searchType =$("#modal_searchType").val();
         let keyword = $("#modal_keyword").val();
 
@@ -117,6 +120,7 @@
             success : function(data) {
                 // 원하는 음식이 안나올 수 있어서 최대한 많은 데이터를 가져오고 페이징을 해야함.
                 // 각 요소마다 클릭되면 데이터가 저장될 수 있게 해야함.
+                loading_ed();
                 paging(data.I2790.row.length, 1, data);
             }
         })
@@ -405,4 +409,21 @@
     init();
     ca_kcal(<%=member_gk%>);
     eatFood();
+</script>
+<script type="text/javascript">
+    function loading_st() {
+        let layer_str = "<div id='loading_layer' style='position: fixed;z-index: 3000;top: 0;left: 0;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;background-color: rgba(123 ,123 ,123 , 0.4);writing-mode: vertical-lr;'><img style='width:30%' src='/resource/boots/hosting_tp/assets/img/workout_logo_test.png'></div>"
+        document.write(layer_str);
+    }
+
+    function loading_ed() {
+        let ta = document.getElementById('loading_layer');
+        ta.style.display = 'none';
+    }
+
+    function reloading_st() {
+        let re = document.getElementById('loading_layer');
+        re.style.display = 'flex';
+    }
+
 </script>

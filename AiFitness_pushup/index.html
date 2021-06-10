@@ -332,6 +332,7 @@
     let model, webcam, ctx, labelContainer, maxPredictions;
 
     async function init() {
+        reloading_st();
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
@@ -346,7 +347,7 @@
         const flip = true; // whether to flip the webcam
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
 
-        reloading_st();
+
         await webcam.setup(); // request access to the webcam
         loading_ed();
         await webcam.play();
@@ -449,17 +450,17 @@
 
 <script type="text/javascript">
     function loading_st() {
-        layer_str = "<div id='loading_layer' style='position: fixed;z-index: 3000;top: 0;left: 0;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;background-color: rgba(123 ,123 ,123 , 0.4);writing-mode: vertical-lr;'><img style='width:30%' src='hosting_tp/assets/img/workout_logo_test.png'/></div>"
+        let layer_str = "<div id='loading_layer' style='position: fixed;z-index: 3000;top: 0;left: 0;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;background-color: rgba(123 ,123 ,123 , 0.4);writing-mode: vertical-lr;'><img style='width:30%' src='hosting_tp/assets/img/workout_logo_test.png'/></div>"
         document.write(layer_str);
     }
 
     function loading_ed() {
-        var ta = document.getElementById('loading_layer');
+        let ta = document.getElementById('loading_layer');
         ta.style.display = 'none';
     }
 
     function reloading_st() {
-        var re = document.getElementById('loading_layer');
+        let re = document.getElementById('loading_layer');
         re.style.display = 'flex';
     }
 

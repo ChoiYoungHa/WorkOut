@@ -332,6 +332,7 @@
     let model, webcam, ctx, labelContainer, maxPredictions;
 
     async function init() {
+        reloading_st();
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
@@ -342,11 +343,10 @@
         maxPredictions = model.getTotalClasses();
 
         // Convenience function to setup a webcam
-        const size = 300;
+        const size = 450;
         const flip = true; // whether to flip the webcam
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
 
-        reloading_st();
         await webcam.setup(); // request access to the webcam
         loading_ed();
         await webcam.play();

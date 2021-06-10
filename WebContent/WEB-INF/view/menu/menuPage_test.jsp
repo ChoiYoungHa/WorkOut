@@ -22,6 +22,9 @@
 <!-- Preloader End -->
 <%@include file="../include/navbar.jsp"%>
 <main>
+    <div id='loading_layer'
+         style='position: fixed;z-index: 3000;top: 0;left: 0;width: 100%;height: 100%;display: none;justify-content: center;align-items: center;background-color: rgba(123, 123, 123, 0.4);writing-mode: vertical-lr;'>
+        <img style='width:30%' src='/resource/boots/hosting_tp/assets/img/workout_logo_test.png'/></div>
     <!-- Slider Area Start-->
     <section class="team-area section-padding40 section-bg1">
         <div class="container">
@@ -59,7 +62,7 @@
             <div class="row justify-content-center mt-50">
                 <div class="col-xl-8 col-lg-7">
                     <!--Hero form -->
-                    <form class="search-box">
+                    <form class="search-box">;
                         <div class="input-form">
                             <input type="text" placeholder="원하는 음식을 검색해보세요" data-target="#exampleModalCenter" data-toggle="modal">
                             <!-- icon search -->
@@ -146,7 +149,7 @@
                             </div>
                             <div>
                                 <!--Hero form -->
-                                <form class="search-box ml-10" style="width: 900px">
+                                <form class="search-box ml-10" style="width: 900px" onsubmit="return false">
                                     <div class="input-form">
                                         <input type="text" placeholder="원하는 음식을 검색해보세요" id="modal_keyword">
                                         <!-- icon search -->
