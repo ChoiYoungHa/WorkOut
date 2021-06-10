@@ -123,6 +123,7 @@
             all:unset;
         }
     </style>
+
     <script type="text/javascript">
         function goal_kcal_ch(){
             let select = $('#week-select').val();
@@ -190,8 +191,6 @@
                 }
             })
         }
-
-
     </script>
 </head>
 <body>

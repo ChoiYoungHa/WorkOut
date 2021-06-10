@@ -51,7 +51,7 @@ public class CoreController {
             url = "/metabolism.do";
             msg = "기초대사량을 구해주세요.";
         }else {
-            url = "/menu.do";
+            url = "/menuTest.do";
             msg = "환영합니다.";
             session.setAttribute("SS_MEMBER_GK",res);
         }
