@@ -26,8 +26,4 @@ public class MainController {
 		return "/menu/menuPage";
 	}
 
-	@RequestMapping(value = "/menuTest")
-	public String menuTest(){
-		return "/menu/menuPage_test";
-	}
 }
