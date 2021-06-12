@@ -737,7 +737,7 @@ public class NoticeController {
         pDTO = null;
 
         log.info(this.getClass().getName() + ".pagingList End!");
-        return "/notice/NoticeList";
+        return "/notice/NoticeList_test";
     }
 
     /***
@@ -800,7 +800,7 @@ public class NoticeController {
 
     /**
      * 댓글 수정을 위해 기존 댓글 불러오기
-     * */
+     */
     @RequestMapping(value = "/getCommentDetail")
     @ResponseBody
     public NoticeDTO getCommentDetail(HttpServletRequest request) throws Exception {
@@ -814,7 +814,7 @@ public class NoticeController {
 
         NoticeDTO rDTO = noticeService.getCommentDetail(pDTO);
 
-        if(rDTO == null){
+        if (rDTO == null) {
             rDTO = new NoticeDTO();
         }
 
@@ -841,14 +841,14 @@ public class NoticeController {
 
         int res = 0;
 
-        try{
-          noticeService.deleteComment(pDTO);
-          res = 1;
+        try {
+            noticeService.deleteComment(pDTO);
+            res = 1;
 
         } catch (Exception e) {
             e.printStackTrace();
             log.info("댓글삭제 실패");
-        }finally {
+        } finally {
             pDTO = null;
         }
 
@@ -858,9 +858,10 @@ public class NoticeController {
         return res;
     }
 
-
-
-
+    @RequestMapping(value = "/noticeListTest")
+    public String noticeListTest(){
+        return "/notice/NoticeList_test";
+    }
 }
 
 
