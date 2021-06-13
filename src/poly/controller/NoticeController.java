@@ -1,6 +1,4 @@
 package poly.controller;
-import com.mysql.cj.protocol.x.Notice;
-import org.apache.commons.collections.ArrayStack;
 import org.apache.log4j.Logger;
 
 import org.springframework.stereotype.Controller;
@@ -21,7 +19,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
 import java.util.*;
 
 @Controller
@@ -155,8 +152,8 @@ public class NoticeController {
         //로그 찍기(추후 찍은 로그를 통해 이 함수 호출이 끝났는지 파악하기 용이하다.)
         log.info(this.getClass().getName() + ".NoticeListCategory end!");
 
-        //함수 처리가 끝나고 보여줄 JSP 파일명(/WEB-INF/view/notice/NoticeList.jsp)
-        return "/notice/NoticeList";
+        //함수 처리가 끝나고 보여줄 JSP 파일명(/WEB-INF/view/notice/NoticeList_back.jsp)
+        return "notice/NoticeList";
     }
 
     /**
@@ -673,7 +670,7 @@ public class NoticeController {
         rList = null;
 
         log.info(this.getClass().getName() + "searchBoard. END!");
-        return "/notice/NoticeSearch";
+        return "notice/NoticeSearch";
     }
 
 
@@ -737,7 +734,7 @@ public class NoticeController {
         pDTO = null;
 
         log.info(this.getClass().getName() + ".pagingList End!");
-        return "/notice/NoticeList_test";
+        return "notice/NoticeList";
     }
 
     /***
@@ -858,10 +855,6 @@ public class NoticeController {
         return res;
     }
 
-    @RequestMapping(value = "/noticeListTest")
-    public String noticeListTest(){
-        return "/notice/NoticeList_test";
-    }
 }
 
 

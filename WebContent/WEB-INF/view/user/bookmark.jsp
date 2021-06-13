@@ -105,7 +105,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="d-flex">
+                                    <a href="/metabolism.do" class="d-flex">
                                         <p style="font-weight: bold">기초대사량 재설정</p>
                                     </a>
                                 </li>
