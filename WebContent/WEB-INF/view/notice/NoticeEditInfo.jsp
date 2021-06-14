@@ -4,6 +4,7 @@
 <%@ page import="poly.dto.NoticeDTO" %>
 <%
     NoticeDTO rDTO = (NoticeDTO)request.getAttribute("rDTO");
+    String SS_MEMBER_ID = ((String)session.getAttribute("SS_MEMBER_ID"));
 //공지글 정보를 못불러왔다면, 객체 생성
     if (rDTO==null){
         rDTO = new NoticeDTO();

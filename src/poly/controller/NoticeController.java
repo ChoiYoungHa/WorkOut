@@ -214,7 +214,7 @@ public class NoticeController {
 
         log.info(this.getClass().getName() + ".NoticeInfo end!");
 
-        return "/notice/NoticeInfo";
+        return "notice/NoticeInfo";
     }
 
     /**
@@ -223,7 +223,6 @@ public class NoticeController {
     @RequestMapping(value = "notice/NoticeEditInfo", method = RequestMethod.GET)
     public String NoticeEditInfo(HttpServletRequest request, HttpServletResponse response,
                                  ModelMap model) throws Exception {
-
         log.info(this.getClass().getName() + ".NoticeEditInfo start!");
         String post_id = CmmUtil.nvl(request.getParameter("nSeq")); // 게시글번호
 
@@ -254,7 +253,7 @@ public class NoticeController {
 
         log.info(this.getClass().getName() + ".NoticeEditInfo end!");
 
-        return "/notice/NoticeEditInfo";
+        return "/notice/NoticeEditInfo_test";
     }
 
     /**
@@ -854,6 +853,7 @@ public class NoticeController {
 
         return res;
     }
+
 
 }
 

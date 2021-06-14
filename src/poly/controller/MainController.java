@@ -15,6 +15,11 @@ public class MainController {
 		return "/user/login";
 	}
 
+	@RequestMapping(value = "/notice/main")
+	public String noticeMain(){
+		return "/main";
+	}
+
 	@RequestMapping(value = "main")
 	public String main() {
 		return "/main";
