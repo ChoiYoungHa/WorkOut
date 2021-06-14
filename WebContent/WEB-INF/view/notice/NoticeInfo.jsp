@@ -82,8 +82,8 @@
                             <div class="blog-author">
                                 <div class="quote-wrapper">
                                     <div>
-                                        <div><h1><%=rDTO.getPost_title()%></h1></div>
-                                        <div><h3><%=find_member.getMember_nic()%></h3></div>
+                                        <div><h1 class="font-weight-bold"><%=rDTO.getPost_title()%></h1></div>
+                                        <div><h4><%=find_member.getMember_nic()%></h4></div>
                                         <div class="row justify-content-end">
                                             <div><h5 class="mr-20">조회수 : <%=rDTO.getPost_view()%></h5></div>
                                         </div>

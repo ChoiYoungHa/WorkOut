@@ -1,110 +1,97 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
 <%@ page import="poly.util.CmmUtil" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     request.setCharacterEncoding("UTF-8");
     String SS_MEMBER_NAME = CmmUtil.nvl((String)session.getAttribute("SS_MEMBER_NAME"));
+    String SS_MEMBER_ID = CmmUtil.nvl((String)session.getAttribute("SS_MEMBER_ID"));
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>게시판 글쓰기</title>
-
-    <script type="text/javascript">
-
-        //로그인 여부 체크
-        function doOnload(){
-            var user_id = "<%=SS_MEMBER_NAME%>";
-
-            if (user_id==""){
-                alert("로그인된 사용자만 글을 쓸 수 있습니다.");
-                top.location.href="/notice/NoticeList.do";
-            }
-        }
-        //전송시 유효성 체크
-        function doSubmit(f){
-            if(f.title.value == ""){
-                alert("제목을 입력하시기 바랍니다.");
-                f.title.focus();
-                return false;
-            }
-
-            if(calBytes(f.title.value) > 200){
-                alert("최대 200Bytes까지 입력 가능합니다.");
-                f.title.focus();
-                return false;
-            }
-
-            if(f.contents.value == ""){
-                alert("내용을 입력하시기 바랍니다.");
-                f.contents.focus();
-                return false;
-            }
-
-            if(calBytes(f.contents.value) > 5000){
-                alert("최대 5000Bytes까지 입력 가능합니다.");
-                f.contents.focus();
-                return false;
-            }
-
-        }
-
-        //글자 길이 바이트 단위로 체크하기(바이트값 전달)
-        function calBytes(str){
-
-            var tcount = 0;
-            var tmpStr = new String(str);
-            var strCnt = tmpStr.length;
-            var onechar;
-            for (i=0;i<strCnt;i++){
-                onechar = tmpStr.charAt(i);
-
-                if (escape(onechar).length > 4){
-                    tcount += 2;
-                }else{
-                    tcount += 1;
-                }
-            }
-            return tcount;
-        }
-    </script>
-
-
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>게시판 글보기</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/resource/boots/hosting_tp/assets/img/workout_logo_test.png">
+    <!-- CSS here -->
+    <%@include file="../include/css.jsp" %>
 </head>
-<body onload="doOnload();">
-<form name="f" method="post" action="/notice/NoticeInsert.do" target= "ifrPrc" onsubmit="return doSubmit(this);">
-    <table border="1">
-        <col width="100px" />
-        <col width="500px" />
-        <tr>
-            <td align="center">제목</td>
-            <td><input type="text" name="title" maxlength="100" style="width: 450px" /></td>
-        </tr>
-        <tr>
-            <td align="center">게시판 선택</td>
-            <td>
-                <select id="category" name="category" class="custom-select custom-select-lg mb-3" style="background-color:lightskyblue; text-align:center;font-weight:bold;">
-                <option value="menu">식단게시판</option>
-                <option value="work">운동게시판</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <textarea name="contents" style="width: 550px; height: 400px"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td align="center" colspan="2">
-                <input type="submit" value="등록" />
-                <input type="reset" value="다시 작성" />
-                <button><a href="/main.do">돌아가기</a></button>
-            </td>
-        </tr>
-    </table>
-</form>
-<!-- 프로세스 처리용 iframe / form 태그에서 target을 iframe으로 한다. -->
-<iframe name="ifrPrc" style="display:none"></iframe>
+<body onload="doOnload()">
+<!-- ? Preloader Start -->
+<%@ include file="../include/preloader.jsp" %>
+<!-- Preloader Start -->
+<header>
+    <!-- Header Start -->
+    <%@include file="../include/navbar.jsp" %>
+    <!-- Header End -->
+</header>
+<main>
+    <!-- Slider Area Start-->
+    <div class="slider-area slider-bg ">
+        <!-- Single Slider -->
+        <div class="single-slider d-flex align-items-center slider-height3">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-xl-8 col-lg-9 col-md-12 ">
+                        <div class="hero__caption hero__caption3 text-center">
+                            <h1>게시물 작성</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slider Shape -->
+        <div class="slider-shape d-none d-lg-block">
+            <img class="slider-shape1" src="/resource/boots/hosting_tp/assets/img/hero/top-left-shape.png" alt="">
+        </div>
+    </div>
+    <!-- Slider Area End -->
+    <!--? Blog Area Start -->
+    <section class="blog_area single-post-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 posts-list">
+                    <div class="single-post">
+                        <div class="blog_details">
+                            <div class="blog-author">
+                                <form name="f" method="post" action="/notice/NoticeInsert.do" onsubmit="return doSubmit(this);">
+                                <div class="quote-wrapper">
+                                    <div>
+                                        <div class="row col-lg-12"><input class="single-input font-weight-bold" name="title" type="text"></div>
+                                        <div class="row col-2">
+                                            <select class="form-select mt-10" name="category" id="category">
+                                                <option value="menu">식단게시판</option>
+                                                <option value="work">운동게시판</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row col-lg-12">
+                                    <input class="single-input-primary" name="contents">
+                                </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div><input class="genric-btn info-border radius mr-10 ml-20" type="submit" value="등록" /></div>
+                                        <div><input class="genric-btn info-border radius" type="reset" value="다시 작성" /></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Area End -->
+</main>
+<%@include file="../include/footer.jsp" %>
+<!-- Scroll Up -->
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+<%@include file="../include/js.jsp" %>
+<%@include file="../include/noticeReg_script.jsp" %>
 </body>
 </html>

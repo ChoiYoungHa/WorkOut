@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <script type="text/javascript">
+
+    function priceToString(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
     function goal_kcal_ch(){
         let select = $('#week-select').val();
         let goal_kcal = <%=member_gk%>;
@@ -18,7 +23,7 @@
         }else if(select == '7week'){
             goal_kcal = Math.ceil(goal_kcal - goal_kcal * 0.35);
         }
-
+        goal_kcal = priceToString(goal_kcal);
         ca_kcal(goal_kcal);
 
         let html = "목표 칼로리 : " + goal_kcal + "kcal";
@@ -60,6 +65,8 @@
 
                 let html = "<span class='mr-5'>" + "탄수화물 : " + eat_tan + "g" + " " + "</span>" + "<span class='mr-5'>" + " 단백질 : " + eat_dan + "g" + " " + "</span>" +
                     "<span>" + " 지방 : " + eat_fat + "g" + "</span>";
+
+                eat_kcal = priceToString(eat_kcal);
 
                 let eat_kcal_html = "<h2 style='color: white'> 섭취 칼로리 : " + eat_kcal + "kcal" + "</h2>";
                 $('#food_intake_info').html(html);

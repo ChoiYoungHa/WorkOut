@@ -1,4 +1,5 @@
 <%@ page import="poly.util.CmmUtil" %>
+<%@ page import="java.text.DecimalFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@include file="../include/session.jsp"%>
@@ -6,6 +7,11 @@
 <html class="no-js" lang="zxx">
 <%
     String member_gk = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_GK"));
+
+    // 소수점 찍기
+    int i = Integer.parseInt(member_gk);
+    DecimalFormat dc = new DecimalFormat("###,###,###,###");
+    String parse_goal_kcal = dc.format(i);
 %>
 <head>
     <meta charset="utf-8">
@@ -54,7 +60,7 @@
                 </div>
                 </div>
             <div class="row justify-content-center mt-10">
-                <h2 id="goal_kcal" style="color: white">목표 칼로리 : <%=member_gk%>kcal</h2>
+                <h2 id="goal_kcal" style="color: white">목표 칼로리 : <%=parse_goal_kcal%>kcal</h2>
             </div>
             <div class="row justify-content-center mt-10">
                 <div id="eat_kcal"></div>

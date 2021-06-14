@@ -41,7 +41,7 @@ public class NoticeController {
     public String insertPage() {
         log.info(this.getClass().getName() + ".insertPage Start!");
         log.info(this.getClass().getName() + ".insertPage END!");
-        return "/notice/NoticeReg";
+        return "notice/NoticeReg";
     }
 
 
@@ -253,7 +253,7 @@ public class NoticeController {
 
         log.info(this.getClass().getName() + ".NoticeEditInfo end!");
 
-        return "/notice/NoticeEditInfo_test";
+        return "notice/NoticeEditInfo";
     }
 
     /**
