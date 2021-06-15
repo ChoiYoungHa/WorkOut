@@ -61,7 +61,7 @@
                         <div class="blog_details">
                             <h2 style="color: #2d2d2d; text-align: center">나의 상세정보</h2>
                             <div class="quote-wrapper">
-                                <form action="/myPage_Change_pw.do" method="post" class="subscribe_form relative mail_part" novalidate="true">
+                                <form action="/myPage_Change_pw.do" method="post" class="subscribe_form relative mail_part" novalidate="true" onsubmit="return InsertCheck();">
                                     <div class="typography">
                                         <div class="quotes">
                                             <h4 class="mt-10">이름 : <%=rDTO.getMember_name()%></h4>
@@ -119,11 +119,11 @@
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
 <%@include file="include/js.jsp"%>
+
 <script type="text/javascript">
     function InsertCheck() {
-        if ($("#password1").val() !== $("#password2").val()) {
-            alert("비밀번호가 일치하지 않습니다.");
-            $("#password_2").focus();
+        if (($("#password1").val() != $("#password2").val())) {
+            Swal.fire('비밀번호를 다시 한 번 확인해 주세요.', '', 'warning');
             return false;
         }
     }

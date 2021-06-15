@@ -1,27 +1,27 @@
 //회원가입 정보의 유효성 체크하기 및 계산
 function InsertCheck() {
     if ($("#age").val() == "") {
-        alert("나이를 입력해주세요.");
+        Swal.fire("나이를 입력해주세요.","","error");
         $("#age").focus();
         return false;
     }else if ($("input[name='sex']:checked").length < 1) {
-        alert("성별을 체크해주세요.");
+        Swal.fire("성별을 체크해주세요.","","error");
         $("#sex").focus();
         return false;
     }else if ($("#tall").val() == "") {
-        alert("키를 입력해주세요.");
+        Swal.fire("키를 입력해주세요.","","error");
         $("#tall").focus();
         return false;
     }else if ($("#weight").val() == "") {
-        alert("몸무게를 입력해주세요.");
+        Swal.fire("몸무게를 입력해주세요.","","error");
         $("#weight").focus();
         return false;
     }else if ($("input[name='activity']:checked").length < 1) {
-        alert("활동량을 체크해주세요.");
+        Swal.fire("활동량을 체크해주세요.","","error");
         $("#how_exer").focus();
         return false;
     }else if ($("input[name='how_exer']:checked").length < 1) {
-        alert("운동목적을 체크해주세요.");
+        Swal.fire("운동목적을 체크해주세요.","","error");
         $("#activity").focus();
         return false;
     }else {
@@ -69,3 +69,8 @@ function InsertCheck() {
         return true;
     }
 };
+
+// 숫자 형태만 입력되도록 함수 작성
+$(document).on("keyup", "input:text[numberOnly]", function() {
+    $(this).val( $(this).val().replace(/[^0-9]/gi,"") );
+});

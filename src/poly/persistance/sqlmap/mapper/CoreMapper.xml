@@ -60,6 +60,4 @@
         WHERE FOOD_TIME = #{food_time} AND FOOD_KCAL = #{food_kcal} AND FOOD_GRAM = #{food_gram} AND MEMBER_ID = #{member_id}
     </delete>
 
-
-
 </mapper>

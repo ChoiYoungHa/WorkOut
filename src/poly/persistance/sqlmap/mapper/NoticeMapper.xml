@@ -32,14 +32,14 @@
     <!-- 게시판 리스트 쿼리 / 식단, 운동 게시판 분리 전체게시물-->
     <select id="getNoticeList" resultType="NoticeDTO">
         SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
-        FROM work.POST P, work.MEMBER M
+        FROM work.post P, work.member M
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID
     </select>
 
     <!-- 게시판 리스트 쿼리 / 식단, 운동 게시판 분리쿼리-->
     <select id="getNoticeList_Category" parameterType="NoticeDTO" resultType="NoticeDTO">
         SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
-        FROM work.POST P, work.MEMBER M
+        FROM work.post P, work.member M
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
         ORDER BY P.POST_ID
     </select>
@@ -48,7 +48,7 @@
     <select id="getNoticeInfo" parameterType="NoticeDTO" resultType="NoticeDTO">
         SELECT P.POST_ID, P.POST_TITLE, P.POST_VIEW, P.POST_RECOM,
                P.POST_CATEGORY, C.CONTENT, P.MEMBER_MEMBER_ID
-        FROM work.POST P, work.POST_CONTENT C
+        FROM work.post P, work.post_content C
         WHERE P.POST_ID = C.POST_POST_ID AND P.POST_ID = #{post_id}
     </select>
 
@@ -134,7 +134,7 @@
     <!--인기순 게시판 정렬-->
     <select id="hit_sort_board" resultType="NoticeDTO" parameterType="NoticeDTO">
         SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
-        FROM work.POST P, work.MEMBER M
+        FROM work.post P, work.member M
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
         ORDER BY P.POST_VIEW DESC
     </select>
@@ -144,8 +144,8 @@
         SELECT *
         FROM (SELECT @rownum:=@rownum+1 rowNum,
         N.*, M.MEMBER_NIC, M.MEMBER_ID FROM (SELECT * FROM work.post) N, (SELECT @ROWNUM:=0) R, (SELECT * FROM work.member) M
-        ORDER BY POST_ID DESC) A WHERE rowNum BETWEEN #{start} AND #{end}
-        AND POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID AND POST_TITLE LIKE '%' #{keyword} '%'
+              WHERE POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID AND POST_TITLE LIKE CONCAT('%',#{keyword},'%') ORDER BY POST_ID DESC) A
+        WHERE rowNum BETWEEN #{start} AND #{end}
     </select>
 
     <!--게시물 작성자 검색 쿼리-->
@@ -153,26 +153,24 @@
         SELECT *
         FROM (SELECT @rownum:=@rownum+1 rowNum,
         N.*, M.MEMBER_NIC, M.MEMBER_ID FROM (SELECT * FROM work.post) N, (SELECT @ROWNUM:=0) R, (SELECT * FROM work.member) M
-        ORDER BY POST_ID DESC) A WHERE rowNum BETWEEN #{start} AND #{end}
-        AND POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID AND MEMBER_NIC LIKE '%' #{keyword} '%'
+              WHERE POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID AND MEMBER_NIC LIKE CONCAT('%',#{keyword},'%') ORDER BY POST_ID DESC) A
+        WHERE rowNum BETWEEN #{start} AND #{end}
     </select>
 
     <!-- 페이징 처리 후 게시글 리스트 불러오기 -->
     <select id="selectPaging" resultType="NoticeDTO">
         SELECT *
         FROM (SELECT @rownum:=@rownum+1 rowNum,
-              N.*, M.MEMBER_NIC, M.MEMBER_ID FROM (SELECT * FROM work.post) N, (SELECT @ROWNUM:=0) R, (SELECT * FROM work.member) M
-              ORDER BY POST_ID DESC) A WHERE rowNum BETWEEN #{start} AND #{end}
-              AND POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID
+              N.*, M.MEMBER_NIC, M.MEMBER_ID FROM (SELECT @ROWNUM:=0) R, (SELECT * FROM work.post) N, (SELECT * FROM work.member) M
+              WHERE POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID ORDER BY POST_ID DESC) D WHERE rowNum BETWEEN #{start} AND #{end}
     </select>
 
     <!-- 페이징 처리 후 게시글 리스트 불러오기 인기순 정렬-->
     <select id="selectPaging_sort" resultType="NoticeDTO">
         SELECT *
         FROM (SELECT @rownum:=@rownum+1 rowNum,
-              N.*, M.MEMBER_NIC, M.MEMBER_ID FROM (SELECT * FROM work.post) N, (SELECT @ROWNUM:=0) R, (SELECT * FROM work.member) M
-              ORDER BY POST_VIEW DESC) A WHERE rowNum BETWEEN #{start} AND #{end}
-              AND POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID
+              N.*, M.MEMBER_NIC, M.MEMBER_ID FROM (SELECT @ROWNUM:=0) R, (SELECT * FROM work.post) N, (SELECT * FROM work.member) M
+              WHERE POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID ORDER BY POST_VIEW DESC) D WHERE rowNum BETWEEN #{start} AND #{end}
     </select>
 
 
@@ -183,15 +181,14 @@
 
     <!-- 게시글 제목으로 검색했을 때, 페이징 게시물 수 카운트-->
     <select id="searchNoticePcn" resultType="int" parameterType="NoticeDTO">
-        SELECT COUNT(*) FROM work.post WHERE POST_CATEGORY = #{post_category} AND POST_TITLE LIKE '%' #{keyword} '%'
+        SELECT COUNT(*) FROM work.post WHERE POST_CATEGORY = #{post_category} AND POST_TITLE LIKE CONCAT('%', #{keyword},'%')
     </select>
 
     <!-- 게시글 작성자로 검색했을 때, 페이징 게시물 수 카운트-->
     <select id="searchNoticeMcn" resultType="int" parameterType="NoticeDTO">
         SELECT COUNT(*) FROM work.post P, work.member M
         WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND P.POST_CATEGORY = #{post_category}
-        AND M.MEMBER_NIC LIKE '%' #{keyword} '%'
-        AND M.MEMBER_NIC LIKE '%' #{keyword} '%'
+        AND M.MEMBER_NIC LIKE CONCAT('%',#{keyword},'%')
     </select>
 
     <!-- 댓글 수정하기 -->
@@ -218,7 +215,5 @@
         DELETE FROM work.comment
         WHERE COMMENT_ID = #{comment_id}
     </delete>
-
-
 
 </mapper>

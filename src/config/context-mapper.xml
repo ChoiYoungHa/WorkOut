@@ -12,10 +12,10 @@
 	</bean>
 
 	<!-- MapperConfigurer setup for MyBatis Database Layer with @Mapper("deptMapper") in DeptMapper Interface -->
- 	<bean class="config.MapperConfigurer">
+	<bean class="config.MapperConfigurer">
 		<property name="basePackage" value="poly.persistance.mapper" />
 	</bean>
-    
+
 </beans>
 
 
