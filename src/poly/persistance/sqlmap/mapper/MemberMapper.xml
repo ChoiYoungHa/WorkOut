@@ -70,8 +70,8 @@
     <!-- 북마크 게시물 가져오기-->
     <select id="bookMarkGetList" parameterType="NoticeDTO" resultType="NoticeDTO">
         SELECT P.POST_VIEW, P.POST_RECOM, P.POST_TITLE, P.POST_ID, M.MEMBER_NIC
-        FROM work.POST P, work.MEMBER M
-        WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND POST_ID IN (SELECT POST_ID FROM work.BOOKMARK
+        FROM work.post P, work.member M
+        WHERE P.MEMBER_MEMBER_ID = M.MEMBER_ID AND POST_ID IN (SELECT POST_ID FROM work.bookmark
         WHERE MEMBER_ID = #{member_id})
     </select>
 

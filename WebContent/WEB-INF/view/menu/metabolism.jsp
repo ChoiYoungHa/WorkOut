@@ -52,8 +52,8 @@
                         <form action="/MetabolismResult.do" onsubmit="return InsertCheck()">
                             <div class="mt-10 mb-10">
                                 <input type="text" name="age" id="age" placeholder="나이를 입력하세요 : "
-                                       onfocus="this.placeholder = ''" onblur="this.placeholder = '나이를 입력하세요 : '" required
-                                       class="single-input-primary" style="font-weight: bold">
+                                       onfocus="this.placeholder = ''" onblur="this.placeholder = '나이를 입력하세요 : '"
+                                       class="single-input-primary" style="font-weight: bold" numberOnly="true">
                             </div>
 
                             <div class="row m-2">
@@ -66,13 +66,14 @@
 
                             <div class="mt-10">
                                 <input type="text" name="tall" id="tall" placeholder="키를 입력하세요 : "
-                                       onfocus="this.placeholder = ''" onblur="this.placeholder = '키를 입력하세요 : '" required
-                                       class="single-input-primary" style="font-weight: bold">
+                                       onfocus="this.placeholder = ''" onblur="this.placeholder = '키를 입력하세요 : '"
+                                       class="single-input-primary" style="font-weight: bold" numberOnly="true">
                             </div>
                             <div class="mt-10">
+
                                 <input type="text" name="weight" id="weight" placeholder="몸무게를 입력하세요 : "
-                                       onfocus="this.placeholder = ''" onblur="this.placeholder = '몸무게를 입력하세요 : '" required
-                                       class="single-input-primary" style="font-weight: bold">
+                                       onfocus="this.placeholder = ''" onblur="this.placeholder = '몸무게를 입력하세요 : '"
+                                       class="single-input-primary" style="font-weight: bold" numberOnly="true">
                             </div>
 
                             <hr>
@@ -162,6 +163,6 @@
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
 <%@include file="../include/js.jsp"%>
-<script type="text/javascript" src="/resources/js/metabolism.js"></script>
+<script type="text/javascript" src="/resources/js/metabolism.js?ver=4"></script>
 </body>
 </html>

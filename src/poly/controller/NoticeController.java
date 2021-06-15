@@ -733,6 +733,7 @@ public class NoticeController {
         pDTO = null;
 
         log.info(this.getClass().getName() + ".pagingList End!");
+
         return "notice/NoticeList";
     }
 
@@ -757,6 +758,7 @@ public class NoticeController {
         log.info(this.getClass().getName() + ".getSearchList END!");
         return rList;
     }
+
 
     /**
      * 댓글 수정

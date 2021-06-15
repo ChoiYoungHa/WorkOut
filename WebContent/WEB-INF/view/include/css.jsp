@@ -16,3 +16,4 @@
 <link rel="stylesheet" href="/resource/boots/hosting_tp/assets/css/slick.css">
 <link rel="stylesheet" href="/resource/boots/hosting_tp/assets/css/nice-select.css">
 <link rel="stylesheet" href="/resource/boots/hosting_tp/assets/css/style.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

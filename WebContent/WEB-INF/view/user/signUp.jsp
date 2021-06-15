@@ -13,13 +13,10 @@
 <!-- ? Preloader Start -->
 <%@include file="../include/preloader.jsp"%>
 <!-- Preloader Start-->
-
-
 <!-- Register -->
-
 <main class="login-body" data-vide-bg="/resource/boots/hosting_tp/assets/img/signup-pushup.mp4">
     <!-- Login Admin -->
-    <form class="form-default" action="/insertMember.do" method="POST">
+    <form class="form-default" action="/insertMember.do" method="POST" onsubmit="return signupCheck()">
         <div class="login-form">
             <!-- logo-login -->
             <div class="logo-login">
@@ -29,11 +26,11 @@
 
             <div class="form-input">
                 <label for="member_name">이름</label>
-                <input id="member_name" type="text" name="name" placeholder="Full name">
+                <input id="member_name" type="text" name="member_name" placeholder="Full name">
             </div>
             <div class="form-input">
                 <label for="member_nic">닉네임</label>
-                <input id="member_nic" type="text" name="name" placeholder="Full name">
+                <input id="member_nic" type="text" name="member_nic" placeholder="Full name">
             </div>
             <div class="form-input">
                 <label for="email">이메일</label>

@@ -23,8 +23,8 @@
         }else if(select == '7week'){
             goal_kcal = Math.ceil(goal_kcal - goal_kcal * 0.35);
         }
-        goal_kcal = priceToString(goal_kcal);
         ca_kcal(goal_kcal);
+        goal_kcal = priceToString(goal_kcal);
 
         let html = "목표 칼로리 : " + goal_kcal + "kcal";
         $("#goal_kcal").html(html);
