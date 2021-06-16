@@ -26,5 +26,4 @@
         <property name="username" value="admin"/> <!-- MariaDB 계정 -->
         <property name="password" value="12341234"/> <!-- MariaDB 패스워드 -->
     </bean>
-
 </beans>

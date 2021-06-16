@@ -160,4 +160,8 @@
         height: 30px;
         padding:0px;
     }
+    
+    .font:hover {
+        cursor: pointer;
+    }
 </style>
