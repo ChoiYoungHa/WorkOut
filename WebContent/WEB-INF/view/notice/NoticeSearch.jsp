@@ -86,7 +86,7 @@
 
     <!-- About-1 Area End -->
     <!--? About-2 Area Start -->
-    <div class="about-area1 pb-bottom">
+    <div class="about-area1 pb-bottom pl-200 pr-200">
         <hr/>
         <%
             Criteria pDTO = (Criteria) request.getAttribute("paging");
