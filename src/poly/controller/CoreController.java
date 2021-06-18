@@ -75,6 +75,7 @@ public class CoreController {
     public String MetabolismResult(HttpServletRequest request, HttpSession session, ModelMap model){
         log.info(this.getClass().getName() + "MetabolismResult. Start!");
 
+        // 세션값, 목표칼로리 프론트에서 받기
         String member_id = CmmUtil.nvl((String) session.getAttribute("SS_MEMBER_ID"));
         String goal_kcal = CmmUtil.nvl(request.getParameter("goal_kcal"));
 
@@ -95,6 +96,7 @@ public class CoreController {
         String msg = "";
         String url = "";
 
+        // 목표칼로리 저장
         try{
             coreService.insertGk(pDTO);
             msg = "등록에 성공했습니다.";
