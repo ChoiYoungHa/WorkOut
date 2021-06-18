@@ -293,7 +293,6 @@
 <!--식단 등록 및 삭제 섭취 식단 확인 -->
 <script type="text/javascript">
     function innerFoodData(tan,dan,fat,food_name,food_brand,food_kcal,food_gram){
-
         var html = "<li>" + "<p>" + "음식이름 : " + food_name + "</p>" + "<p>" + "제조사 : " + food_brand + "</p>" +
             "<p>" + "칼로리 : "+ food_kcal + "kcal" + "</p>" + "<p>" + "용량 : " + food_gram + "g" + "</p>" +
             "<p>" + "탄수화물 : " + tan + "g" + "</p>" + "<p>" + "단백질 : " + dan + "g" + "</p>" + "<p>" + "지방 : " + fat + "g" + "</p></li>";
@@ -380,13 +379,10 @@
     function deleteFood(e){
         // 부모요소에 접근 후 각 자식요소 데이터 추출
         let pa = e.parentNode;
-        console.log(pa.childNodes[5].value); // 원하는 데이터 섭취시간
 
         // 자식요소의 데이터 공백단위로 정제
         let split_res = pa.childNodes[1].textContent.split("    ");
         let split_it = pa.childNodes[3].textContent.split(" ");
-        console.log(split_res[1]); // 원하는 데이터 kcal
-        console.log(split_it[0]); // 원하는 데이터 g
 
         // 필요한 데이터 정제
         let food_time = pa.childNodes[5].value;
@@ -394,6 +390,7 @@
         let food_gram = split_it[0].replace(/g/,'');
 
         // 서버로 전송
+        // 다른방법으로 element id랑 food 테이블 id를 일치시키고 id 조회해서 삭제
         $.ajax({
             url : "/deleteFoodData.do", // db 요소 삭제 로직작성
             type : "post",

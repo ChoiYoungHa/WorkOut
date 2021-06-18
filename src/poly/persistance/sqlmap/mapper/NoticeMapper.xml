@@ -173,7 +173,6 @@
               WHERE POST_CATEGORY = #{category} AND MEMBER_MEMBER_ID = MEMBER_ID ORDER BY POST_VIEW DESC) D WHERE rowNum BETWEEN #{start} AND #{end}
     </select>
 
-
     <!-- 페이징처리에 사용 될 카테고리에 맞는 게시물 수 카운트 -->
     <select id="cntNotice" resultType="int" parameterType="NoticeDTO">
         SELECT COUNT(*) FROM work.post WHERE POST_CATEGORY = #{post_category}
