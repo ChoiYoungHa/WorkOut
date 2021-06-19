@@ -61,6 +61,8 @@
                 for(let i = 0; i < data.length; i++){
                     searchList += data[i] + "<br>";
                 }
+
+                // 레디스에서 저장된 데이터 html로 꾸미고 데이터 표시
                 $("#search_box").html(searchList);
                 $("#search_box").css("color", "white");
                 $("#search_box").show();
