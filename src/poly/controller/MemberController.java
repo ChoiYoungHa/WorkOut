@@ -156,7 +156,6 @@ public class MemberController {
         return "user/find_pw_email";
     }
 
-
     //회원가입 진행
     @RequestMapping(value = "/insertMember", method = RequestMethod.POST)
     public String insertMember(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
@@ -293,7 +292,7 @@ public class MemberController {
             // 인증번호 메일 발송 로직
             mDTO.setToMail(email);
             mDTO.setTitle("Work out 인증번호 이메일입니다.");
-            mDTO.setContents("임시 비밀번호는 :  " + auth + "  입니다.");
+            mDTO.setContents("인증번호는 :  " + auth + "  입니다.");
 
             // 최종 전송
             mailService.doSendMail(mDTO);

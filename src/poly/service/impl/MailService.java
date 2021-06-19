@@ -53,8 +53,8 @@ public class MailService implements IMailService {
 		props.put("mail.store.protocol", "pop3");
 		props.put("mail.transport.protocol", "smtp");
 
-		final String username = PrivateAuth.ID;
-		final String password = PrivateAuth.PW;
+		final String username = PrivateAuth.ID; // 구글이메일
+		final String password = PrivateAuth.PW; // 구글비번
 
 		try{
 			Session session = Session.getDefaultInstance(props,
