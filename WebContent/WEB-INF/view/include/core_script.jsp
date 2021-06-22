@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <script type="text/javascript">
 
+    // 주차별 칼로리
     function priceToString(price) {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
@@ -30,6 +31,7 @@
         $("#goal_kcal").html(html);
     }
 
+    // 탄단지 계산
     function ca_kcal(kcal){
         let tan_kcal = Math.ceil(kcal * 0.5);
         let dan_kcal = Math.ceil(kcal * 0.3);
@@ -46,6 +48,7 @@
     }
 
 
+    // 섭취한 음식 기록
     function eatFood(){
         $.ajax({
             url : "/getFoodData.do",
