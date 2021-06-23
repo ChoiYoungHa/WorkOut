@@ -2,11 +2,12 @@
          pageEncoding="UTF-8"%>
 <script type="text/javascript">
 
-    // 주차별 칼로리
+    // 칼로리 단위 조정
     function priceToString(price) {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
+    // 주차별 칼로리
     function goal_kcal_ch(){
         let select = $('#week-select').val();
         let goal_kcal = <%=member_gk%>;
@@ -355,6 +356,7 @@
         })
     }
 
+    // 페이지가 로딩되면 섭취한 음식 DB에서 가져오기
     function init(){
         $.ajax({
             url : "/getFoodData.do",
