@@ -82,6 +82,7 @@ public class CoreController {
         log.info("member_id : " + member_id);
         log.info("goal_kcal : " + goal_kcal);
 
+
         // 소수점 반올림
         double member_gk = Math.ceil(Double.parseDouble(goal_kcal));
         log.info("member_gk : " + member_gk);
