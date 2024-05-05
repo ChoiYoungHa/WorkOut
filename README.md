@@ -41,3 +41,6 @@
 - 회원정보 및 마이페이지, 운동정보, 식단정보 게시판 CRUD 개발
 - AWS 인프라 구성, 배포, 운영
 - 테이블 구조 설계
+
+## 3. 시연 영상
+- https://www.youtube.com/watch?v=PJl0Q-T9dbU&t=110s
